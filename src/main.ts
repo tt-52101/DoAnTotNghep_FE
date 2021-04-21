@@ -20,7 +20,6 @@ if (environment.production) {
     window.console.assert = () => {};
   }
 }
-
 const bootstrap = () => {
   return platformBrowserDynamic()
     .bootstrapModule(AppModule, {

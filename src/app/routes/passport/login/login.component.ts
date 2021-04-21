@@ -179,7 +179,7 @@ export class UserLoginComponent implements OnDestroy {
             if (url.includes('/passport')) {
               url = '/';
             }
-            this.router.navigateByUrl(url);
+            this.router.navigateByUrl('/admin');
           });
         },
         (error: any) => {

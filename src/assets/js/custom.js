@@ -285,7 +285,10 @@ jQuery(function($){
         $('.scrollToTop').fadeOut();
       }
     });
-     
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
     //Click event to scroll to top
 
     jQuery('.scrollToTop').click(function(){

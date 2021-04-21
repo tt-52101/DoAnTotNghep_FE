@@ -40,11 +40,11 @@ export class ProductService {
   }
 
   getFilter(model: QueryFilerModel): Observable<any> {
-    return this.http.post(environment.BASE_API_URL + productRouter.getFilter, model);
+    return this.http.post(environment.BASE_API_URL + productRouter.getFilter + environment.ALLOW_ANONYMOUS, model);
   }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.BASE_API_URL + productRouter.getAll);
+    return this.http.get(environment.BASE_API_URL + productRouter.getAll + environment.ALLOW_ANONYMOUS);
   }
 
   getListCombobox(): Observable<any> {

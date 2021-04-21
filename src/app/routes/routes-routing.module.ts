@@ -15,10 +15,11 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 import { UserRegisterComponent } from './passport/register/register.component';
 
 import { AgGridComponent } from './ag-grid/demo/ag-grid.component';
+import { LayoutComponent } from './computer-customer/layout/layout.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'admin',
     component: LayoutProComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -37,6 +38,14 @@ const routes: Routes = [
         path: 'computer-management',
         loadChildren: () => import('./computer-management/computer-management.module').then((m) => m.ComputerManagementModule),
       },
+    ],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      // { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '', loadChildren: () => import('./computer-customer/computer-customer.module').then((m) => m.ComputerCustomerModule) },
     ],
   },
   // passport
