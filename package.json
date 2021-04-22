@@ -68,6 +68,7 @@
     "angular-baidu-maps": "^10.0.0",
     "element-closest": "^3.0.2",
     "file-saver": "^2.0.2",
+    "jquery": "^3.6.0",
     "js-base64": "^3.4.5",
     "masonry-layout": "^4.2.2",
     "moment": "^2.29.1",

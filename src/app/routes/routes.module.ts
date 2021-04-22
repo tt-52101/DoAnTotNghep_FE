@@ -11,7 +11,7 @@ import { UserLoginComponent } from './passport/login/login.component';
 import { UserRegisterResultComponent } from './passport/register-result/register-result.component';
 import { UserRegisterComponent } from './passport/register/register.component';
 import { RouteRoutingModule } from './routes-routing.module';
-
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { BtnCellRenderComponent } from '@shared';
@@ -45,7 +45,7 @@ const COMPONENTS: Type<void>[] = [
 const COMPONENTS_NOROUNT: Type<void>[] = [];
 
 @NgModule({
-  imports: [SharedModule, RouteRoutingModule, AgGridModule.withComponents([])],
+  imports: [SharedModule, NzBackTopModule, RouteRoutingModule, AgGridModule.withComponents([])],
   declarations: [...COMPONENTS, ...COMPONENTS_NOROUNT],
   entryComponents: COMPONENTS_NOROUNT,
 })

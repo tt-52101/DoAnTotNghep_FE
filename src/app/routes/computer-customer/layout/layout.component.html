@@ -6,7 +6,12 @@
 </div>
 <!-- / wpf loader Two -->
 <!-- SCROLL TOP BUTTON -->
-<a class="scrollToTop" (click)="topFunction()" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a>
+
+<nz-back-top [nzTemplate]="tpl">
+  <ng-template #tpl>
+    <a class="scrollToTop" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a>
+  </ng-template>
+</nz-back-top>
 <!-- END SCROLL TOP BUTTON -->
 
 <app-header></app-header>
