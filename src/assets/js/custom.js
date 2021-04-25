@@ -24,7 +24,6 @@
 
   
 **/
-
 jQuery(function($){
 
 
@@ -32,7 +31,7 @@ jQuery(function($){
   /*  1. CARTBOX 
   /* ----------------------------------------------------------- */
     
-     jQuery(".aa-cartbox").hover(function(){
+  jQuery(".aa-cartbox").hover(function(){
       jQuery(this).find(".aa-cartbox-summary").fadeIn(500);
     }
       ,function(){

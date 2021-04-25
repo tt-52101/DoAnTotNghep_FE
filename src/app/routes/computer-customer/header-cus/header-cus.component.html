@@ -1,0 +1,115 @@
+<!-- Start header section -->
+<header id="aa-header">
+  <!-- start header top  -->
+  <div class="aa-header-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-header-top-area">
+            <!-- start header top left -->
+            <div class="aa-header-top-left">
+              <!-- start cellphone -->
+              <div class="cellphone hidden-xs">
+                <p><span class="fa fa-phone"></span>+8439-483-5311</p>
+              </div>
+              <!-- / cellphone -->
+            </div>
+            <!-- / header top left -->
+            <div class="aa-header-top-right">
+              <ul class="aa-head-top-nav-right">
+                <li><a href="account.html">Thông tin tài khoản</a></li>
+                <li><a href="" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                <li><a href="" data-toggle="modal" data-target="#login-modal">Đăng ký</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / header top  -->
+
+  <!-- start header bottom  -->
+  <div class="aa-header-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-header-bottom-area">
+            <!-- logo  -->
+            <!-- <img src="../../../../assets/img/Logo.png" alt=""> -->
+            <div class="aa-logo">
+              <!-- Text based logo -->
+              <a href="index.html">
+                <span class="fas fa-laptop"></span>
+                <p>Vân Anh<strong>Computer</strong> <span>Thế giới máy tính</span></p>
+              </a>
+              <!-- img based logo -->
+              <!-- <a href="index.html"><img src="../../../../../assets/tmp/img/logo.jpg" alt="logo img"></a> -->
+            </div>
+            <!-- / logo  -->
+            <!-- cart box -->
+            <div class="aa-cartbox">
+              <div class="dropdown">
+                <a class="aa-cart-link dropbtn" href="#">
+                  <span class="fas fa-shopping-basket"></span>
+                  <span class="aa-cart-title">SHOPPING CART</span>
+                  <span class="aa-cart-notify">{{ listCart.length }}</span>
+                </a>
+                <div class="dropdown-content">
+                  <div class="row">
+                    <div [ngStyle]="{ height: listCart.length > 0 ? '300px' : '0px' }" class="col-md-12 overflow-auto">
+                      <div *ngFor="let item of listCart" class="row">
+                        <div class="col-md-3">
+                          <img width="80" height="80" [src]="baseFile + item.pictures[0]" [alt]="'image product' + item.code" />
+                        </div>
+                        <div class="col-md-2 item-center">
+                          <div class="form-group">
+                            <input
+                              [value]="item.count"
+                              type="number"
+                              [min]="1"
+                              (ngModelChange)="changeCount($event, item)"
+                              class="form-control"
+                              name=""
+                              id=""
+                              [(ngModel)]="item.count"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-5">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <span [title]="item.name" class="name-text">{{ item.name }}</span>
+                            </div>
+                          </div>
+                          <span class="price-prod">{{ item.subTotal }}đ</span>
+                        </div>
+                        <div class="col-md-2 item-center">
+                          <button (click)="removeItem(item)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="price-prod">Tổng cộng: {{ total }}đ</span>
+                  <a class="aa-cartbox-checkout aa-primary-btn" href="javascript:void(0)">Thanh toán ngay</a>
+                </div>
+              </div>
+            </div>
+            <!-- / cart box -->
+            <!-- search box -->
+            <div class="aa-search-box">
+              <form action="">
+                <input type="text" name="" id="" placeholder="Nhập từ khóa tìm kiếm... " />
+                <button type="submit"><span class="fa fa-search"></span></button>
+              </form>
+            </div>
+            <!-- / search box -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / header bottom  -->
+</header>
+<!-- / header section -->

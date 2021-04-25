@@ -69,6 +69,8 @@ export const productRouter = {
   getFilter: `api/v1/computer-management/product/filter`,
   getAll: `api/v1/computer-management/product/all`,
   getListCombobox: `api/v1/computer-management/product/for-combobox`,
+  getProdBySupplier: `api/v1/computer-management/product/product-by-supplier`,
+  updateVisitCount: `api/v1/computer-management/product/update-visit-count`,
 };
 export const orderRouter = {
   create: `api/v1/computer-management/order`,

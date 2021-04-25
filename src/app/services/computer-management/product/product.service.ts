@@ -28,6 +28,9 @@ export class ProductService {
   getById(id: string): Observable<any> {
     return this.http.get(environment.BASE_API_URL + productRouter.getById + id);
   }
+  updateVisitCount(model: any): Observable<any> {
+    return this.http.post(environment.BASE_API_URL + productRouter.updateVisitCount + environment.ALLOW_ANONYMOUS, model);
+  }
 
   delete(list: [string]): Observable<any> {
     const option = {
@@ -41,6 +44,10 @@ export class ProductService {
 
   getFilter(model: QueryFilerModel): Observable<any> {
     return this.http.post(environment.BASE_API_URL + productRouter.getFilter + environment.ALLOW_ANONYMOUS, model);
+  }
+
+  getListProductBySupplier(model: any): Observable<any> {
+    return this.http.post(environment.BASE_API_URL + productRouter.getProdBySupplier + environment.ALLOW_ANONYMOUS, model);
   }
 
   getAll(): Observable<any> {

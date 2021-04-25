@@ -16,6 +16,9 @@ import { UserRegisterComponent } from './passport/register/register.component';
 
 import { AgGridComponent } from './ag-grid/demo/ag-grid.component';
 import { LayoutComponent } from './computer-customer/layout/layout.component';
+import { NotFoundComponent } from './computer-customer/not-found/not-found.component';
+import { JWTGuard } from '@delon/auth';
+import { Exception404Component } from './exception/404.component';
 
 const routes: Routes = [
   {
@@ -44,8 +47,14 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      // { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: '', loadChildren: () => import('./computer-customer/computer-customer.module').then((m) => m.ComputerCustomerModule) },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: '',
+        loadChildren: () => import('./computer-customer/computer-customer.module').then((m) => m.ComputerCustomerModule),
+        data: { title: 'Vân Anh PC - Laptop Gaming, Pc Gaming' },
+      },
+      { path: '404-not-found', component: NotFoundComponent },
+      { path: '**', redirectTo: '404-not-found' },
     ],
   },
   // passport
