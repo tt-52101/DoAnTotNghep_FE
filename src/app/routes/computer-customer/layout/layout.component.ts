@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StartupService } from '@core';
 import { SettingsService } from '@delon/theme';
-
+declare var jQuery: any;
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',

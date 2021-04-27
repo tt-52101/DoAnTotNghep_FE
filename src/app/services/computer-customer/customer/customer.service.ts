@@ -17,4 +17,7 @@ export class CustomerService {
   login(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + customerRouter.getToken, model);
   }
+  register(model: any): Observable<any> {
+    return this.http.post(environment.BASE_API_URL + customerRouter.register + environment.ALLOW_ANONYMOUS, model);
+  }
 }

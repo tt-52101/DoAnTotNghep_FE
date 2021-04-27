@@ -14,6 +14,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HeaderCusComponent } from './header-cus/header-cus.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NgbCarousel, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { from } from 'rxjs';
+import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { RegisterComponent } from './register/register.component';
     HeaderCusComponent,
     LoginComponent,
     RegisterComponent,
+    LoginRedirectComponent,
   ],
-  imports: [CommonModule, SharedModule, ComputerCustomerRoutingModule],
+  imports: [CommonModule, SharedModule, NgbCarouselModule, ComputerCustomerRoutingModule],
 })
 export class ComputerCustomerModule {}
