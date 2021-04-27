@@ -85,6 +85,7 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
       name: 'Quản trị hệ thống',
       description: 'Quản trị hệ thống',
       year: 2021,
+      type: 'QTHT',
     };
     this.settingService.setApp(app);
     this.startupService.load();

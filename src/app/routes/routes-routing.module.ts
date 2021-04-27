@@ -25,7 +25,7 @@ const routes: Routes = [
     path: 'admin',
     component: LayoutProComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'passport/login', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'ag-grid', component: AgGridComponent },
       // Exception
@@ -53,8 +53,6 @@ const routes: Routes = [
         loadChildren: () => import('./computer-customer/computer-customer.module').then((m) => m.ComputerCustomerModule),
         data: { title: 'Vân Anh PC - Laptop Gaming, Pc Gaming' },
       },
-      { path: '404-not-found', component: NotFoundComponent },
-      { path: '**', redirectTo: '404-not-found' },
     ],
   },
   // passport
@@ -86,7 +84,8 @@ const routes: Routes = [
   },
   // Single page not wrapped Layout
   { path: 'callback/:type', component: CallbackComponent },
-  { path: '**', redirectTo: 'exception/404' },
+  { path: '404-not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: '404-not-found' },
 ];
 
 @NgModule({

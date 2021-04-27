@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
+import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
 
 @Component({
@@ -15,6 +17,8 @@ export class HeaderCusComponent implements OnInit {
     private fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
     private cartCusService: CartCustomerService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private cusService: CustomerService,
   ) {
     this.cartService.currentCart.subscribe((res) => {
       this.total = 0;
@@ -24,7 +28,11 @@ export class HeaderCusComponent implements OnInit {
         this.total = this.total + item.subTotal;
       });
     });
+    this.cusService.isLoginCurrent.subscribe((res) => {
+      this.isLogin = res;
+    });
   }
+  isLogin: any;
   listCart: any[] = [];
   total: any = 0;
   baseFile = environment.BASE_FILE_URL;
@@ -37,6 +45,10 @@ export class HeaderCusComponent implements OnInit {
         this.total = this.total + item.subTotal;
       });
     }
+  }
+  logout() {
+    this.tokenService.clear();
+    this.cusService.changeLogin(false);
   }
   changeCount(event: any, prod: any) {
     const rs = this.cartCusService.change(event, prod, this.listCart);

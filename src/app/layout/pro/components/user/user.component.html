@@ -34,7 +34,7 @@
 </style>
 <span *ngIf="!token" style="line-height: 60px; cursor: pointer" (click)="login()" class="text-add">Đăng nhập</span>
 <div *ngIf="token" nz-dropdown [nzDropdownMenu]="userMenu" nzPlacement="bottomRight" class="alain-pro__header-item header-user">
-  <span [ngClass]="{ username: homePageCheck }">{{ settings.user.name }} &nbsp; </span>
+  <span [ngClass]="{ username: homePageCheck }">{{ user.name }} &nbsp; </span>
   <nz-avatar [nzSrc]="settings.user.avatar" nzSize="medium" class="mr-sm"></nz-avatar>
   <i *ngIf="homePageCheck" nz-icon nzType="caret-down" nzTheme="outline"></i>
 </div>

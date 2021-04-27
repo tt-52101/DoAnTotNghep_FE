@@ -37,6 +37,7 @@ export class LayoutProWidgetUserComponent implements OnInit {
   confirmPasswordVisible = false;
   confirmPassword?: string;
   isVisible = false;
+  user: any;
   form: FormGroup;
   resetData() {
     this.form.reset();
@@ -49,6 +50,9 @@ export class LayoutProWidgetUserComponent implements OnInit {
   }
   ngOnInit(): void {
     this.validToken();
+    this.user = JSON.parse(
+      localStorage.getItem('_token') || '{token: `nothing`,name: `Admin`,avatar: `./assets/logo-color.svg`,email: `cipchk@qq.com`,}',
+    );
     // mock
     const token = this.tokenService.get() || {
       token: 'nothing',
@@ -70,7 +74,7 @@ export class LayoutProWidgetUserComponent implements OnInit {
     this.validToken();
     this.logOut.emit('logout');
     // this.router.navigateByUrl(this.tokenService.login_url!);
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/passport/login');
   }
   checkConfirmPassword() {
     if (

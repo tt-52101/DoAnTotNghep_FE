@@ -1,7 +1,6 @@
 export const authenticationRouter = {
   getToken: `api/v1/authentication/jwt/login`,
 };
-
 export const navigationRouter = {
   getNavigationOwner: `api/v1/bsd/navigations/owner`,
 };
@@ -72,6 +71,7 @@ export const productRouter = {
   getProdBySupplier: `api/v1/computer-management/product/product-by-supplier`,
   updateVisitCount: `api/v1/computer-management/product/update-visit-count`,
 };
+
 export const orderRouter = {
   create: `api/v1/computer-management/order`,
   createMany: `api/v1/computer-management/order/create-many`,
@@ -101,6 +101,7 @@ export const customerRouter = {
   getFilter: `api/v1/computer-management/customer/filter`,
   getAll: `api/v1/computer-management/customer/all`,
   getListCombobox: `api/v1/computer-management/customer/for-combobox`,
+  getToken: `api/v1/authentication/jwt/user/login`,
 };
 export const productReviewRouter = {
   create: `api/v1/computer-management/productReview`,

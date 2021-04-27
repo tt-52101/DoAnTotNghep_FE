@@ -2649,7 +2649,7 @@ img {
 }
 #login-modal .modal-dialog {
   margin: 100px auto;
-  width: 320px;
+  width: 600px;
 }
 #login-modal .modal-dialog h4 {
   border-bottom: 1px solid #ccc;
