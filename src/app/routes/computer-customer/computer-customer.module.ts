@@ -14,9 +14,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HeaderCusComponent } from './header-cus/header-cus.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NgbCarousel, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { from } from 'rxjs';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
+import { AccountDetailComponent } from './account-detail/account-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { LoginRedirectComponent } from './login-redirect/login-redirect.componen
     LoginComponent,
     RegisterComponent,
     LoginRedirectComponent,
+    AccountDetailComponent,
   ],
-  imports: [CommonModule, SharedModule, NgbCarouselModule, ComputerCustomerRoutingModule],
+  imports: [CommonModule, SharedModule, NzTreeModule, NgbCarouselModule, ComputerCustomerRoutingModule],
 })
 export class ComputerCustomerModule {}

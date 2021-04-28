@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StartupService } from '@core';
 import { SettingsService } from '@delon/theme';
 import { environment } from '@env/environment';
+import { LAPTOP_ID } from '@util';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
@@ -72,26 +73,35 @@ export class HomeComponent implements OnInit {
   addToCart(item: any) {
     this.cartCusService.addToCart(item);
   }
+  listLaptopRs: any[] = [];
   fetchListProduct() {
+    this.listLaptopRs = [];
     this.productService.getAll().subscribe((res) => {
       this.listProduct = res.data.data;
-      this.listAcerActive = this.getListProdActive(this.listProduct.filter((x) => x.supplierName === 'ACER'));
-      this.listAcerResult = this.getListProdRs(this.listProduct.filter((x) => x.supplierName === 'ACER'));
+      for (let index = 0; index < this.listProduct.length; index++) {
+        this.listProduct[index].listCategory.map((item: any) => {
+          if (item == LAPTOP_ID) {
+            this.listLaptopRs.push(this.listProduct[index]);
+          }
+        });
+      }
+      this.listAcerActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
+      this.listAcerResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
 
-      this.listAsusActive = this.getListProdActive(this.listProduct.filter((x) => x.supplierName === 'ASUS'));
-      this.listAsusResult = this.getListProdRs(this.listProduct.filter((x) => x.supplierName === 'ASUS'));
+      this.listAsusActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'ASUS'));
+      this.listAsusResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'ASUS'));
 
-      this.listMsiActive = this.getListProdActive(this.listProduct.filter((x) => x.supplierName === 'MSI'));
-      this.listMsiResult = this.getListProdRs(this.listProduct.filter((x) => x.supplierName === 'MSI'));
+      this.listMsiActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'MSI'));
+      this.listMsiResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'MSI'));
 
-      this.listDellActive = this.getListProdActive(this.listProduct.filter((x) => x.supplierName === 'DELL'));
-      this.listDellResult = this.getListProdRs(this.listProduct.filter((x) => x.supplierName === 'DELL'));
+      this.listDellActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'DELL'));
+      this.listDellResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'DELL'));
 
-      this.listLenovoActive = this.getListProdActive(this.listProduct.filter((x) => x.supplierName === 'LENOVO'));
-      this.listLenovoResult = this.getListProdRs(this.listProduct.filter((x) => x.supplierName === 'LENOVO'));
+      this.listLenovoActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'LENOVO'));
+      this.listLenovoResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'LENOVO'));
 
-      this.listHpActive = this.getListProdActive(this.listProduct.filter((x) => x.supplierName === 'HP'));
-      this.listHpResult = this.getListProdRs(this.listProduct.filter((x) => x.supplierName === 'HP'));
+      this.listHpActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'HP'));
+      this.listHpResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'HP'));
     });
   }
   getListProdActive(list: any[]) {

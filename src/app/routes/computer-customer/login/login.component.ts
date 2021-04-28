@@ -58,6 +58,10 @@ export class LoginComponent implements OnInit {
           this.nzMessage.error('Đăng nhập thất bại, sai tên tài khoản hoặc mật khẩu');
           return;
         }
+        if (res.data.userModel.isLock === true) {
+          this.nzMessage.error('Đăng nhập thất bại, tài khoản của bạn đã bị khóa');
+          return;
+        }
         this.nzMessage.success('Đăng nhập thành công');
         this.customerService.changeLogin(true);
         this.isLogin = true;

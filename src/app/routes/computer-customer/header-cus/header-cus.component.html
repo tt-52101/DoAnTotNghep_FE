@@ -17,7 +17,7 @@
             <!-- / header top left -->
             <div class="aa-header-top-right">
               <ul class="aa-head-top-nav-right">
-                <li><a *ngIf="isLogin === true" href="account.html">Thông tin tài khoản</a></li>
+                <li><a *ngIf="isLogin === true" [routerLink]="['/account-detail']">Thông tin tài khoản</a></li>
                 <li><a href="" data-toggle="modal" *ngIf="isLogin === false" data-target="#login-modal">Đăng nhập</a></li>
                 <li><a href="javascript:void(0)" *ngIf="isLogin === true" (click)="logout()">Đăng xuất</a></li>
                 <li><a href="javascript:void(0)" *ngIf="isLogin === false" [routerLink]="['/register']">Đăng ký</a></li>

@@ -37,6 +37,12 @@ export class HeaderCusComponent implements OnInit {
   total: any = 0;
   baseFile = environment.BASE_FILE_URL;
   ngOnInit(): void {
+    const token = this.tokenService.get()?.token;
+    if (token) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
     const listCart = JSON.parse(localStorage.getItem('list-cart') || '{}');
     if (listCart !== {} && listCart !== undefined && listCart !== null) {
       this.listCart = listCart;

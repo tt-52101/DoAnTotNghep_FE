@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-md-10 offset">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="row">
+          <div class="col-md-6 item-center">
+            <nz-avatar [nzSize]="64" nzIcon="user"></nz-avatar>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
+            <nz-tabset [nzTabPosition]="position">
+              <nz-tab [nzTitle]="userTemplate">
+                <ng-template #userTemplate>
+                  <img height="16" width="16" src="../../../../assets/img/Graphicloads-Flat-Finance-Person.ico" alt="" />
+                  Tài Khoản Của Tôi
+                </ng-template>
+
+                <nz-card [nzTitle]="titleTemplate">
+                  <ng-template #titleTemplate>
+                    <h3><b>Hồ Sơ Của Tôi</b></h3>
+                    <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                  </ng-template>
+                  <form nz-form [formGroup]="formRegister" (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" nzRequired>Tên tài khoản</nz-form-label>
+                      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập tên tài khoản!">
+                        <input nz-input id="username" formControlName="username" placeholder="Tên tài khoản" />
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail </nz-form-label>
+                      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="không đúng định dạng E-mail!">
+                        <input nz-input placeholder="Email" formControlName="email" id="email" />
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+                        <span>Tên</span>
+                      </nz-form-label>
+                      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Nhập vào tên!">
+                        <input nz-input id="nickname" placeholder="Tên" formControlName="nickname" />
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Số điện thoại</nz-form-label>
+                      <nz-form-control
+                        [nzSm]="14"
+                        [nzXs]="24"
+                        [nzValidateStatus]="formRegister.controls['phoneNumber']"
+                        nzErrorTip="Vui lòng nhập số điện thoại!"
+                      >
+                        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                          <ng-template #addOnBeforeTemplate>
+                            <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                              <nz-option nzLabel="+84" nzValue="+84"></nz-option>
+                            </nz-select>
+                          </ng-template>
+                          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+                        </nz-input-group>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sex" nzRequired>Giới tinh </nz-form-label>
+                      <nz-form-control
+                        [nzSm]="14"
+                        [nzXs]="24"
+                        [nzValidateStatus]="formRegister.controls['sex']"
+                        nzErrorTip="Vui lòng chọn giới tính!"
+                      >
+                        <nz-radio-group formControlName="sex">
+                          <label nz-radio [nzValue]="true">Nam</label>
+                          <label nz-radio [nzValue]="false">Nữ</label>
+                        </nz-radio-group>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nz-row class="register-area">
+                      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                        <button nz-button nzType="primary">Lưu</button>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </form>
+                </nz-card>
+              </nz-tab>
+              <nz-tab [nzTitle]="billTemplate">
+                <ng-template #billTemplate>
+                  <img
+                    height="16"
+                    width="16"
+                    src="../../../../assets/img/Dakirby309-Windows-8-Metro-Folders-OS-Documents-Library-Metro.ico"
+                    alt=""
+                  />
+                  Đơn Mua
+                </ng-template>
+              </nz-tab>
+              <nz-tab [nzTitle]="changePwTemplate">
+                <ng-template #changePwTemplate>
+                  <img height="16" width="16" src="../../../../assets/img/Graphicloads-100-Flat-Pencil.ico" alt="" />
+                  Đổi Mật Khẩu
+                </ng-template>
+              </nz-tab>
+            </nz-tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

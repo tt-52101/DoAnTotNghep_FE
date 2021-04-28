@@ -2,7 +2,7 @@
 import { QueryFilerModel } from '@model';
 
 export const ROLE_SYS_ADMIN = 'SYS_ADMIN';
-
+export const LAPTOP_ID = '14843a87-3a07-4dd1-9171-0dc0f56ff0fc';
 export const LIST_STATUS = [
   { id: true, code: true, name: 'Hoạt động' },
   { id: false, code: false, name: 'Không hoạt động' },
