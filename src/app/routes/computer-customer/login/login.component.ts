@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     this.formLogin = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
+      recaptcha: [null, [Validators.required]],
       rememberMe: [true],
     });
   }
@@ -35,6 +36,11 @@ export class LoginComponent implements OnInit {
       this.formLogin.controls[i].updateValueAndValidity();
     }
     if (this.formLogin.errors) {
+      this.nzMessage.error('Kiểm tra thông tin các trường đã nhập');
+      return;
+    }
+    const recaptchaValue = this.formLogin.controls.recaptcha.value;
+    if (recaptchaValue === null || recaptchaValue === undefined || recaptchaValue === '') {
       this.nzMessage.error('Kiểm tra thông tin các trường đã nhập');
       return;
     }

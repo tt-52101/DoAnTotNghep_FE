@@ -101,6 +101,29 @@
                       </nz-radio-group>
                     </nz-form-control>
                   </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="recaptcha" nzRequired>Captcha: </nz-form-label>
+                    <nz-form-control
+                      [nzSm]="14"
+                      [nzXs]="24"
+                      [nzValidateStatus]="formRegister.controls['recaptcha']"
+                      nzErrorTip="Trường này là bắt buộc!"
+                    >
+                      <ngx-recaptcha2
+                        #captchaElem
+                        [siteKey]="'6LcZNb4aAAAAAPajAB3m1peQMCCYekD_QGXGUD2G'"
+                        [useGlobalDomain]="false"
+                        [size]="'normal'"
+                        [hl]="'vi'"
+                        [theme]="'light'"
+                        [type]="'image'"
+                        formControlName="recaptcha"
+                      >
+                      </ngx-recaptcha2>
+                    </nz-form-control>
+                  </nz-form-item>
+
                   <nz-form-item nz-row class="register-area">
                     <nz-form-control nzErrorTip="Vui lòng xác nhận" [nzSpan]="14" [nzOffset]="6">
                       <label nz-checkbox formControlName="agree">

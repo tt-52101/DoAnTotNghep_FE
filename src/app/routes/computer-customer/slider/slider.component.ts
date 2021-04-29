@@ -8,4 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SliderComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {}
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
 }

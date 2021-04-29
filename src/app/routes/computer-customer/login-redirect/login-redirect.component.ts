@@ -25,6 +25,7 @@ export class LoginRedirectComponent implements OnInit {
     this.formLogin = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
+      recaptcha: ['', Validators.required],
       rememberMe: [true],
     });
   }

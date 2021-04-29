@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
 
 @Component({
@@ -26,6 +25,7 @@ export class RegisterComponent implements OnInit {
       captcha: [null, [Validators.required]],
       agree: [false, [Validators.required]],
       sex: [null, [Validators.required]],
+      recaptcha: ['', Validators.required],
     });
   }
   formRegister: FormGroup;
