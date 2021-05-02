@@ -59,6 +59,11 @@ export class LoginRedirectComponent implements OnInit {
           this.nzMessage.error('Đăng nhập thất bại, sai tên tài khoản hoặc mật khẩu');
           return;
         }
+        const recaptchaValue = this.formLogin.controls.recaptcha.value;
+        if (recaptchaValue === null || recaptchaValue === undefined || recaptchaValue === '') {
+          this.nzMessage.error('Kiểm tra thông tin các trường đã nhập');
+          return;
+        }
         this.nzMessage.success('Đăng nhập thành công');
         this.customerService.changeLogin(true);
         this.isLogin = true;

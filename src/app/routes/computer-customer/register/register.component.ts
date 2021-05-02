@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/services/computer-management/user/user.serv
 export class RegisterComponent implements OnInit {
   passwordVisible = false;
   checkPasswordVisible = false;
-  constructor(private fb: FormBuilder, private nzMessage: NzMessageService, private cusService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private nzMessage: NzMessageService, private cusService: CustomerService, private router: Router) {
     this.formRegister = fb.group({
       username: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
       website: [null, [Validators.required]],
       captcha: [null, [Validators.required]],
       agree: [false, [Validators.required]],
+      dateOfBirth: [null, Validators.required],
       sex: [null, [Validators.required]],
       recaptcha: ['', Validators.required],
     });
@@ -47,20 +49,26 @@ export class RegisterComponent implements OnInit {
       this.formRegister.controls.agree.setErrors(['required']);
       return;
     }
+    if (!this.formRegister.controls.recaptcha.value) {
+      this.nzMessage.error('Kiểm tra thông tin các trường đã nhập');
+      return;
+    }
     let model = {
       name: this.formRegister.controls.nickname.value,
       username: this.formRegister.controls.username.value,
       password: this.formRegister.controls.password.value,
       email: this.formRegister.controls.email.value,
+      dateOfBirth: this.formRegister.controls.dateOfBirth.value,
       phone: this.formRegister.controls.phoneNumber.value,
       isLock: false,
       isAdmin: false,
       sex: this.formRegister.controls.sex.value,
     };
-    this.cusService.update(model).subscribe(
+    this.cusService.register(model).subscribe(
       (res) => {
         if (res.code === 200) {
-          this.nzMessage.success('Chỉnh sửa thành công');
+          this.nzMessage.success('Đăng kí thành công');
+          this.router.navigateByUrl('/login');
         }
       },
       (err) => {

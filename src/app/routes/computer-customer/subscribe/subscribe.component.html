@@ -4,9 +4,9 @@
       <div class="col-md-12">
         <div class="aa-subscribe-area">
           <h3>ĐĂNG KÝ NHẬN EMAIL THÔNG BÁO KHUYẾN MẠI HOẶC ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ</h3>
-          <form action="" class="aa-subscribe-form">
-            <input type="email" name="" id="" placeholder="Nhập email hoặc số điện thoại của bạn" />
-            <input type="submit" value="Gửi" />
+          <form action="" [formGroup]="formSub" class="aa-subscribe-form">
+            <input type="email" name="" formControlName="email" id="" placeholder="Nhập email hoặc số điện thoại của bạn" />
+            <input type="submit" (click)="Subscribe()" value="Gửi" />
           </form>
         </div>
       </div>

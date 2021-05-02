@@ -62,6 +62,16 @@
                         </nz-input-group>
                       </nz-form-control>
                     </nz-form-item>
+
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="dateOfBirth" nzRequired>
+                        <span>Ngày sinh</span>
+                      </nz-form-label>
+                      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Nhập vào ngày sinh!">
+                        <nz-date-picker [nzPlaceHolder]="'Nhập vào ngày sinh'" formControlName="dateOfBirth"></nz-date-picker>
+                      </nz-form-control>
+                    </nz-form-item>
+
                     <nz-form-item>
                       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sex" nzRequired>Giới tinh </nz-form-label>
                       <nz-form-control

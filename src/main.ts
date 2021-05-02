@@ -34,7 +34,6 @@ const bootstrap = () => {
       return res;
     });
 };
-
 if (environment.hmr) {
   // tslint:disable-next-line: no-string-literal
   if ((module as NzSafeAny)['hot']) {

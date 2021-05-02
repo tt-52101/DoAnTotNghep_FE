@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
@@ -17,6 +18,7 @@ export class HeaderCusComponent implements OnInit {
     private fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
     private cartCusService: CartCustomerService,
+    private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private cusService: CustomerService,
   ) {
@@ -43,8 +45,8 @@ export class HeaderCusComponent implements OnInit {
     } else {
       this.isLogin = false;
     }
-    const listCart = JSON.parse(localStorage.getItem('list-cart') || '{}');
-    if (listCart !== {} && listCart !== undefined && listCart !== null) {
+    const listCart = JSON.parse(localStorage.getItem('list-cart') || '[]');
+    if (listCart !== '' && listCart.length === 0 && listCart !== undefined && listCart !== null) {
       this.listCart = listCart;
       this.listCart.map((item) => {
         item.subTotal = item.count * (item.price - item.discount);
@@ -55,6 +57,7 @@ export class HeaderCusComponent implements OnInit {
   logout() {
     this.tokenService.clear();
     this.cusService.changeLogin(false);
+    this.router.navigateByUrl('/home');
   }
   changeCount(event: any, prod: any) {
     const rs = this.cartCusService.change(event, prod, this.listCart);
