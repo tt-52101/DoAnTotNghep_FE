@@ -21,14 +21,12 @@ export class SubscribeComponent implements OnInit {
       this.formSub.controls[i].markAsDirty();
       this.formSub.controls[i].updateValueAndValidity();
     }
-    if (this.formSub.valid) {
-      this.nzMessage.error('Hãy nhập email hoặc số điện thoại của bạn.');
-      return;
-    }
-    if (this.formSub.controls.email.value === '') {
+    const value = this.formSub.controls.email.value;
+    if (value === '' || value === null || value === undefined) {
       this.nzMessage.error('Hãy nhập email hoặc số điện thoại của bạn.');
       return;
     }
     this.nzMessage.success('Bạn đã đăng kí thành công. Thông tin của bạn đã được ghi lại.');
+    this.formSub.reset();
   }
 }
