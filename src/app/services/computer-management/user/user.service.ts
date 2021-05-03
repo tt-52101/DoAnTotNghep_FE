@@ -5,14 +5,18 @@ import { environment } from '@env/environment';
 import { QueryFilerModel } from '@model';
 import { customerRouter } from '@util';
 // RxJS
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   constructor(private http: _HttpClient) {}
-
+  private isChangeSource = new BehaviorSubject(false);
+  isChangeCurrent = this.isChangeSource.asObservable();
+  changeUser(isLogin: boolean) {
+    this.isChangeSource.next(isLogin);
+  }
   create(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + customerRouter.create, model);
   }

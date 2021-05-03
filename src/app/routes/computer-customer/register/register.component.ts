@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { reCaptchaKey } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
@@ -30,6 +31,7 @@ export class RegisterComponent implements OnInit {
       recaptcha: ['', Validators.required],
     });
   }
+  reCaptchaKey = reCaptchaKey;
   formRegister: FormGroup;
   ngOnInit(): void {}
   updateConfirmValidator(): void {

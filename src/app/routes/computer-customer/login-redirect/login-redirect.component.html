@@ -28,7 +28,7 @@
         <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="formLogin.controls['recaptcha']" nzErrorTip="Trường này là bắt buộc!">
           <ngx-recaptcha2
             #captchaElem
-            [siteKey]="'6LcZNb4aAAAAAPajAB3m1peQMCCYekD_QGXGUD2G'"
+            [siteKey]="reCaptchaKey"
             [useGlobalDomain]="false"
             [size]="'normal'"
             [hl]="'vi'"

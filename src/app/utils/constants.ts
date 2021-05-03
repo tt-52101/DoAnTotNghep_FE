@@ -13,7 +13,7 @@ export const QUERY_FILTER_DEFAULT: QueryFilerModel = {
   pageSize: 20,
   textSearch: undefined,
 };
-
+export const reCaptchaKey = '6LejNL4aAAAAAJATFE7BD2CCxFN7vNvuohdOiONf';
 export const PAGE_SIZE_OPTION_DEFAULT = [5, 10, 20, 50];
 
 export const EXCEL_STYLES_DEFAULT = [

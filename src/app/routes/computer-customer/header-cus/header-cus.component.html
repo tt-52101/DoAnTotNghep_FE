@@ -34,7 +34,7 @@
   <div class="aa-header-bottom">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div [class]="isLogin ? 'col-md-11' : 'col-md-12'">
           <div class="aa-header-bottom-area">
             <!-- logo  -->
             <!-- <img src="../../../../assets/img/Logo.png" alt=""> -->
@@ -108,6 +108,21 @@
             </div>
             <!-- / search box -->
           </div>
+        </div>
+        <div *ngIf="isLogin" [ngClass]="{ 'col-md-1': isLogin }">
+          <a nz-dropdown [nzDropdownMenu]="menu">
+            <nz-avatar nzSize="large" [nzSrc]="avatar" nzIcon="user"></nz-avatar>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>
+                <i nz-icon nzType="info" nzTheme="outline"></i>Xin chào
+                <b>{{ userName }}</b>
+              </li>
+              <li nz-menu-item routerLink="/account-detail"><i nz-icon nzType="user" nzTheme="outline"></i> Thông tin tài khoản</li>
+              <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i> Đăng xuất</li>
+            </ul>
+          </nz-dropdown-menu>
         </div>
       </div>
     </div>

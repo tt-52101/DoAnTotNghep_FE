@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
+import { reCaptchaKey } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 declare var jQuery: any;
@@ -15,6 +16,7 @@ export class LoginRedirectComponent implements OnInit {
   passwordVisible = false;
   isLoading = false;
   isLogin = false;
+  reCaptchaKey = reCaptchaKey;
   constructor(
     private fb: FormBuilder,
     private nzMessage: NzMessageService,
