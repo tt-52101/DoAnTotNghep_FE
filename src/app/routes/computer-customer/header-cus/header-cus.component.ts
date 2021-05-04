@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
+import { reCaptchaKey } from '@util';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
@@ -15,16 +17,45 @@ import { UserService } from 'src/app/services/computer-management/user/user.serv
   styleUrls: ['./header-cus.component.less'],
 })
 export class HeaderCusComponent implements OnInit, OnDestroy {
+  isVisible = false;
+  reCaptchaKey = reCaptchaKey;
+  isLoading = false;
+  passwordVisible = false;
+  listCart: any[] = JSON.parse(localStorage.getItem('list-cart') || '[]');
+  total: any = 0;
   constructor(
     private cartService: CartService,
     private fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
+    private customerService: CustomerService,
     private userService: UserService,
-    private cartCusService: CartCustomerService,
+    private nzMessage: NzMessageService,
+    private cartcustomerService: CartCustomerService,
     private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    private cusService: CustomerService,
+    private cusService: UserService,
   ) {
+    const token = this.tokenService.get()?.token;
+    if (token) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
+    const listCart = JSON.parse(localStorage.getItem('list-cart') || '[]');
+    if (listCart !== '' && listCart.length !== 0 && listCart !== undefined && listCart !== null) {
+      this.listCart = listCart;
+      this.listCart.map((item) => {
+        item.subTotal = item.count * (item.price - item.discount);
+        this.total = this.total + item.subTotal;
+      });
+    }
+
+    this.formLogin = this.fb.group({
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      recaptcha: [null, [Validators.required]],
+      rememberMe: [true],
+    });
     this.fetchUser();
     this.subscription = this.userService.isChangeCurrent.subscribe((res) => {
       if (res === true) {
@@ -39,32 +70,31 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
         this.total = this.total + item.subTotal;
       });
     });
-    this.cusService.isLoginCurrent.subscribe((res) => {
+    this.customerService.isLoginCurrent.subscribe((res) => {
       this.isLogin = res;
     });
   }
-
+  formLogin: FormGroup;
   isLogin: any;
-  listCart: any[] = [];
-  total: any = 0;
+
   userName = '';
   private subscription: Subscription;
   baseFile = environment.BASE_FILE_URL;
   ngOnInit(): void {
-    const token = this.tokenService.get()?.token;
-    if (token) {
-      this.isLogin = true;
-    } else {
-      this.isLogin = false;
-    }
-    const listCart = JSON.parse(localStorage.getItem('list-cart') || '[]');
-    if (listCart !== '' && listCart.length === 0 && listCart !== undefined && listCart !== null) {
-      this.listCart = listCart;
-      this.listCart.map((item) => {
-        item.subTotal = item.count * (item.price - item.discount);
-        this.total = this.total + item.subTotal;
-      });
-    }
+    this.cdRef.detectChanges();
+  }
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
   user: any;
   avatar = '';
@@ -86,19 +116,90 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
       );
     }
   }
+  submitForm(): void {
+    this.isLoading = true;
+    for (const i in this.formLogin.controls) {
+      this.formLogin.controls[i].markAsDirty();
+      this.formLogin.controls[i].updateValueAndValidity();
+    }
+    if (this.formLogin.errors) {
+      this.nzMessage.error('Kiểm tra thông tin các trường đã nhập');
+      return;
+    }
+    const recaptchaValue = this.formLogin.controls.recaptcha.value;
+    if (recaptchaValue === null || recaptchaValue === undefined || recaptchaValue === '') {
+      this.nzMessage.error('Kiểm tra thông tin các trường đã nhập');
+      return;
+    }
+    let loginModel = {
+      username: this.formLogin.controls.username.value,
+      password: this.formLogin.controls.password.value,
+      rememberMe: this.formLogin.controls.rememberMe.value,
+    };
+    this.customerService.login(loginModel).subscribe(
+      (res) => {
+        this.isLoading = false;
+        if (res.code !== 200) {
+          this.nzMessage.error('Đăng nhập thất bại');
+          return;
+        }
+        if (res.data === null || res.data === undefined) {
+          this.nzMessage.error('Đăng nhập thất bại, sai tên tài khoản hoặc mật khẩu');
+          return;
+        }
+        if (res.data.userModel === null) {
+          this.nzMessage.error('Đăng nhập thất bại, sai tên tài khoản hoặc mật khẩu');
+          return;
+        }
+        if (res.data.userModel.isLock === true) {
+          this.nzMessage.error('Đăng nhập thất bại, tài khoản của bạn đã bị khóa');
+          return;
+        }
+        this.nzMessage.success('Đăng nhập thành công');
+        this.customerService.changeLogin(true);
+        this.cusService.changeUser(true);
+        this.isLogin = true;
+        this.tokenService.set({
+          id: res.data.userId,
+          token: res.data.tokenString,
+          email: res.data.userModel.email,
+          avatarUrl: res.data.userModel.avatarUrl,
+          timeExpride: res.data.timeExpride,
+          time: res.data.timeExpride,
+          name: res.data.userModel.name,
+          appId: res.data.applicationId,
+          rights: res.data.listRight,
+          roles: res.data.listRole,
+          // isSysAdmin,
+        });
+        this.fetchUser();
+        this.isVisible = false;
+        if (res.data.userModel.isAdmin === true) {
+          this.router.navigateByUrl('/admin');
+        } else {
+          this.router.navigateByUrl('/home');
+        }
+      },
+      (error) => {
+        this.isLoading = false;
+        this.nzMessage.error('Đăng nhập thất bại, sai tên tài khoản hoặc mật khẩu');
+        this.router.navigateByUrl('/home');
+      },
+    );
+  }
   logout() {
     this.tokenService.clear();
-    this.cusService.changeLogin(false);
+    this.customerService.changeLogin(false);
     this.router.navigateByUrl('/home');
   }
   changeCount(event: any, prod: any) {
-    const rs = this.cartCusService.change(event, prod, this.listCart);
+    const rs = this.cartcustomerService.change(event, prod, this.listCart);
     console.log(rs);
     this.listCart = rs.listCart;
     this.total = rs.total;
   }
   removeItem(item: any) {
-    this.listCart = this.cartCusService.removeItem(item, this.listCart);
+    this.listCart = this.cartcustomerService.removeItem(item, this.listCart);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

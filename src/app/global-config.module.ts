@@ -12,7 +12,7 @@ import { DelonACLModule } from '@delon/acl';
 const alainConfig: AlainConfig = {
   st: { modal: { size: 'lg' } },
   pageHeader: { homeI18n: 'home', recursiveBreadcrumb: true },
-  auth: { login_url: '/passport/login' },
+  auth: { login_url: '/home' },
 };
 
 const alainModules = [AlainThemeModule.forRoot(), DelonACLModule.forRoot(), DelonMockModule.forRoot()];
