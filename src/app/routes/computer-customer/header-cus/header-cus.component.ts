@@ -16,12 +16,12 @@ import { UserService } from 'src/app/services/computer-management/user/user.serv
   templateUrl: './header-cus.component.html',
   styleUrls: ['./header-cus.component.less'],
 })
-export class HeaderCusComponent implements OnInit, OnDestroy {
+export class HeaderCusComponent implements OnInit {
   isVisible = false;
   reCaptchaKey = reCaptchaKey;
   isLoading = false;
   passwordVisible = false;
-  listCart: any[] = JSON.parse(localStorage.getItem('list-cart') || '[]');
+  listCart: any[] = [];
   total: any = 0;
   constructor(
     private cartService: CartService,
@@ -57,7 +57,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
       rememberMe: [true],
     });
     this.fetchUser();
-    this.subscription = this.userService.isChangeCurrent.subscribe((res) => {
+    this.userService.isChangeCurrent.subscribe((res) => {
       if (res === true) {
         this.fetchUser();
       }
@@ -78,7 +78,6 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
   isLogin: any;
 
   userName = '';
-  private subscription: Subscription;
   baseFile = environment.BASE_FILE_URL;
   ngOnInit(): void {
     this.cdRef.detectChanges();
@@ -200,8 +199,5 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
   }
   removeItem(item: any) {
     this.listCart = this.cartcustomerService.removeItem(item, this.listCart);
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

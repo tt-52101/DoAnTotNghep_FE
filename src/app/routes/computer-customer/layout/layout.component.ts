@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StartupService } from '@core';
 import { SettingsService } from '@delon/theme';
 declare var jQuery: any;

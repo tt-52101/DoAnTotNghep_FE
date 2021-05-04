@@ -5,6 +5,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { reCaptchaKey } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
+import { UserService } from 'src/app/services/computer-management/user/user.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-login-redirect',
@@ -21,6 +22,7 @@ export class LoginRedirectComponent implements OnInit {
     private fb: FormBuilder,
     private nzMessage: NzMessageService,
     private customerService: CustomerService,
+    private cusService: UserService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private router: Router,
   ) {
@@ -68,6 +70,7 @@ export class LoginRedirectComponent implements OnInit {
         }
         this.nzMessage.success('Đăng nhập thành công');
         this.customerService.changeLogin(true);
+        this.cusService.changeUser(true);
         this.isLogin = true;
         jQuery('#login-modal').modal('hide');
         this.tokenService.set({
