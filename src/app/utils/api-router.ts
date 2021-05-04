@@ -103,6 +103,7 @@ export const customerRouter = {
   getListCombobox: `api/v1/computer-management/customer/for-combobox`,
   getToken: `api/v1/authentication/jwt/user/login`,
   register: `api/v1/account/create`,
+  changePassword: `api/v1/computer-management/customer/update-password`,
 };
 export const productReviewRouter = {
   create: `api/v1/computer-management/productReview`,
@@ -127,5 +128,5 @@ export const categoryMetaProductRouter = {
 export const userRouter = {
   getListRightOfUser: `api/v1/idm/users`,
   getListRoleOfUser: `api/v1/idm/users`,
-  changePassword: `api/v1/user/update-password`,
+  changePassword: `api/v1/idm/users/changepassword`,
 };

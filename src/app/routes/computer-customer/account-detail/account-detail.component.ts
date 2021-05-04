@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
+import { cleanForm } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTabPosition } from 'ng-zorro-antd/tabs';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
@@ -15,7 +17,13 @@ import { UserService } from 'src/app/services/computer-management/user/user.serv
   styleUrls: ['./account-detail.component.less'],
 })
 export class AccountDetailComponent implements OnInit {
-  constructor(private fb: FormBuilder, private nzMessage: NzMessageService, private cusService: UserService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private nzMessage: NzMessageService,
+    private cusService: UserService,
+    private router: Router,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+  ) {
     this.formRegister = fb.group({
       username: [{ value: null, disabled: true }, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
@@ -27,14 +35,26 @@ export class AccountDetailComponent implements OnInit {
       dateOfBirth: [null, [Validators.required]],
       sex: [null, [Validators.required]],
     });
+    this.formChangePassword = fb.group({
+      oldPassword: [null, [Validators.required]],
+      newPassword: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
+    });
   }
   avatar = '';
   avatarUrl: any = '';
   userId: any;
+  passwordVisible = false;
+  password?: string;
+  newPasswordVisible = false;
+  newPassword?: string;
+  confirmPasswordVisible = false;
+  confirmPassword?: string;
   baseFileUrl = environment.BASE_FILE_URL;
   uploadUrl = environment.BASE_UPLOAD_URL;
   position: NzTabPosition = 'left';
   formRegister: FormGroup;
+  formChangePassword: FormGroup;
   ngOnInit(): void {
     this.fetchUser();
   }
@@ -61,6 +81,15 @@ export class AccountDetailComponent implements OnInit {
           this.nzMessage.error(err.error.message);
         },
       );
+    }
+  }
+  checkConfirmPassword() {
+    if (
+      String(this.formChangePassword.controls.newPassword.value).toLowerCase().trim() !==
+      String(this.formChangePassword.controls.confirmPassword.value).toString().toLowerCase().trim()
+    ) {
+      this.formChangePassword.controls.confirmPassword.setErrors({ invalidConfirmPw: true });
+      return;
     }
   }
   beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]) => {
@@ -133,15 +162,52 @@ export class AccountDetailComponent implements OnInit {
           this.fetchUser();
           this.avatarUrl = '';
           this.cusService.changeUser(true);
-          setTimeout(function () {
-            window.location.reload();
-          }, 2000);
         } else {
           this.nzMessage.error('Cập nhật thất bại');
         }
       },
       (err) => {
         this.nzMessage.error('Cập nhật thất bại');
+      },
+    );
+  }
+  resetData() {
+    this.formChangePassword.reset();
+  }
+  save() {
+    cleanForm(this.formChangePassword);
+    // tslint:disable-next-line:forin
+    for (const i in this.formChangePassword.controls) {
+      this.formChangePassword.controls[i].markAsDirty();
+      this.formChangePassword.controls[i].updateValueAndValidity();
+    }
+    if (this.formChangePassword.invalid) {
+      this.nzMessage.error('Kiểm tra thông tin các trường đã nhập');
+      return;
+    }
+    const changePwModel = {
+      oldPassword: this.formChangePassword.controls.oldPassword.value,
+      newPassword: this.formChangePassword.controls.newPassword.value,
+      confirmPassword: this.formChangePassword.controls.confirmPassword.value,
+    };
+    const userModel = this.tokenService.get();
+    const UpdateUserModel = {
+      userName: userModel?.userName,
+      oldPassword: changePwModel.oldPassword,
+      newPassword: changePwModel.newPassword,
+    };
+    this.cusService.changePassword(UpdateUserModel).subscribe(
+      (res) => {
+        if (res.code !== 200) {
+          this.nzMessage.error(`Có lỗi xảy ra: ${res.message}`);
+          return;
+        }
+        this.resetData();
+        this.nzMessage.success('Đổi mật khẩu thành công');
+      },
+      (err) => {
+        console.log(err);
+        this.nzMessage.error(`Có lỗi xảy ra: ${err.error.message}`);
       },
     );
   }

@@ -50,7 +50,9 @@ export class UserService {
   getAll(): Observable<any> {
     return this.http.get(environment.BASE_API_URL + customerRouter.getAll);
   }
-
+  changePassword(userUpdatePasswordModel: any): Observable<any> {
+    return this.http.put(environment.BASE_API_URL + customerRouter.changePassword, userUpdatePasswordModel);
+  }
   getListCombobox(): Observable<any> {
     return this.http.get(environment.BASE_API_URL + customerRouter.getListCombobox);
   }
