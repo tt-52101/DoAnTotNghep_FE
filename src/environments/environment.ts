@@ -7,8 +7,9 @@ export const environment = {
   BASE_API_URL: 'http://localhost:8310/',
   BASE_UPLOAD_URL: 'https://localhost:44375/api/server-upload/upload',
   BASE_FILE_URL: 'https://localhost:44375/Resources/Images/',
+  ALLOW_ANONYMOUS: '?_allow_anonymous=true',
   production: false,
-  useHash: true,
+  useHash: false,
   hmr: false,
   pro: {
     theme: 'light',

@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-alain-version', VERSION_ALAIN.full);
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
-    renderer.setAttribute(el.nativeElement, 'github', 'https://github.com/duchaindh94');
+    renderer.setAttribute(el.nativeElement, 'github', 'https://github.com/minhvu1502');
     renderer.setAttribute(el.nativeElement, 'a' + 'u' + 't' + 'h' + 'o' + 'r', 'o' + 'r' + 'i' + 'o' + 'n' + '1' + '0' + '5' + '9' + '4');
   }
 

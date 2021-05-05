@@ -1,8 +1,8 @@
 {
     "app": {
-      "name": "Dashboard",
-      "description": "Vân Anh Shop",
-      "year": 2020
+      "name": "Vân Anh Shop",
+      "description": "Dashboard",
+      "year": 2021
     },
     "user": {
       "name": "Admin",
@@ -20,7 +20,7 @@
             "text": "Trang chủ",
             "i18n": "menu.dashboard",
             "icon": "anticon anticon-dashboard",
-            "link": "/dashboard"
+            "link": "/admin/dashboard"
           }, 
           {
             "text": "Quản lý danh mục",
@@ -34,21 +34,21 @@
                 "i18n": "Tag",
                 "hideInBreadcrumb": true,
                 "icon": "anticon anticon-dashboard",
-                "link": "/computer-management/tag"
+                "link": "/admin/computer-management/tag"
               },
               {
                 "text": "Nhà cung cấp",
                 "i18n": "Nhà cung cấp",
                 "hideInBreadcrumb": true,
                 "icon": "anticon anticon-dashboard",
-                "link": "/computer-management/supplier"
+                "link": "/admin/computer-management/supplier"
               }
             ]
            },
           {
            "text": "Quản lý sản phẩm",
            "i18n": "Quản lý sảm phẩm",
-           "hideInBreadcrumb": true,
+           "hideInBreadcrumb": false,
            "icon": "anticon anticon-rocket",
            "shortcutRoot": true,
            "children": [
@@ -57,20 +57,20 @@
                "i18n": "Loại sản phẩm",
                "hideInBreadcrumb": true,
                "icon": "anticon anticon-dashboard",
-               "link": "/computer-management/category"
+               "link": "/admin/computer-management/category"
              },             {
               "text": "Thông tin sản phẩm",
               "i18n": "Thông tin sản phẩm",
               "hideInBreadcrumb": true,
               "icon": "anticon anticon-dashboard",
-              "link": "/computer-management/category-meta"
+              "link": "/admin/computer-management/category-meta"
             },
              {
               "text": "Sản phẩm",
               "i18n": "Sản phẩm",
               "hideInBreadcrumb": true,
               "icon": "anticon anticon-dashboard",
-              "link": "/computer-management/product"
+              "link": "/admin/computer-management/product"
             }
            ]
           },
@@ -86,7 +86,7 @@
                 "i18n": "Đơn đặt hàng",
                 "hideInBreadcrumb": true,
                 "icon": "anticon anticon-dashboard",
-                "link": "/computer-management/order"
+                "link": "/admin/computer-management/order"
               }
             ]
            },
@@ -102,13 +102,13 @@
                 "i18n": "Tài khoản",
                 "hideInBreadcrumb": true,
                 "icon": "anticon anticon-dashboard",
-                "link": "/computer-management/user"
+                "link": "/admin/computer-management/user"
               },  {
                 "text": "Bình luận",
                 "i18n": "Bình luận",
                 "hideInBreadcrumb": true,
                 "icon": "anticon anticon-dashboard",
-                "link": "/computer-management/product-review"
+                "link": "/admin/computer-management/product-review"
               }
             ]
            },

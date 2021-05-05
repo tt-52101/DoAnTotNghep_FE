@@ -476,7 +476,7 @@ export class ProductItemComponent implements OnInit {
       code: this.form.controls.code.value,
       status: this.form.controls.status.value,
       price: this.form.controls.price.value,
-      discount: this.form.controls.discount.value,
+      discount: this.form.controls.discount.value ? this.form.controls.discount.value : 0,
       supplierId: this.form.controls.supplier.value,
       pictures: listPictures,
       listCategoryMeta: this.grid.rowData,

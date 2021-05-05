@@ -1,7 +1,6 @@
 export const authenticationRouter = {
   getToken: `api/v1/authentication/jwt/login`,
 };
-
 export const navigationRouter = {
   getNavigationOwner: `api/v1/bsd/navigations/owner`,
 };
@@ -69,7 +68,10 @@ export const productRouter = {
   getFilter: `api/v1/computer-management/product/filter`,
   getAll: `api/v1/computer-management/product/all`,
   getListCombobox: `api/v1/computer-management/product/for-combobox`,
+  getProdBySupplier: `api/v1/computer-management/product/product-by-supplier`,
+  updateVisitCount: `api/v1/computer-management/product/update-visit-count`,
 };
+
 export const orderRouter = {
   create: `api/v1/computer-management/order`,
   createMany: `api/v1/computer-management/order/create-many`,
@@ -85,7 +87,7 @@ export const cartRouter = {
   createMany: `api/v1/computer-management/cart/create-many`,
   update: `api/v1/computer-management/cart`,
   delete: `api/v1/computer-management/cart`,
-  getById: `api/v1/computer-management/cart?id=`,
+  getById: `api/v1/computer-management/cart/get-by-user-id`,
   getFilter: `api/v1/computer-management/cart/filter`,
   getAll: `api/v1/computer-management/cart/all`,
   getListCombobox: `api/v1/computer-management/cart/for-combobox`,
@@ -99,6 +101,9 @@ export const customerRouter = {
   getFilter: `api/v1/computer-management/customer/filter`,
   getAll: `api/v1/computer-management/customer/all`,
   getListCombobox: `api/v1/computer-management/customer/for-combobox`,
+  getToken: `api/v1/authentication/jwt/user/login`,
+  register: `api/v1/account/create`,
+  changePassword: `api/v1/computer-management/customer/update-password`,
 };
 export const productReviewRouter = {
   create: `api/v1/computer-management/productReview`,
@@ -123,5 +128,5 @@ export const categoryMetaProductRouter = {
 export const userRouter = {
   getListRightOfUser: `api/v1/idm/users`,
   getListRoleOfUser: `api/v1/idm/users`,
-  changePassword: `api/v1/user/update-password`,
+  changePassword: `api/v1/idm/users/changepassword`,
 };

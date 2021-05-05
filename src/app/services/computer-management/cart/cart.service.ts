@@ -5,14 +5,18 @@ import { environment } from '@env/environment';
 import { QueryFilerModel } from '@model';
 import { cartRouter } from '@util';
 // RxJS
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   constructor(private http: _HttpClient) {}
-
+  private listCartSource = new BehaviorSubject(JSON.parse(localStorage.getItem('list-cart') || '[]'));
+  currentCart = this.listCartSource.asObservable();
+  changeCart(listCart: any) {
+    this.listCartSource.next(listCart);
+  }
   create(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + cartRouter.create, model);
   }
@@ -25,8 +29,8 @@ export class CartService {
     return this.http.put(environment.BASE_API_URL + cartRouter.update, model);
   }
 
-  getById(id: string): Observable<any> {
-    return this.http.get(environment.BASE_API_URL + cartRouter.getById + id);
+  getById(): Observable<any> {
+    return this.http.get(environment.BASE_API_URL + cartRouter.getById + environment.ALLOW_ANONYMOUS);
   }
 
   delete(list: [string]): Observable<any> {

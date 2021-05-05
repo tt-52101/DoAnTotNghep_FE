@@ -79,8 +79,20 @@ export class DefaultInterceptor implements HttpInterceptor {
   }
 
   private toLogin(): void {
+    const app = JSON.parse(localStorage.getItem('app') || '{}');
+    if (app !== null && app !== undefined && app !== {}) {
+      switch (app.type) {
+        case 'HOME':
+          this.goTo('/home');
+          break;
+        case 'QTHT':
+          this.goTo('/passport/login');
+          break;
+        default:
+          break;
+      }
+    }
     // this.notification.error(`Chưa đăng nhập hoặc phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.`, ``);
-    this.goTo('/passport/login');
   }
 
   private delayGotoLogin(): void {

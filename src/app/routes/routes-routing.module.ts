@@ -15,13 +15,17 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 import { UserRegisterComponent } from './passport/register/register.component';
 
 import { AgGridComponent } from './ag-grid/demo/ag-grid.component';
+import { LayoutComponent } from './computer-customer/layout/layout.component';
+import { NotFoundComponent } from './computer-customer/not-found/not-found.component';
+import { JWTGuard } from '@delon/auth';
+import { Exception404Component } from './exception/404.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'admin',
     component: LayoutProComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'passport/login', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'ag-grid', component: AgGridComponent },
       // Exception
@@ -36,6 +40,18 @@ const routes: Routes = [
       {
         path: 'computer-management',
         loadChildren: () => import('./computer-management/computer-management.module').then((m) => m.ComputerManagementModule),
+      },
+    ],
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: '',
+        loadChildren: () => import('./computer-customer/computer-customer.module').then((m) => m.ComputerCustomerModule),
+        data: { title: 'Vân Anh PC - Laptop Gaming, Pc Gaming' },
       },
     ],
   },
@@ -68,7 +84,8 @@ const routes: Routes = [
   },
   // Single page not wrapped Layout
   { path: 'callback/:type', component: CallbackComponent },
-  { path: '**', redirectTo: 'exception/404' },
+  { path: '404-not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: '404-not-found' },
 ];
 
 @NgModule({

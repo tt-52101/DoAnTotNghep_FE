@@ -446,14 +446,12 @@ img {
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cart-link {
   font-size: 22px;
-  position: relative;
   width: 120px;
   height: auto;
   display: block;
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cart-link .fa-shopping-basket {
   z-index: 99;
-  position: relative;
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cart-link .aa-cart-title {
   color: #555;
@@ -919,6 +917,7 @@ img {
 #aa-promo .aa-promo-area .aa-promo-banner {
   width: 100%;
   height: 100%;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   -moz-transform: translateZ(0);
@@ -2650,7 +2649,7 @@ img {
 }
 #login-modal .modal-dialog {
   margin: 100px auto;
-  width: 320px;
+  width: 600px;
 }
 #login-modal .modal-dialog h4 {
   border-bottom: 1px solid #ccc;

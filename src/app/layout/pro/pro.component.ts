@@ -15,8 +15,9 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
+import { StartupService } from '@core';
 import { ReuseTabService } from '@delon/abc/reuse-tab';
-import { ScrollService } from '@delon/theme';
+import { ScrollService, SettingsService } from '@delon/theme';
 import { updateHostClass } from '@delon/util';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -76,8 +77,18 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     private el: ElementRef,
     private renderer: Renderer2,
     public pro: BrandService,
+    private settingService: SettingsService,
+    private startupService: StartupService,
     @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
   ) {
+    const app = {
+      name: 'Quản trị hệ thống',
+      description: 'Quản trị hệ thống',
+      year: 2021,
+      type: 'QTHT',
+    };
+    this.settingService.setApp(app);
+    this.startupService.load();
     // scroll to top in change page
     router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt) => {
       if (!this.isFetching && evt instanceof RouteConfigLoadStart) {

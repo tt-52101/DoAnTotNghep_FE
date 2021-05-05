@@ -59,7 +59,7 @@ export class StartupService {
             // application data
             const res = appData as NzSafeAny;
             // Application information: including site name, description, year
-            this.settingService.setApp(res.app);
+            // this.settingService.setApp(res.app);
             // User information: including name, profile picture, email address
             this.settingService.setUser(res.user);
 
@@ -83,12 +83,14 @@ export class StartupService {
             // console.log(this.aclService.data);
             // console.log(this.aclService.can({ role: ['role1'] }));
             //#endregion
-
+            const app = JSON.parse(localStorage.getItem('app') || '{}');
+            if (app !== {} && app !== null && app !== undefined) {
+              this.titleService.suffix = app.name;
+            }
             // Initialization menu
             this.menuService.add(res.menu);
             // Set the suffix of the page title
             this.titleService.default = '';
-            this.titleService.suffix = res.app.name;
           },
           () => {},
           () => {

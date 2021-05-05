@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Digital-ID</title>
+  <title>Vân Anh Shop-PC, Laptop Gaming</title>
   <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="./assets/img/VA.ico" />
   <!-- Apple Touch Icon -->
   <!-- <link rel="apple-touch-icon" href="custom-icon.png"> -->
   <style type="text/css">
@@ -36,6 +36,19 @@
       display: none;
     }
   </style>
+  <!-- Font awesome -->
+  <link href="./assets/css/fontawesome.min.css" rel="stylesheet">
+  <link href="./assets/css/bootstrap3.css" rel="stylesheet">
+  <link href="./assets/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./assets/css/jquery.simpleLens.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/slick.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/nouislider.css">
+  <link id="switcher" href="./assets/css/theme-color/default-theme.css" rel="stylesheet">
+  <link href="./assets/css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
+
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 </head>
 
 <body theme-name="pro" theme-version="10.0.0">
@@ -46,6 +59,124 @@
           class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
     </div>
   </div>
+  <footer id="aa-footer">
+    <!-- footer bottom -->
+    <div class="aa-footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div style="height: 200px;" class="fb-page"
+              data-href="https://www.facebook.com/profile.php?id=100066815273527" data-tabs="timeline" data-width=""
+              data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
+              data-show-facepile="true">
+              <blockquote cite="https://www.facebook.com/profile.php?id=100066815273527" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/profile.php?id=100066815273527">Vân Anh Computer</a>
+              </blockquote>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="aa-footer-top-area">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="aa-footer-widget">
+                    <div class="aa-footer-widget">
+                      <p style="color: #888">
+                        Vân Anh Computer chuyên Laptop Gaming MSI & Asus & Acer, máy tính PC chính hãng. Mang đến cho
+                        khách hàng giải pháp xây
+                        dựng máy tính hoàn chỉnh.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="aa-footer-widget">
+                    <div class="aa-footer-widget">
+                      <h3>Kết nối với chúng tôi</h3>
+                      <p style="color: #888">
+                        <i class="fas fa-address-card"></i> Số nhà 54, ngách 225/7 đường Quan Hoa, Quận Cầu Giấy, Hà Nội
+                      </p>
+                      <p style="color: #888"><span class="fa fa-phone"></span>+84394835311</p>
+                      <p style="color: #888"><span class="fa fa-envelope"></span>vuquangminhql123@gmail.com</p>
+
+                      <div class="aa-footer-social">
+                        <a class="socical btn-fb" href="https://facebook.com/minhvu1502" target="_blank"><span
+                            class="fab fa-facebook"></span></a>
+                        <a class="socical btn-instagram" target="_blank" href="https://instagram.com/minhvu1502"><span
+                            class="fab fa-instagram"></span></a>
+                        <a class="socical btn-twitter" target="_blank" href="https://twitter.com"><span
+                            class="fab fa-twitter"></span></a>
+                        <a class="socical btn-google" target="_blank" href="https://google.com"><span
+                            class="fab fa-google-plus"></span></a>
+                        <a class="socical btn-youtube" target="_blank"
+                          href="https://www.youtube.com/channel/UCr4JvsMzS71c97sOLbA2hNg"><span
+                            class="fab fa-youtube"></span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer-bottom -->
+    <div class="aa-footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-footer-bottom-area">
+              <p>Designed by <a href="http://www.markups.io/">Minh Vũ</a></p>
+              <div class="aa-footer-payment">
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-paypal"></i>
+                <i class="fab fa-cc-discover"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  var localStogare = JSON.parse(localStorage.getItem('app'));
+  if (localStogare) {
+    var element = document.getElementById('aa-footer');
+    if (localStogare.type === 'QTHT') {
+      element.hidden = true;      
+    } else{
+      element.hidden = false;
+    }
+  }
+</script>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1"
+    nonce="rKUuob9z"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="./assets/js/bootstrap.js"></script>
+
+  <!-- SmartMenus jQuery plugin -->
+  <script type="text/javascript" src="./assets/js/jquery.smartmenus.js"></script>
+  <!-- SmartMenus jQuery Bootstrap Addon -->
+  <script type="text/javascript" src="./assets/js/jquery.smartmenus.bootstrap.js"></script>
+  <!-- To Slider JS -->
+  <script src="./assets/js/sequence.js"></script>
+  <script src="./assets/js/sequence-theme.modern-slide-in.js"></script>
+  <!-- Product view slider -->
+  <script type="text/javascript" src="./assets/js/jquery.simpleGallery.js"></script>
+  <script type="text/javascript" src="./assets/js/jquery.simpleLens.js"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="./assets/js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="./assets/js/nouislider.js"></script>
+  <!-- Custom js -->
+
+  <script type="text/javascript" src="./assets/js/custom.js"></script>
+
 </body>
 
 </html>

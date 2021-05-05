@@ -2,7 +2,7 @@
 import { QueryFilerModel } from '@model';
 
 export const ROLE_SYS_ADMIN = 'SYS_ADMIN';
-
+export const LAPTOP_ID = '14843a87-3a07-4dd1-9171-0dc0f56ff0fc';
 export const LIST_STATUS = [
   { id: true, code: true, name: 'Hoạt động' },
   { id: false, code: false, name: 'Không hoạt động' },
@@ -13,7 +13,7 @@ export const QUERY_FILTER_DEFAULT: QueryFilerModel = {
   pageSize: 20,
   textSearch: undefined,
 };
-
+export const reCaptchaKey = '6LejNL4aAAAAAJATFE7BD2CCxFN7vNvuohdOiONf';
 export const PAGE_SIZE_OPTION_DEFAULT = [5, 10, 20, 50];
 
 export const EXCEL_STYLES_DEFAULT = [

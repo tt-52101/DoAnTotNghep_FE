@@ -100,7 +100,7 @@ import { LayoutModule } from './layout/layout.module';
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
-
+import { NgxCaptchaModule } from 'ngx-captcha';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -113,6 +113,7 @@ import { STWidgetModule } from './shared/st-widget/st-widget.module';
     LayoutModule,
     RoutesModule,
     STWidgetModule,
+    NgxCaptchaModule,
     ...I18NSERVICE_MODULES,
     // ...GLOBAL_THIRD_MODULES,
     ...FORM_MODULES,
