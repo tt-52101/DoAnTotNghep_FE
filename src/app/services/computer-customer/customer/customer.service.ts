@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { categoryRouter, customerRouter } from '@util';
@@ -8,8 +9,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CustomerService {
-  constructor(private http: _HttpClient) {}
-  private isLoginSource = new BehaviorSubject(false);
+  constructor(private http: _HttpClient, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService) {}
+  private isLoginSource = new BehaviorSubject(this.tokenService.get()?.token ? true : false);
   isLoginCurrent = this.isLoginSource.asObservable();
   changeLogin(isLogin: any) {
     this.isLoginSource.next(isLogin);

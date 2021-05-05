@@ -87,7 +87,7 @@ export const cartRouter = {
   createMany: `api/v1/computer-management/cart/create-many`,
   update: `api/v1/computer-management/cart`,
   delete: `api/v1/computer-management/cart`,
-  getById: `api/v1/computer-management/cart?id=`,
+  getById: `api/v1/computer-management/cart/get-by-user-id`,
   getFilter: `api/v1/computer-management/cart/filter`,
   getAll: `api/v1/computer-management/cart/all`,
   getListCombobox: `api/v1/computer-management/cart/for-combobox`,

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
@@ -19,6 +20,16 @@ export class CartCustomerService {
     listCart.splice(index, 1);
     localStorage.setItem('list-cart', JSON.stringify(listCart));
     this.cartService.changeCart(listCart);
+    const cartModel = {
+      listProducts: JSON.stringify(listCart),
+    };
+    this.cartService.update(cartModel).subscribe((res) => {
+      if (res.code === 200) {
+        this.nzMessage.success('Cập nhật giỏ hàng thành công');
+      } else {
+        this.nzMessage.success('Có lỗi xảy ra');
+      }
+    });
     return listCart;
   }
   change(event: any, prod: any, listCart: any[]) {
@@ -33,6 +44,16 @@ export class CartCustomerService {
       total = total + item.subTotal;
     });
     localStorage.setItem('list-cart', JSON.stringify(listCart));
+    const cartModel = {
+      listProducts: JSON.stringify(listCart),
+    };
+    this.cartService.update(cartModel).subscribe((res) => {
+      if (res.code === 200) {
+        this.nzMessage.success('Cập nhật giỏ hàng thành công');
+      } else {
+        this.nzMessage.success('Có lỗi xảy ra');
+      }
+    });
     const modelReturn = {
       total: total,
       listCart: listCart,
@@ -60,6 +81,16 @@ export class CartCustomerService {
         listCart.push(item);
       }
       localStorage.setItem('list-cart', JSON.stringify(listCart));
+      const cartModel = {
+        listProducts: JSON.stringify(listCart),
+      };
+      this.cartService.update(cartModel).subscribe((res) => {
+        if (res.code === 200) {
+          this.nzMessage.success('Đã thêm vào giỏ hàng');
+        } else {
+          this.nzMessage.success('Có lỗi xảy ra');
+        }
+      });
       this.cartService.changeCart(listCart);
     } else {
       this.nzMessage.error('Bạn phải đăng nhập để mua hàng');

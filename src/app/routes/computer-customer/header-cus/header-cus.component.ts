@@ -38,30 +38,11 @@ export class HeaderCusComponent implements OnInit {
     const token = this.tokenService.get()?.token;
     if (token) {
       this.isLogin = true;
+      this.getListCart();
+      this.fetchUser();
     } else {
       this.isLogin = false;
     }
-    const listCart = JSON.parse(localStorage.getItem('list-cart') || '[]');
-    if (listCart !== '' && listCart.length !== 0 && listCart !== undefined && listCart !== null) {
-      this.listCart = listCart;
-      this.listCart.map((item) => {
-        item.subTotal = item.count * (item.price - item.discount);
-        this.total = this.total + item.subTotal;
-      });
-    }
-
-    this.formLogin = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      recaptcha: [null, [Validators.required]],
-      rememberMe: [true],
-    });
-    this.fetchUser();
-    this.userService.isChangeCurrent.subscribe((res) => {
-      if (res === true) {
-        this.fetchUser();
-      }
-    });
     this.cartService.currentCart.subscribe((res) => {
       this.total = 0;
       this.listCart = res;
@@ -70,8 +51,29 @@ export class HeaderCusComponent implements OnInit {
         this.total = this.total + item.subTotal;
       });
     });
+    this.formLogin = this.fb.group({
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      recaptcha: [null, [Validators.required]],
+      rememberMe: [true],
+    });
+    this.userService.isChangeCurrent.subscribe((res) => {
+      if (res === true) {
+        this.fetchUser();
+      }
+    });
+
     this.customerService.isLoginCurrent.subscribe((res) => {
       this.isLogin = res;
+      if (this.isLogin === false) {
+        this.listCart = [];
+        this.total = 0;
+      } else {
+        setTimeout(() => {
+          this.fetchUser();
+          this.getListCart();
+        }, 3000);
+      }
     });
   }
   formLogin: FormGroup;
@@ -85,7 +87,24 @@ export class HeaderCusComponent implements OnInit {
   showModal(): void {
     this.isVisible = true;
   }
-
+  getListCart() {
+    this.cartService.getById().subscribe((res) => {
+      if (res.code === 200) {
+        const listProducts = JSON.parse(res.data.listProducts);
+        if (listProducts) {
+          const listCart = listProducts;
+          if (listCart !== '' && listCart.length !== 0 && listCart !== undefined && listCart !== null) {
+            this.listCart = listCart;
+            localStorage.setItem('list-cart', JSON.stringify(listCart));
+            this.listCart.map((item) => {
+              item.subTotal = item.count * (item.price - item.discount);
+              this.total = this.total + item.subTotal;
+            });
+          }
+        }
+      }
+    });
+  }
   handleOk(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;
@@ -155,8 +174,8 @@ export class HeaderCusComponent implements OnInit {
           return;
         }
         this.nzMessage.success('Đăng nhập thành công');
-        this.customerService.changeLogin(true);
-        this.cusService.changeUser(true);
+        // this.customerService.changeLogin(true);
+        // this.cusService.changeUser(true);
         this.isLogin = true;
         this.tokenService.set({
           id: res.data.userId,
@@ -172,6 +191,7 @@ export class HeaderCusComponent implements OnInit {
           // isSysAdmin,
         });
         this.fetchUser();
+        this.getListCart();
         this.isVisible = false;
         if (res.data.userModel.isAdmin === true) {
           this.router.navigateByUrl('/admin');

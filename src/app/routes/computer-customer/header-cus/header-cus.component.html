@@ -84,7 +84,7 @@
                               <span [title]="item.name" class="name-text">{{ item.name }}</span>
                             </div>
                           </div>
-                          <span class="price-prod">{{ item.subTotal }}đ</span>
+                          <span class="price-prod">{{ item.subTotal | currency: 'VND' | lowercase }}</span>
                         </div>
                         <div class="col-md-2 item-center">
                           <i style="margin-right: 5px" class="fas fa-pencil-alt"></i>
@@ -93,7 +93,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="price-prod">Tổng cộng: {{ total }}đ</span>
+                  <span class="price-prod">Tổng cộng: {{ total | currency: 'VND' | lowercase }}</span>
                   <a class="aa-cartbox-checkout aa-primary-btn" href="javascript:void(0)">Thanh toán ngay</a>
                 </div>
               </div>

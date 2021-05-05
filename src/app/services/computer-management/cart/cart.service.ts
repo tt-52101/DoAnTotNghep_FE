@@ -29,8 +29,8 @@ export class CartService {
     return this.http.put(environment.BASE_API_URL + cartRouter.update, model);
   }
 
-  getById(id: string): Observable<any> {
-    return this.http.get(environment.BASE_API_URL + cartRouter.getById + id);
+  getById(): Observable<any> {
+    return this.http.get(environment.BASE_API_URL + cartRouter.getById + environment.ALLOW_ANONYMOUS);
   }
 
   delete(list: [string]): Observable<any> {

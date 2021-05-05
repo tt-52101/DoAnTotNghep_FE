@@ -70,9 +70,7 @@ export class LoginRedirectComponent implements OnInit {
         }
         this.nzMessage.success('Đăng nhập thành công');
         this.customerService.changeLogin(true);
-        this.cusService.changeUser(true);
         this.isLogin = true;
-        jQuery('#login-modal').modal('hide');
         this.tokenService.set({
           id: res.data.userId,
           token: res.data.tokenString,
