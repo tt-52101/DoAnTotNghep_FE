@@ -18,6 +18,8 @@ import { RegisterComponent } from './register/register.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { QuickViewComponent } from './quick-view/quick-view.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { AccountDetailComponent } from './account-detail/account-detail.componen
     RegisterComponent,
     LoginRedirectComponent,
     AccountDetailComponent,
+    QuickViewComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, NgxCaptchaModule, SharedModule, ComputerCustomerRoutingModule],
+  imports: [CommonModule, ReactiveFormsModule, NgxImageZoomModule, NgxCaptchaModule, SharedModule, ComputerCustomerRoutingModule],
 })
 export class ComputerCustomerModule {}

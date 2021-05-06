@@ -37,6 +37,8 @@
     }
   </style>
   <!-- Font awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="./assets/css/fontawesome.min.css" rel="stylesheet">
   <link href="./assets/css/bootstrap3.css" rel="stylesheet">
   <link href="./assets/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
@@ -140,17 +142,17 @@
     </div>
   </footer>
 
-<script>
-  var localStogare = JSON.parse(localStorage.getItem('app'));
-  if (localStogare) {
-    var element = document.getElementById('aa-footer');
-    if (localStogare.type === 'QTHT') {
-      element.hidden = true;      
-    } else{
-      element.hidden = false;
+  <script>
+    var localStogare = JSON.parse(localStorage.getItem('app'));
+    if (localStogare) {
+      var element = document.getElementById('aa-footer');
+      if (localStogare.type === 'QTHT') {
+        element.hidden = true;
+      } else {
+        element.hidden = false;
+      }
     }
-  }
-</script>
+  </script>
   <script async defer crossorigin="anonymous"
     src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1"
     nonce="rKUuob9z"></script>

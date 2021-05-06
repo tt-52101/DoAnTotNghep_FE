@@ -79,6 +79,7 @@
     "ng-zorro-antd": "^10.0.0",
     "ngx-captcha": "^9.0.1",
     "ngx-countdown": "^10.0.0",
+    "ngx-image-zoom": "^0.6.0",
     "ngx-trend": "^6.0.0",
     "perfect-scrollbar": "^1.5.0",
     "qrious": "^4.0.2",
