@@ -16,11 +16,14 @@ import { UserService } from 'src/app/services/computer-management/user/user.serv
   templateUrl: './header-cus.component.html',
   styleUrls: ['./header-cus.component.less'],
 })
-export class HeaderCusComponent implements OnInit {
+export class HeaderCusComponent implements OnInit, OnDestroy {
   isVisible = false;
   reCaptchaKey = reCaptchaKey;
   isLoading = false;
   passwordVisible = false;
+  sub1: Subscription;
+  sub2: Subscription;
+  sub3: Subscription;
   listCart: any[] = [];
   total: any = 0;
   constructor(
@@ -43,7 +46,7 @@ export class HeaderCusComponent implements OnInit {
     } else {
       this.isLogin = false;
     }
-    this.cartService.currentCart.subscribe((res) => {
+    this.sub1 = this.cartService.currentCart.subscribe((res) => {
       this.total = 0;
       this.listCart = res;
       this.listCart.map((item) => {
@@ -57,13 +60,13 @@ export class HeaderCusComponent implements OnInit {
       recaptcha: [null, [Validators.required]],
       rememberMe: [true],
     });
-    this.userService.isChangeCurrent.subscribe((res) => {
+    this.sub2 = this.userService.isChangeCurrent.subscribe((res) => {
       if (res === true) {
         this.fetchUser();
       }
     });
 
-    this.customerService.isLoginCurrent.subscribe((res) => {
+    this.sub3 = this.customerService.isLoginCurrent.subscribe((res) => {
       this.isLogin = res;
       if (this.isLogin === false) {
         this.listCart = [];
@@ -75,6 +78,11 @@ export class HeaderCusComponent implements OnInit {
         }, 3000);
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
   }
   formLogin: FormGroup;
   isLogin: any;

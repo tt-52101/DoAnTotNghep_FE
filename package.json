@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/ng-alain/ng-alain.git"
   },
-  "homepage": "https://e.ng-alain.com/theme/pro",
+  "homepage": "https://minhvu1502.github.io/DoAnTotNghiep_FE/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
@@ -21,6 +21,8 @@
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "e2e": "ng e2e",
     "test": "ng test --watch",
+    "predeploy": "npm run build",
+"deploy": "gh-pages -d build",
     "test-coverage": "ng test --code-coverage --watch=false",
     "color-less": "ng-alain-plugin-theme -t=colorLess",
     "theme": "ng-alain-plugin-theme -t=themeCss",
@@ -72,6 +74,7 @@
     "angular-social-plugins": "^1.3.0",
     "element-closest": "^3.0.2",
     "file-saver": "^2.0.2",
+    "gh-pages": "^3.1.0",
     "jquery": "^3.6.0",
     "js-base64": "^3.4.5",
     "masonry-layout": "^4.2.2",
