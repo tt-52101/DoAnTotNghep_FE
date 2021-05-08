@@ -907,11 +907,11 @@ img {
   display: inline;
   float: left;
   width: 100%;
-  height: 400px;
+  height: 200px;
 }
 #aa-promo .aa-promo-area .aa-promo-right .aa-single-promo-right {
   width: 50%;
-  height: 50%;
+  height: 100%;
   float: left;
 }
 #aa-promo .aa-promo-area .aa-promo-banner {

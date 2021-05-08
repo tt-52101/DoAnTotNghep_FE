@@ -44,7 +44,7 @@ export class CategoryMetaService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.BASE_API_URL + categoryMetaRouter.getAll);
+    return this.http.get(environment.BASE_API_URL + categoryMetaRouter.getAll + environment.ALLOW_ANONYMOUS);
   }
 
   getListCombobox(): Observable<any> {
