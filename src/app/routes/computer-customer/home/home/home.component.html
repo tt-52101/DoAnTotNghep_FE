@@ -991,6 +991,13 @@
                 <nz-tag [nzColor]="'#f50'">{{ item }}</nz-tag>
               </a>
             </p>
+
+            <p class="aa-prod-category">
+              <span class="text-label">Tag: </span
+              ><a *ngFor="let item of itemQuickView ? itemQuickView.tagName : []" href="#">
+                <nz-tag [nzColor]="'lime'">{{ item }}</nz-tag>
+              </a>
+            </p>
           </div>
           <span class="text-label">Thông tin bổ sung: </span>
           <div class="row">
@@ -1012,8 +1019,10 @@
             </div>
           </div>
           <div class="item-center aa-prod-view-bottom">
-            <a href="#" style="margin-right: 20px" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
-            <a href="#" class="aa-add-to-cart-btn">Xem chi tiết</a>
+            <a (click)="addToCart(itemQuickView)" href="javascript:void(0)" style="margin-right: 20px" class="aa-add-to-cart-btn"
+              ><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a
+            >
+            <a href="javascript:void(0)" (click)="viewDetail(itemQuickView.code)" class="aa-add-to-cart-btn">Xem chi tiết</a>
           </div>
         </div>
       </div>

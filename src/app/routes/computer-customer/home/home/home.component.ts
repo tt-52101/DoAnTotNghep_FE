@@ -1,4 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StartupService } from '@core';
 import { SettingsService } from '@delon/theme';
 import { environment } from '@env/environment';
@@ -56,6 +57,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     private productService: ProductService,
     private settingService: SettingsService,
+    private router: Router,
     private startupService: StartupService,
     private categoryMetaService: CategoryMetaService,
     private cartCusService: CartCustomerService,
@@ -155,30 +157,34 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     return listRs;
   }
+  viewDetail(code: any) {
+    const url = '/product-detail/' + code;
+    window.location = url;
+    // this.router.navigate(['/product-detail/' + code]);
+  }
   ngAfterViewInit() {
-    (function (d, s, id) {
-      let js,
-        fjs = d.getElementsByTagName(s)[2];
-      // for (let index = 0; index < fjs.length; index++) {
-      //   console.log(index + ' ' + fjs[index].outerHTML);
-      // }
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.setAttribute('src', 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1');
-      // js.src = '//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1';
-      // Notice the "!" at the end of line
-      fjs.nodeName; // <- error!
-
-      if (fjs === null) {
-        alert('oops');
-      } else {
-        // since you've done the nullable check
-        // TS won't complain from this point on
-        fjs.parentNode?.insertBefore(js, fjs); // <- no error
-      }
-    })(document, 'script', 'facebook-js-sdk');
+    // (function (d, s, id) {
+    //   let js,
+    //     fjs = d.getElementsByTagName(s)[2];
+    //   // for (let index = 0; index < fjs.length; index++) {
+    //   //   console.log(index + ' ' + fjs[index].outerHTML);
+    //   // }
+    //   if (d.getElementById(id)) {
+    //     return;
+    //   }
+    //   js = d.createElement(s);
+    //   js.id = id;
+    //   js.setAttribute('src', 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1');
+    //   // js.src = '//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1';
+    //   // Notice the "!" at the end of line
+    //   fjs.nodeName; // <- error!
+    //   if (fjs === null) {
+    //     alert('oops');
+    //   } else {
+    //     // since you've done the nullable check
+    //     // TS won't complain from this point on
+    //     fjs.parentNode?.insertBefore(js, fjs); // <- no error
+    //   }
+    // })(document, 'script', 'facebook-js-sdk');
   }
 }
