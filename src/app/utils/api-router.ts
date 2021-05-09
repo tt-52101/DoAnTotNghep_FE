@@ -65,6 +65,7 @@ export const productRouter = {
   update: `api/v1/computer-management/product`,
   delete: `api/v1/computer-management/product`,
   getById: `api/v1/computer-management/product?id=`,
+  getByCode: `api/v1/computer-management/product/code`,
   getFilter: `api/v1/computer-management/product/filter`,
   getAll: `api/v1/computer-management/product/all`,
   getListCombobox: `api/v1/computer-management/product/for-combobox`,

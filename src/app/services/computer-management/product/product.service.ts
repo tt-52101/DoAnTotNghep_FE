@@ -28,6 +28,12 @@ export class ProductService {
   getById(id: string): Observable<any> {
     return this.http.get(environment.BASE_API_URL + productRouter.getById + id);
   }
+  getByCode(code: string): Observable<any> {
+    const model = {
+      code: code,
+    };
+    return this.http.post(environment.BASE_API_URL + productRouter.getByCode + environment.ALLOW_ANONYMOUS, model);
+  }
   updateVisitCount(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + productRouter.updateVisitCount + environment.ALLOW_ANONYMOUS, model);
   }
