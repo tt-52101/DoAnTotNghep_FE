@@ -85,7 +85,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     this.sub3.unsubscribe();
   }
   formLogin: FormGroup;
-  isLogin: any;
+  isLogin: any = false;
 
   userName = '';
   baseFile = environment.BASE_FILE_URL;

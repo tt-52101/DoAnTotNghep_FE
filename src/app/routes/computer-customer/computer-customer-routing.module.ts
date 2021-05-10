@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { CartDetailComponent } from './cart-detail/cart-detail.component';
 import { HomeComponent } from './home/home/home.component';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginRedirectComponent },
       { path: 'account-detail', component: AccountDetailComponent },
+      { path: 'cart-detail', component: CartDetailComponent },
       { path: 'product-detail/:id', component: ProductDetailComponent },
     ],
   },

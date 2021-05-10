@@ -99,7 +99,16 @@
                     </div>
                   </div>
                   <span class="price-prod">Tổng cộng: {{ total | currency: 'VND' | lowercase }}</span>
-                  <a class="aa-cartbox-checkout aa-primary-btn" href="javascript:void(0)">Thanh toán ngay</a>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <a class="aa-cartbox-checkout aa-primary-btn" [routerLink]="'/cart-detail'" href="javascript:void(0)"
+                        >Đi tới giỏ hàng</a
+                      >
+                    </div>
+                    <div class="col-md-6">
+                      <a class="aa-cartbox-checkout aa-primary-btn" href="javascript:void(0)">Thanh toán ngay</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
