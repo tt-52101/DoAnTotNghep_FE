@@ -81,13 +81,15 @@
                         <div class="col-md-5">
                           <div class="row">
                             <div class="col-md-12">
-                              <span [title]="item.name" class="name-text">{{ item.name }}</span>
+                              <span style="cursor: pointer" (click)="viewDetail(item.code)" [title]="item.name" class="name-text">{{
+                                item.name
+                              }}</span>
                             </div>
                           </div>
                           <span class="price-prod">{{ item.subTotal | currency: 'VND' | lowercase }}</span>
                         </div>
                         <div class="col-md-2 item-center">
-                          <i style="margin-right: 5px" class="fas fa-pencil-alt"></i>
+                          <i style="margin-right: 5px" [routerLink]="'/cart-detail'" class="fas fa-pencil-alt"></i>
                           <i (click)="removeItem(item)" class="fas fa-trash"></i>
                         </div>
                       </div>

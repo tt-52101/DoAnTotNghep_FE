@@ -4,6 +4,11 @@
     <div class="col-md-12">
       <div class="aa-product-details-area">
         <div class="aa-product-details-content">
+          <ul class="breadcrumb">
+            <li><a href="javascript:void(0)" [routerLink]="'/home'">Trang chủ</a></li>
+            <li>Chi tiết sản phẩm</li>
+            <li>{{ itemQuickView.code }}</li>
+          </ul>
           <div class="row">
             <!-- Modal view slider -->
             <div class="col-md-6 col-sm-12 col-xs-12">
