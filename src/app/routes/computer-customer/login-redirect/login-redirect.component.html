@@ -46,7 +46,15 @@
           </label>
         </div>
       </div>
-      <button nz-col [nzSpan]="24" style="width: 100%" nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+      <button
+        [nzLoading]="isLoading"
+        nz-col
+        [nzSpan]="24"
+        style="width: 100%"
+        nz-button
+        class="login-form-button login-form-margin"
+        [nzType]="'primary'"
+      >
         Đăng nhập
       </button>
       <div class="twitter">

@@ -1,11 +1,13 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StartupService } from '@core';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { SettingsService } from '@delon/theme';
 import { environment } from '@env/environment';
 import { LAPTOP_ID } from '@util';
 import { FacebookService, InitParams } from 'ngx-facebook';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
+import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
 import { CategoryMetaService } from 'src/app/services/computer-management/category-meta/category-meta.service';
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
@@ -58,11 +60,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private productService: ProductService,
     private settingService: SettingsService,
     private router: Router,
+    private customerService: CustomerService,
     private startupService: StartupService,
     private categoryMetaService: CategoryMetaService,
     private cartCusService: CartCustomerService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private fb: FacebookService,
-  ) {}
+  ) {
+    const token = this.tokenService.get()?.token;
+    if (token) {
+    } else {
+      this.customerService.changeLogin(false);
+    }
+  }
   topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
