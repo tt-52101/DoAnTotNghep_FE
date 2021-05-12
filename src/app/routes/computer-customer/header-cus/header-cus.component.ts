@@ -74,6 +74,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
         this.listCart = [];
         this.total = 0;
       } else {
+        this.total = 0;
         setTimeout(() => {
           this.fetchUser();
           this.getListCart();
@@ -107,6 +108,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     this.isVisible = true;
   }
   getListCart() {
+    this.total = 0;
     this.cartService.getById().subscribe((res) => {
       if (res.code === 200) {
         const listProducts = JSON.parse(res.data.listProducts);

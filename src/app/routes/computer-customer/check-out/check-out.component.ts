@@ -5,16 +5,17 @@ import { CartService } from 'src/app/services/computer-management/cart/cart.serv
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
 
 @Component({
-  selector: 'app-cart-detail',
-  templateUrl: './cart-detail.component.html',
-  styleUrls: ['./cart-detail.component.less'],
+  selector: 'app-check-out',
+  templateUrl: './check-out.component.html',
+  styleUrls: ['./check-out.component.less'],
 })
-export class CartDetailComponent implements OnInit {
+export class CheckOutComponent implements OnInit {
   constructor(private cartService: CartService, private cartcustomerService: CartCustomerService, private productService: ProductService) {}
   listCart: any[] = [];
   total = 0;
   radioValue: any = 1;
   shipping = 0;
+  paymentType = 1;
   shippingValue = 25000;
   baseFile = environment.BASE_FILE_URL;
   ngOnInit(): void {
@@ -33,6 +34,7 @@ export class CartDetailComponent implements OnInit {
     }
   }
   getListCart() {
+    this.total = 0;
     this.cartService.getById().subscribe((res) => {
       if (res.code === 200) {
         const listProducts = JSON.parse(res.data.listProducts);

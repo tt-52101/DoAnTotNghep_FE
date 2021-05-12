@@ -21,6 +21,7 @@ import { AccountDetailComponent } from './account-detail/account-detail.componen
 import { QuickViewComponent } from './quick-view/quick-view.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
+import { CheckOutComponent } from './check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CartDetailComponent } from './cart-detail/cart-detail.component';
     AccountDetailComponent,
     QuickViewComponent,
     CartDetailComponent,
+    CheckOutComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, NgxImageZoomModule, NgxCaptchaModule, SharedModule, ComputerCustomerRoutingModule],
 })
