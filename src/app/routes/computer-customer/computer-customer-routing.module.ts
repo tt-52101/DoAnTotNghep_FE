@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
 import { CheckOutComponent } from './check-out/check-out.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 import { HomeComponent } from './home/home/home.component';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'checkout', component: CheckOutComponent, data: { title: 'Thanh toán' } },
       { path: 'cart-detail', component: CartDetailComponent, data: { title: 'Thông tin giỏ hàng' } },
       { path: 'product-detail/:id', component: ProductDetailComponent, data: { title: 'Chi tiết sản phẩm' } },
+      { path: 'confirm/:id', component: ConfirmComponent, data: { title: 'Đặt hàng thành công' } },
     ],
   },
 ];

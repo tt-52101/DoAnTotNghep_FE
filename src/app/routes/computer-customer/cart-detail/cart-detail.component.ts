@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
@@ -10,7 +11,12 @@ import { ProductService } from 'src/app/services/computer-management/product/pro
   styleUrls: ['./cart-detail.component.less'],
 })
 export class CartDetailComponent implements OnInit {
-  constructor(private cartService: CartService, private cartcustomerService: CartCustomerService, private productService: ProductService) {}
+  constructor(
+    private cartService: CartService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private cartcustomerService: CartCustomerService,
+    private productService: ProductService,
+  ) {}
   listCart: any[] = [];
   total = 0;
   radioValue: any = 1;
@@ -18,7 +24,10 @@ export class CartDetailComponent implements OnInit {
   shippingValue = 25000;
   baseFile = environment.BASE_FILE_URL;
   ngOnInit(): void {
-    this.getListCart();
+    const token = this.tokenService.get()?.token;
+    if (token) {
+      this.getListCart();
+    }
   }
   changeShipping(event: any) {
     switch (this.radioValue) {

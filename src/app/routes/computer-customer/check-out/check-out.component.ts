@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -19,6 +20,7 @@ export class CheckOutComponent implements OnInit {
     private cartService: CartService,
     private addressService: BaseAddressService,
     private fb: FormBuilder,
+    private router: Router,
     private nzMessage: NzMessageService,
     private orderService: OrderService,
     private cartcustomerService: CartCustomerService,
@@ -98,6 +100,7 @@ export class CheckOutComponent implements OnInit {
       console.log(res);
       if (res.code === 200) {
         this.nzMessage.success('Đặt hàng thành công');
+        this.router.navigateByUrl('/confirm/' + res.data);
       }
     });
   }
