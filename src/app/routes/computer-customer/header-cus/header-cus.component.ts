@@ -83,10 +83,6 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     });
   }
   viewDetail(code: any) {
-    const model = {
-      prodCode: code,
-    };
-    this.productService.updateVisitCount(model).subscribe((res) => {});
     const url = '/product-detail/' + code;
     window.location.href = url;
     // this.router.navigate(['/product-detail/' + code]);
