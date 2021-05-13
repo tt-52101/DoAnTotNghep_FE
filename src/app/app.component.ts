@@ -5,7 +5,8 @@ import { NzConfigService } from 'ng-zorro-antd/core/config';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
 import { filter } from 'rxjs/operators';
-
+import { HubConnection } from '@aspnet/signalr';
+import * as signalR from '@aspnet/signalr';
 import 'ag-grid-enterprise';
 
 @Component({
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit {
     renderer.setAttribute(el.nativeElement, 'github', 'https://github.com/minhvu1502');
     renderer.setAttribute(el.nativeElement, 'a' + 'u' + 't' + 'h' + 'o' + 'r', 'o' + 'r' + 'i' + 'o' + 'n' + '1' + '0' + '5' + '9' + '4');
   }
-
+  msgs: any[] = [];
   ngOnInit(): void {
     this.router.events.pipe(filter((evt) => evt instanceof NavigationEnd)).subscribe(() => {
       this.titleSrv.setTitle();

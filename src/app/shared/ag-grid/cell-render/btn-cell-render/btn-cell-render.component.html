@@ -55,3 +55,15 @@
 >
   <i nz-icon nzType="lock" nzTheme="outline"></i>
 </button>
+
+<button
+  nz-button
+  nzType="primary"
+  nzShape="circle"
+  *ngIf="params.data.unlockGrantAccess"
+  class="btn-success"
+  (click)="btnUnLockClickedHandler($event)"
+  title="Mở khóa tài khoản"
+>
+  <i nz-icon nzType="unlock" nzTheme="outline"></i>
+</button>

@@ -7,6 +7,7 @@ import { UserApiService } from '@service';
 import { cleanForm } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 @Component({
   selector: 'layout-pro-user',
   templateUrl: 'user.component.html',
@@ -19,6 +20,7 @@ export class LayoutProWidgetUserComponent implements OnInit {
     public settings: SettingsService,
     private fb: FormBuilder,
     private messageService: NzMessageService,
+    private notifiService: NzNotificationService,
     private userService: UserApiService,
     private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,

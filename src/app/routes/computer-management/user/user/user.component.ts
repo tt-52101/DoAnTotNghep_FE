@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ACLService } from '@delon/acl';
 import { ButtonModel, GridModel, QueryFilerModel } from '@model';
-import { BtnCellRenderComponent, DeleteModalComponent, StatusNameCellRenderComponent } from '@shared';
+import { BtnCellRenderComponent, DeleteModalComponent, LockModalComponent, StatusNameCellRenderComponent } from '@shared';
 import {
   EXCEL_STYLES_DEFAULT,
   LIST_STATUS,
@@ -62,6 +62,7 @@ export class UserComponent implements OnInit {
           editClicked: (item: any) => this.onEditItem(item),
           deleteClicked: (item: any) => this.onDeleteItem(item),
           lockClicked: (item: any) => this.onLockItem(item),
+          unlockClicked: (item: any) => this.onLockItem(item),
         },
       },
     ];
@@ -143,7 +144,7 @@ export class UserComponent implements OnInit {
   }
 
   @ViewChild(UserItemComponent, { static: false }) itemModal!: { initData: (arg0: {}, arg1: string) => void };
-  @ViewChild(DeleteModalComponent, { static: false }) deleteModal!: {
+  @ViewChild(LockModalComponent, { static: false }) deleteModal!: {
     initData: (arg0: any, arg1: string) => void;
     updateIsLoading: (arg0: boolean) => void;
     updateData: (arg0: undefined) => void;
@@ -349,9 +350,9 @@ export class UserComponent implements OnInit {
     const tittle = 'Xác nhận xóa';
     let content = '';
     if (selectedRows.length > 1) {
-      content = 'Bạn có chắc chắn muốn xóa các bản ghi này không?';
+      content = 'Bạn có chắc chắn muốn thay đổi trạng thái các bản ghi này không?';
     } else {
-      content = 'Bạn có chắc chắn muốn xóa bản ghi này không?';
+      content = 'Bạn có chắc chắn muốn thay đổi trạng thái bản ghi này không?';
     }
     this.isShowDelete = true;
     this.deleteModal.initData(selectedRows, content);
@@ -460,7 +461,8 @@ export class UserComponent implements OnInit {
           item.statusName = this.listStatus.find((x: any) => x.id === item.status)?.name;
           item.editGrantAccess = false;
           item.deleteGrantAccess = false;
-          item.lockGrantAccess = true;
+          item.lockGrantAccess = !item.isLock;
+          item.unlockGrantAccess = item.isLock;
         }
         this.grid.totalData = dataResult.totalCount;
         this.grid.dataCount = dataResult.dataCount;

@@ -52,7 +52,7 @@ const COMPONENTS_ENTRY = [
   PaginationComponent,
   ...QUICK_CHAT_COMPONENTS,
 ];
-const COMPONENTS = [EditorComponent, DeleteModalComponent, ...COMPONENTS_ENTRY, ...PRO_SHARED_COMPONENTS];
+const COMPONENTS = [EditorComponent, DeleteModalComponent, LockModalComponent, ...COMPONENTS_ENTRY, ...PRO_SHARED_COMPONENTS];
 const DIRECTIVES = [ImgDirective, DelayDirective, MasonryDirective, ScrollbarDirective, MouseFocusDirective];
 const PIPES = [FormatDatePipe, GenderPipe];
 // #endregion
@@ -66,6 +66,7 @@ import {
   StatusImportCellRenderComponent,
   StatusNameCellRenderComponent,
 } from './ag-grid/index';
+import { LockModalComponent } from './components/modal/lock-modal/lock-modal.component';
 
 @NgModule({
   imports: [

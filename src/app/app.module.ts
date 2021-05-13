@@ -3,7 +3,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FacebookModule } from 'ngx-facebook';
 // #region default language
 // reference：https://ng-alain.com/docs/i18n
 import { default as ngLang } from '@angular/common/locales/zh';
@@ -101,10 +100,10 @@ import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { HubConnection } from '@aspnet/signalr';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    FacebookModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

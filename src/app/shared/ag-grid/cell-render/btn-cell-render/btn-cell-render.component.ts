@@ -43,6 +43,10 @@ export class BtnCellRenderComponent implements ICellRendererAngularComp, OnInit,
     // console.log(this.params.data);
     this.params.lockClicked(this.params.data);
   }
+  btnUnLockClickedHandler($event: any) {
+    // console.log(this.params.data);
+    this.params.unlockClicked(this.params.data);
+  }
   btnEnterFormulaClickedHandler($event: any) {
     // console.log(this.params.data);
     this.params.enterFormulaClicked(this.params.data);
