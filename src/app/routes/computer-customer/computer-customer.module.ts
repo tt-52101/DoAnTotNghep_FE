@@ -20,6 +20,9 @@ import { LoginRedirectComponent } from './login-redirect/login-redirect.componen
 import { AccountDetailComponent } from './account-detail/account-detail.component';
 import { QuickViewComponent } from './quick-view/quick-view.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { CartDetailComponent } from './cart-detail/cart-detail.component';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     LoginRedirectComponent,
     AccountDetailComponent,
     QuickViewComponent,
+    CartDetailComponent,
+    CheckOutComponent,
+    ConfirmComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, NgxImageZoomModule, NgxCaptchaModule, SharedModule, ComputerCustomerRoutingModule],
 })

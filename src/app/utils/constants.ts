@@ -7,7 +7,13 @@ export const LIST_STATUS = [
   { id: true, code: true, name: 'Hoạt động' },
   { id: false, code: false, name: 'Không hoạt động' },
 ];
-
+export const LIST_STATUS_ORDER = [
+  { id: 0, name: 'Chờ xác nhận' },
+  { id: 1, name: 'Chờ xác nhận' },
+  { id: 2, name: 'Đang lấy hàng' },
+  { id: 3, name: 'Đang giao hàng' },
+  { id: 4, name: 'Đánh giá' },
+];
 export const QUERY_FILTER_DEFAULT: QueryFilerModel = {
   pageNumber: 1,
   pageSize: 20,

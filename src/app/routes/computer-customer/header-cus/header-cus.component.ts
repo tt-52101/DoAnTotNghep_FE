@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
+import { ProductService } from 'src/app/services/computer-management/product/product.service';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
     private customerService: CustomerService,
+    private productService: ProductService,
     private userService: UserService,
     private nzMessage: NzMessageService,
     private cartcustomerService: CartCustomerService,
@@ -72,6 +74,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
         this.listCart = [];
         this.total = 0;
       } else {
+        this.total = 0;
         setTimeout(() => {
           this.fetchUser();
           this.getListCart();
@@ -79,13 +82,18 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
       }
     });
   }
+  viewDetail(code: any) {
+    const url = '/product-detail/' + code;
+    window.location.href = url;
+    // this.router.navigate(['/product-detail/' + code]);
+  }
   ngOnDestroy(): void {
     this.sub1.unsubscribe();
     this.sub2.unsubscribe();
     this.sub3.unsubscribe();
   }
   formLogin: FormGroup;
-  isLogin: any;
+  isLogin: any = false;
 
   userName = '';
   baseFile = environment.BASE_FILE_URL;
@@ -96,6 +104,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     this.isVisible = true;
   }
   getListCart() {
+    this.total = 0;
     this.cartService.getById().subscribe((res) => {
       if (res.code === 200) {
         const listProducts = JSON.parse(res.data.listProducts);

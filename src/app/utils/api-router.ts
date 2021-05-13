@@ -59,12 +59,18 @@ export const supplierRouter = {
   getAll: `api/v1/computer-management/supplier/all`,
   getListCombobox: `api/v1/computer-management/supplier/for-combobox`,
 };
+export const baseAddressRouter = {
+  city: `api/v1/address/city`,
+  district: `api/v1/address/district?matp=`,
+  commune: `api/v1/address/commune?maqh=`,
+};
 export const productRouter = {
   create: `api/v1/computer-management/product`,
   createMany: `api/v1/computer-management/product/create-many`,
   update: `api/v1/computer-management/product`,
   delete: `api/v1/computer-management/product`,
   getById: `api/v1/computer-management/product?id=`,
+  getByCode: `api/v1/computer-management/product/code`,
   getFilter: `api/v1/computer-management/product/filter`,
   getAll: `api/v1/computer-management/product/all`,
   getListCombobox: `api/v1/computer-management/product/for-combobox`,

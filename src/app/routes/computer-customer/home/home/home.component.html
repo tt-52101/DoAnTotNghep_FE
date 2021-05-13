@@ -158,13 +158,13 @@
                         </div>
                         <div class="col-md-3">
                           <!-- Controls -->
-                          <div class="controls pull-right hidden-xs">
+                          <div class="controls pull-right">
                             <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a
                             ><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
                           </div>
                         </div>
                       </div>
-                      <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                      <div id="carousel-example" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                           <div class="item active">
@@ -174,7 +174,7 @@
                                   <div *ngFor="let item of listAcerActive" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -196,9 +196,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -220,7 +220,7 @@
                                   <div *ngFor="let item of prodResult" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -242,9 +242,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -267,20 +267,20 @@
                 <!-- start ASUS product category -->
                 <div class="tab-pane fade" id="asus">
                   <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-sm-12">
                       <div class="row">
                         <div class="col-md-9">
                           <h3>AUS ROG</h3>
                         </div>
                         <div class="col-md-3">
                           <!-- Controls -->
-                          <div class="controls pull-right hidden-xs">
+                          <div class="controls pull-right">
                             <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a
                             ><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
                           </div>
                         </div>
                       </div>
-                      <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                      <div id="carousel-example" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                           <div class="item active">
@@ -290,7 +290,7 @@
                                   <div *ngFor="let item of listAsusActive" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -312,9 +312,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -336,7 +336,7 @@
                                   <div *ngFor="let item of prodResult" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -358,9 +358,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -377,7 +377,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-12">
                       <img height="427" src="../../../../../assets/img/asus-rogjpg.jpg" alt="" />
                     </div>
                   </div>
@@ -396,13 +396,13 @@
                         </div>
                         <div class="col-md-3">
                           <!-- Controls -->
-                          <div class="controls pull-right hidden-xs">
+                          <div class="controls pull-right">
                             <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a
                             ><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
                           </div>
                         </div>
                       </div>
-                      <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                      <div id="carousel-example" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                           <div class="item active">
@@ -412,7 +412,7 @@
                                   <div *ngFor="let item of listMsiActive" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -434,9 +434,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -458,7 +458,7 @@
                                   <div *ngFor="let item of prodResult" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -480,9 +480,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -512,13 +512,13 @@
                         </div>
                         <div class="col-md-3">
                           <!-- Controls -->
-                          <div class="controls pull-right hidden-xs">
+                          <div class="controls pull-right">
                             <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a
                             ><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
                           </div>
                         </div>
                       </div>
-                      <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                      <div id="carousel-example" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                           <div class="item active">
@@ -528,7 +528,7 @@
                                   <div *ngFor="let item of listDellActive" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -550,9 +550,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -574,7 +574,7 @@
                                   <div *ngFor="let item of prodResult" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -596,9 +596,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -634,13 +634,13 @@
                         </div>
                         <div class="col-md-3">
                           <!-- Controls -->
-                          <div class="controls pull-right hidden-xs">
+                          <div class="controls pull-right">
                             <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a
                             ><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
                           </div>
                         </div>
                       </div>
-                      <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                      <div id="carousel-example" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                           <div class="item active">
@@ -650,7 +650,7 @@
                                   <div *ngFor="let item of listLenovoActive" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -672,9 +672,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -696,7 +696,7 @@
                                   <div *ngFor="let item of prodResult" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -718,9 +718,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -751,13 +751,13 @@
                         </div>
                         <div class="col-md-3">
                           <!-- Controls -->
-                          <div class="controls pull-right hidden-xs">
+                          <div class="controls pull-right">
                             <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a
                             ><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
                           </div>
                         </div>
                       </div>
-                      <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                      <div id="carousel-example" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                           <div class="item active">
@@ -767,7 +767,7 @@
                                   <div *ngFor="let item of listHpActive" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -789,9 +789,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -813,7 +813,7 @@
                                   <div *ngFor="let item of prodResult" class="col-md-3 col-sm-6">
                                     <div class="product-grid4">
                                       <div class="product-image4">
-                                        <a href="#">
+                                        <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                                           <img class="pic-1" [src]="baseFile + item.pictures[0]" />
                                           <img class="pic-2" [src]="baseFile + item.pictures[0]" />
                                         </a>
@@ -835,9 +835,9 @@
                                           >-{{ (item.discount / item.price) * 100 | number: '1.0-0' }}%</span
                                         >
                                       </div>
-                                      <div class="product-content">
+                                      <div (click)="viewDetail(item.code)" class="product-content">
                                         <h3 class="title" class="name-text" title="{{ item.name }}">
-                                          <a href="#">{{ item.name }}</a>
+                                          <a href="javascript:void(0)">{{ item.name }}</a>
                                         </h3>
                                         <div class="price">
                                           {{ item.price - item.discount | currency: 'VND' | lowercase }}
@@ -906,7 +906,7 @@
           <div class="col-md-9"></div>
           <div class="col-md-3">
             <!-- Controls -->
-            <div class="controls pull-right hidden-xs">
+            <div class="controls pull-right">
               <a class="left fa fa-chevron-left btn btn-success" href="#list-picture" data-slide="prev"></a
               ><a class="right fa fa-chevron-right btn btn-success" href="#list-picture" data-slide="next"></a>
             </div>

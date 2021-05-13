@@ -12,6 +12,7 @@ export class CartCustomerService {
   constructor(
     private cartService: CartService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private cartcusService: CartService,
     private router: Router,
     private nzMessage: NzMessageService,
   ) {}
@@ -23,6 +24,7 @@ export class CartCustomerService {
     const cartModel = {
       listProducts: JSON.stringify(listCart),
     };
+    this.cartcusService.changeCart(listCart);
     this.cartService.update(cartModel).subscribe((res) => {
       if (res.code === 200) {
         this.nzMessage.success('Cập nhật giỏ hàng thành công');
@@ -44,6 +46,7 @@ export class CartCustomerService {
       total = total + item.subTotal;
     });
     localStorage.setItem('list-cart', JSON.stringify(listCart));
+    this.cartcusService.changeCart(listCart);
     const cartModel = {
       listProducts: JSON.stringify(listCart),
     };

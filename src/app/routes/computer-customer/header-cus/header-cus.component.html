@@ -51,7 +51,7 @@
             <!-- cart box -->
             <div class="aa-cartbox">
               <div class="dropdown">
-                <a class="aa-cart-link dropbtn" href="#">
+                <a class="aa-cart-link dropbtn" [routerLink]="'/cart-detail'" href="javascript:void(0)">
                   <span class="fas fa-shopping-basket"></span>
                   <span class="aa-cart-title">Giỏ hàng</span>
                   <span class="aa-cart-notify">{{ listCart.length > 0 ? listCart.length : 0 }}</span>
@@ -81,13 +81,15 @@
                         <div class="col-md-5">
                           <div class="row">
                             <div class="col-md-12">
-                              <span [title]="item.name" class="name-text">{{ item.name }}</span>
+                              <span style="cursor: pointer" (click)="viewDetail(item.code)" [title]="item.name" class="name-text">{{
+                                item.name
+                              }}</span>
                             </div>
                           </div>
                           <span class="price-prod">{{ item.subTotal | currency: 'VND' | lowercase }}</span>
                         </div>
                         <div class="col-md-2 item-center">
-                          <i style="margin-right: 5px" class="fas fa-pencil-alt"></i>
+                          <i style="margin-right: 5px" [routerLink]="'/cart-detail'" class="fas fa-pencil-alt"></i>
                           <i (click)="removeItem(item)" class="fas fa-trash"></i>
                         </div>
                       </div>
@@ -99,7 +101,16 @@
                     </div>
                   </div>
                   <span class="price-prod">Tổng cộng: {{ total | currency: 'VND' | lowercase }}</span>
-                  <a class="aa-cartbox-checkout aa-primary-btn" href="javascript:void(0)">Thanh toán ngay</a>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <a class="aa-cartbox-checkout aa-primary-btn" [routerLink]="'/cart-detail'" href="javascript:void(0)"
+                        >Đi tới giỏ hàng</a
+                      >
+                    </div>
+                    <div class="col-md-6">
+                      <a class="aa-cartbox-checkout aa-primary-btn" [routerLink]="'/checkout'" href="javascript:void(0)">Thanh toán ngay</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -180,7 +191,15 @@
           </label>
         </div>
       </div>
-      <button nz-col [nzSpan]="24" style="width: 100%" nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+      <button
+        nz-col
+        [nzSpan]="24"
+        style="width: 100%"
+        [nzLoading]="isLoading"
+        nz-button
+        class="login-form-button login-form-margin"
+        [nzType]="'primary'"
+      >
         Đăng nhập
       </button>
       <div class="twitter">

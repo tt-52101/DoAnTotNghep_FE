@@ -1,0 +1,256 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <h2 style="padding-top: 20px; text-align: center">Thanh toán</h2>
+    <ul class="breadcrumb">
+      <li><a href="javascript:void(0)" [routerLink]="'/home'">Trang chủ</a></li>
+      <li>Thanh toán</li>
+    </ul>
+    <div class="">
+      <div class="row">
+        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+          <!-- <nz-breadcrumb>
+                          <nz-breadcrumb-item>
+                              <a href="" [routerLink]="'/home'"><i nz-icon nzType="home"></i></a>
+                          </nz-breadcrumb-item>
+                          <nz-breadcrumb-item>
+                              <i class="fab fa-car-alt    "></i><span>Giỏ hàng</span>
+                          </nz-breadcrumb-item>
+                      </nz-breadcrumb> -->
+          <!-- Shopping cart table -->
+          <button style="float: right" type="button" (click)="getListCart()" class="btn btn-danger">Cập nhật giỏ hàng</button>
+          <div *ngIf="listCart.length === 0" class="col-sm-12 empty-cart-cls text-center">
+            <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3" />
+            <h3><strong>Giỏ hàng của bạn đang trống</strong></h3>
+            <h4>Hãy tiếp tục mua sắn bạn nhé :)</h4>
+            <h4><button type="button" [routerLink]="'/home'" class="btn btn-success">Tiếp tục mua sắm</button></h4>
+          </div>
+          <div class="table-responsive">
+            <table *ngIf="listCart.length > 0" class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Sản phẩm</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Giá</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Số lượng</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Thao tác</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listCart">
+                  <td scope="row" class="border-0">
+                    <div class="col-md-2 item-center">
+                      <img [src]="baseFile + item.pictures[0]" alt="" width="70" class="img-fluid rounded shadow-sm" />
+                    </div>
+                    <div class="col-md-7 item-center">
+                      <div class="d-inline-block align-middle">
+                        <h5 class="">
+                          <a href="javascript:void(0)" (click)="viewDetail(item.code)" class="text-dark d-inline-block align-middle">{{
+                            item.name
+                          }}</a>
+                        </h5>
+                        <span class="text-muted font-weight-normal font-italic d-block"
+                          >Loại sản phẩm: <span *ngFor="let cate of item.categoryName">{{ cate }}</span></span
+                        >
+                      </div>
+                    </div>
+                  </td>
+                  <td style="height: 70px" class="border-0 align-middle item-center">
+                    <strong> {{ item.price - item.discount | currency: 'VND' | lowercase }}</strong>
+                  </td>
+                  <td style="width: 50px; height: 70px" class="border-0 align-middle">
+                    <div class="form-group item-center">
+                      <p>{{ item.count }}</p>
+                    </div>
+                  </td>
+                  <td class="border-0 align-middle">
+                    <a href="javascript:void(0)" (click)="removeItem(item)" class="text-dark item-center"><i class="fas fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- End -->
+        </div>
+      </div>
+      <div *ngIf="listCart.length > 0">
+        <div class="row py-5 p-4 bg-white rounded shadow-sm">
+          <div class="col-lg-12">
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Thông tin mua hàng</div>
+            <div class="p-4">
+              <form nz-form [formGroup]="form" (ngSubmit)="save()">
+                <div nz-row>
+                  <div nz-col [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">Họ Tên</nz-form-label>
+                      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Họ tên không được để trống!">
+                        <input nz-input formControlName="name" id="name" placeholder="Nhập vào họ tên" />
+                      </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Email</nz-form-label>
+                      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Email không được để trống!">
+                        <input nz-input formControlName="email" id="email" placeholder="Nhập vào email" />
+                      </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Số điện thoại </nz-form-label>
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        [nzValidateStatus]="form.controls['phoneNumber']"
+                        nzErrorTip="Vui lòng nhập số điện thoại!"
+                      >
+                        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                          <ng-template #addOnBeforeTemplate>
+                            <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                              <nz-option nzLabel="+84" nzValue="+84"></nz-option>
+                            </nz-select>
+                          </ng-template>
+                          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+                        </nz-input-group>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+
+                  <div nz-col [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="city">Tỉnh/ Thành phố</nz-form-label>
+                      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Tỉnh/ Thành phố không được để trống!">
+                        <nz-select
+                          nzShowSearch
+                          nzMode="default"
+                          (ngModelChange)="changeCity($event)"
+                          nzPlaceHolder="Chọn tỉnh/ thành phố"
+                          formControlName="city"
+                          [nzOptions]="listCity"
+                        >
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="district">Quận/ Huyện </nz-form-label>
+                      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Quận huyện không được để trống!">
+                        <nz-select
+                          nzShowSearch
+                          [nzDisabled]="listDistrict.length === 0"
+                          nzMode="default"
+                          nzPlaceHolder="Chọn quận/ huyện"
+                          (ngModelChange)="changeDistrict($event)"
+                          formControlName="district"
+                          [nzOptions]="listDistrict"
+                        >
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="commune">Xã/ Phường/ Thị trấn </nz-form-label>
+                      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Xã/ Phường không được để trống!">
+                        <nz-select
+                          nzShowSearch
+                          [nzDisabled]="listDistrict.length === 0"
+                          nzMode="default"
+                          nzPlaceHolder="Chọn Xã/ Phường"
+                          formControlName="commune"
+                          [nzOptions]="listCommune"
+                        >
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="metaTitle">Địa chỉ chi tiết </nz-form-label>
+                      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Địa chỉ chi tiết không được để trống!">
+                        <input nz-input formControlName="addressDetail" id="addressDetail" placeholder="Nhập vào địa chỉ chi tiết" />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="row py-5 p-4 bg-white rounded shadow-sm">
+          <div class="col-lg-6">
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Mã giảm giá</div>
+            <div class="p-4">
+              <p class="font-italic mb-4">Nếu bạn có mã giảm giá, hãy nhập nó vào ô bên dưới</p>
+              <div class="input-group mb-4 border rounded-pill p-2">
+                <div class="col-md-10">
+                  <input type="text" placeholder="Nhập mã giảm giá" aria-describedby="button-addon3" class="form-control border-0" />
+                </div>
+                <div class="col-md-2">
+                  <button id="button-addon3" type="button" class="btn btn-success px-4 rounded-pill">
+                    <i class="fa fa-gift mr-2"></i>Áp dụng
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Hình thức thanh toán</div>
+            <div class="p-4">
+              <div class="input-group mb-4 border rounded-pill p-2">
+                <span>
+                  <nz-radio-group [(ngModel)]="paymentType">
+                    <div nz-row>
+                      <label nz-radio [nzValue]="1">Thanh toán khi nhận hàng</label>
+                    </div>
+                    <div nz-row>
+                      <label nz-radio [nzValue]="2">Thanh toán Online</label>
+                    </div>
+                  </nz-radio-group>
+                </span>
+              </div>
+            </div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">GHI CHÚ CHO ĐƠN HÀNG(TÙY CHỌN)</div>
+            <div class="p-4">
+              <p class="font-italic mb-4">Nếu bạn có yêu cầu cho người bán, bạn có thể để lại trong hộp bên dưới</p>
+              <textarea [(ngModel)]="description" name="" cols="30" rows="2" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Đơn hàng tổng quát</div>
+            <div class="p-4">
+              <span>
+                <nz-radio-group [(ngModel)]="radioValue">
+                  <div nz-row>
+                    <label (click)="changeShipping($event)" nz-radio [nzValue]="1">Tiêu chuẩn(miễn phí)</label>
+                  </div>
+                  <div nz-row>
+                    <label (click)="changeShipping($event)" nz-radio [nzValue]="2">Siêu Tốc 2h -Nội thành HCM và HN: 25.000₫</label>
+                  </div>
+                </nz-radio-group>
+              </span>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                  <strong class="text-muted">Giá tạm tính </strong><strong>{{ total | currency: 'VND' | lowercase }}</strong>
+                </li>
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                  <strong class="text-muted">Phí vận chuyển</strong><strong>{{ shipping | currency: 'VND' | lowercase }}</strong>
+                </li>
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                  <strong class="text-muted">Mã giảm giá</strong><strong>{{ shipping | currency: 'VND' | lowercase }}</strong>
+                </li>
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                  <strong class="text-muted">Tổng cộng</strong>
+                  <strong>{{ shipping + total | currency: 'VND' | lowercase }}</strong>
+                </li>
+              </ul>
+              <a href="javascript:void(0)" (click)="save()" class="btn btn-danger rounded-pill py-2 btn-block">Đặt hàng</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
