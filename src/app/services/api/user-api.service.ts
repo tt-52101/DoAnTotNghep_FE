@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
-import { userRouter } from '@util';
+import { notifyRouter, userRouter } from '@util';
 // RxJS
 import { Observable } from 'rxjs';
 
@@ -20,5 +20,12 @@ export class UserApiService {
   }
   changePassword(userUpdatePasswordModel: any): Observable<any> {
     return this.http.put(environment.BASE_API_URL + userRouter.changePassword, userUpdatePasswordModel);
+  }
+
+  getNotify(): Observable<any> {
+    return this.http.get(environment.BASE_API_URL + notifyRouter.getAll);
+  }
+  updateNotify(model: any): Observable<any> {
+    return this.http.post(environment.BASE_API_URL + notifyRouter.update, model);
   }
 }

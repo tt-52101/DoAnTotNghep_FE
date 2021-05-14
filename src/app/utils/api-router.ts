@@ -64,6 +64,10 @@ export const baseAddressRouter = {
   district: `api/v1/address/district?matp=`,
   commune: `api/v1/address/commune?maqh=`,
 };
+export const notifyRouter = {
+  getAll: `api/v1/computer-management/notification`,
+  update: `api/v1/computer-management/notification/update`,
+};
 export const productRouter = {
   create: `api/v1/computer-management/product`,
   createMany: `api/v1/computer-management/product/create-many`,

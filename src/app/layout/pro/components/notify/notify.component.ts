@@ -7,6 +7,8 @@ import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import * as signalR from '@aspnet/signalr';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { UserService } from 'src/app/services/computer-management/user/user.service';
+import { UserApiService } from '@service';
 @Component({
   selector: 'layout-pro-notify',
   templateUrl: './notify.component.html',
@@ -30,15 +32,29 @@ export class LayoutProWidgetNotifyComponent {
     },
   ];
 
-  count = 5;
+  count = 0;
   loading = false;
   listMsg: any[] = [];
   constructor(
     private msg: NzMessageService,
+    private userService: UserApiService,
     private notifiService: NzNotificationService,
     private nzI18n: NzI18nService,
     private cdr: ChangeDetectorRef,
   ) {
+    this.userService.getNotify().subscribe((res) => {
+      if (res.data) {
+        res.data.map((item: any) => {
+          item.avatar = 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png';
+          item.datetime = item.createdDate.slice(0, 10);
+          item.read = item.isRead;
+          item.type = item.read === false ? 'Chưa đọc' : 'Đã đọc';
+        });
+        this.listMsg = res.data;
+        console.log(this.listMsg);
+        this.count = this.listMsg.filter((x) => x.read === false).length;
+      }
+    });
     let connection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:8310/signalr')
       .configureLogging(signalR.LogLevel.Information)
@@ -51,7 +67,6 @@ export class LayoutProWidgetNotifyComponent {
 
     connection.on('BroadcastMessage', (data: any) => {
       this.notifiService.info('Thông báo', 'Bạn có 1 thông báo mới');
-      console.log(data);
       if (data.listNotifications) {
         data.listNotifications.map((item: any) => {
           item.type = 'Thông báo';
@@ -109,6 +124,15 @@ export class LayoutProWidgetNotifyComponent {
   }
 
   select(res: any): void {
-    this.msg.success(`点击了 ${res.title} 的 ${res.item.title}`);
+    this.userService.updateNotify(res.item).subscribe();
+    this.listMsg.map((item) => {
+      if (item.id === res.item.id) {
+        item.read = true;
+        item.isRead = true;
+        item.type = 'Đã đọc';
+      }
+    });
+    this.count = this.listMsg.filter((x) => x.read === false).length;
+    this.updateNoticeData(this.listMsg);
   }
 }
