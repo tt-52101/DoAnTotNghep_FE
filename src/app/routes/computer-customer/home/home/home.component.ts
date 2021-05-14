@@ -5,7 +5,6 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { SettingsService } from '@delon/theme';
 import { environment } from '@env/environment';
 import { LAPTOP_ID } from '@util';
-import { FacebookService, InitParams } from 'ngx-facebook';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
@@ -65,7 +64,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private categoryMetaService: CategoryMetaService,
     private cartCusService: CartCustomerService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    private fb: FacebookService,
   ) {
     const token = this.tokenService.get()?.token;
     if (token) {

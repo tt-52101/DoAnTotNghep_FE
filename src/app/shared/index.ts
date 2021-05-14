@@ -17,6 +17,7 @@ export * from './json-schema/json-schema.module';
 export * from './shared.module';
 
 export * from './components/modal/delete-modal/delete-modal.component';
+export * from './components/modal/lock-modal/lock-modal.component';
 
 // Ag-grid
 export * from './ag-grid/index';

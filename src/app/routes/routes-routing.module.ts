@@ -25,7 +25,7 @@ const routes: Routes = [
     path: 'admin',
     component: LayoutProComponent,
     children: [
-      { path: '', redirectTo: 'passport/login', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'ag-grid', component: AgGridComponent },
       // Exception
