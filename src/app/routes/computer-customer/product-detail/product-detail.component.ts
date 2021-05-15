@@ -13,6 +13,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   urlComment = '';
   myThumbnail: any;
   itemQuickView: any = {};
+  tooltips = ['Cực tệ', 'Tệ', 'Trung bình', 'Tốt', 'Tuyệt vời'];
+  value = 3;
   baseFile = environment.BASE_FILE_URL;
   constructor(
     private route: ActivatedRoute,
@@ -22,13 +24,13 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   ) {
     this.fetchListCategoryMetaByProd();
     const code = this.route.snapshot.paramMap.get('id');
+    console.log(code);
     this.urlComment = 'http://localhost:4200/product-detail/' + code;
     this.fetchProductByCode(code ? code : '');
   }
   listCateMeta: any[] = [];
   fetchListCategoryMetaByProd() {
     this.categoryMetaService.getAll().subscribe((res) => {
-      console.log(res);
       this.listCateMeta = res.data.data;
     });
   }
@@ -50,7 +52,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (code) {
       this.prodService.getByCode(code).subscribe(
         (res) => {
-          console.log(res.data);
           this.itemQuickView = res.data;
           this.myThumbnail = this.baseFile + this.itemQuickView.pictures[0];
           this.itemQuickView.listPicturesActive = this.getListProdActive(this.itemQuickView.pictures);
@@ -72,7 +73,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnDestroy(): void {}
   changePicture(item: any) {
     this.myThumbnail = this.baseFile + item;
-    console.log(this.myThumbnail);
   }
   addToCart(item: any) {
     this.cartCusService.addToCart(item);
@@ -81,7 +81,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     (function (d, s, id, idBefore) {
       let js,
         fjs = d.getElementsByTagName(s)[3];
-      console.log(d.getElementsByTagName(s));
       // for (let index = 0; index < fjs.length; index++) {
       //   console.log(index + ' ' + fjs[index].outerHTML);
       // }

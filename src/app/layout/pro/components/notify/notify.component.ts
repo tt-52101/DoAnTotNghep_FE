@@ -9,6 +9,7 @@ import * as signalR from '@aspnet/signalr';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
 import { UserApiService } from '@service';
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'layout-pro-notify',
   templateUrl: './notify.component.html',
@@ -40,6 +41,7 @@ export class LayoutProWidgetNotifyComponent {
     private userService: UserApiService,
     private notifiService: NzNotificationService,
     private nzI18n: NzI18nService,
+    private router: Router,
     private cdr: ChangeDetectorRef,
   ) {
     this.userService.getNotify().subscribe((res) => {
@@ -134,5 +136,6 @@ export class LayoutProWidgetNotifyComponent {
     });
     this.count = this.listMsg.filter((x) => x.read === false).length;
     this.updateNoticeData(this.listMsg);
+    this.router.navigateByUrl('admin/computer-management/order');
   }
 }

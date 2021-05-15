@@ -111,14 +111,7 @@
                 "link": "/admin/computer-management/product-review"
               }
             ]
-           },
-          {
-            "text": "Lối tắt",
-            "i18n": "menu.shortcut",
-            "icon": "anticon anticon-rocket",
-            "shortcutRoot": true,
-            "children": []
-          }
+           }
         ]
       }
     ]

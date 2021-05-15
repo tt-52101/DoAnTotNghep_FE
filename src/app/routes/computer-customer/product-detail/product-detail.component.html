@@ -210,12 +210,9 @@
                   </ul>
                   <h4>Add a review</h4>
                   <div class="aa-your-rating">
-                    <p>Your Rating</p>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
-                    <a href="#"><span class="fa fa-star-o"></span></a>
+                    <p>Bạn đánh giá</p>
+                    <nz-rate [(ngModel)]="value" [nzTooltips]="tooltips"></nz-rate>
+                    <span *ngIf="value" class="ant-rate-text">{{ value ? tooltips[value - 1] : '' }}</span>
                   </div>
                   <!-- review form -->
                   <form action="" class="aa-review-form">

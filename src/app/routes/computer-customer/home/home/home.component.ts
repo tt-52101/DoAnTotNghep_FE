@@ -34,6 +34,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   listMsiActive: any[] = [];
   listMsiResult: any[] = [];
 
+  prodCountActive: any[] = [];
+  prodCountResult: any[] = [];
+
   listLenovoActive: any[] = [];
   listLenovoResult: any[] = [];
   listDellActive: any[] = [];
@@ -129,6 +132,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         });
       }
+
+      this.prodCountActive = this.getListProdActive(this.listProduct.sort((a, b) => (b.visitCount > a.visitCount ? 1 : -1)));
+      this.prodCountResult = this.getListProdRs(this.listProduct.sort((a, b) => (b.visitCount > a.visitCount ? 1 : -1)));
+
       this.listAcerActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
       this.listAcerResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
 
