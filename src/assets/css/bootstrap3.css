@@ -92,6 +92,9 @@ svg:not(:root) {
 figure {
   margin: 1em 40px;
 }
+figure img{
+  width: 100%;
+}
 hr {
   height: 0;
   -webkit-box-sizing: content-box;

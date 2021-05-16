@@ -6,6 +6,7 @@ import { ButtonModel, GridModel } from '@model';
 import { CategoryService, SupplierService, TagService } from '@service';
 import { PAGE_SIZE_OPTION_DEFAULT } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Subscription } from 'rxjs';
 import { CategoryMetaProductService } from 'src/app/services/computer-management/category-meta-product/category-meta-product.service';
@@ -18,6 +19,26 @@ import { ProductService } from 'src/app/services/computer-management/product/pro
   styleUrls: ['./product-item.component.less'],
 })
 export class ProductItemComponent implements OnInit {
+  public Editor = ClassicEditor;
+  config = {
+    toolbar: [
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      'Alignment',
+      'Autoformat',
+      'BlockQuote',
+      'CKFinder',
+      'CKFinderUploadAdapter',
+      'Image',
+      'Link',
+      'Table',
+      'TableToolbar',
+      'TextTransformation',
+      'MediaEmbed',
+    ],
+  };
   @Input() type = 'add';
   @Input() item: any;
   @Input() isVisible = false;

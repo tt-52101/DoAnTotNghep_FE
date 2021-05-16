@@ -281,7 +281,8 @@
           <nz-form-item>
             <nz-form-label [nzSm]="24" [nzXs]="24" nzFor="quantity">Chi tiết sản phẩm</nz-form-label>
             <nz-form-control [nzSm]="24" [nzXs]="24">
-              <textarea rows="4" nz-input formControlName="description"></textarea>
+              <!-- <textarea rows="4" nz-input formControlName="description"></textarea> -->
+              <ckeditor formControlName="description" style="width: 500px !important" [editor]="Editor"></ckeditor>
             </nz-form-control>
           </nz-form-item>
         </div>

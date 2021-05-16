@@ -124,8 +124,8 @@ export class StartupService {
               if (role.code !== 200) {
                 this.msg.error(role.message);
               }
-              const listRole = [];
-              const listRight = [];
+              const listRole: any[] = [];
+              const listRight: any[] = [];
               for (const iterator of res.data) {
                 listRight.push(iterator.code);
               }

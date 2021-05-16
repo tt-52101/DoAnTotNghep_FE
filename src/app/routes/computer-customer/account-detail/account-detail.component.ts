@@ -41,6 +41,7 @@ export class AccountDetailComponent implements OnInit {
       confirmPassword: [null, [Validators.required]],
     });
   }
+  tabs = ['Tất cả', 'Chờ xác nhận', 'Chờ lấy hàng', 'Đang giao hàng', 'Đã giao hàng', 'Đã hủy'];
   avatar = '';
   avatarUrl: any = '';
   userId: any;
