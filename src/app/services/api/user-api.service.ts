@@ -23,7 +23,7 @@ export class UserApiService {
   }
 
   getNotify(): Observable<any> {
-    return this.http.get(environment.BASE_API_URL + notifyRouter.getAll);
+    return this.http.get(environment.BASE_API_URL + notifyRouter.getAll + environment.ALLOW_ANONYMOUS);
   }
   updateNotify(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + notifyRouter.update, model);

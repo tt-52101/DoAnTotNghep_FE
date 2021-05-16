@@ -13,14 +13,14 @@
     <form nz-form [formGroup]="form" (ngSubmit)="save()">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">Mã</nz-form-label>
-        <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Mã loại sản phẩm không được để trống!">
+        <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Mã nhà cung cấp không được để trống!">
           <input nz-input formControlName="code" id="code" placeholder="Nhập vào mã" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Tên</nz-form-label>
-        <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Tên loại sản phẩm không được để trống!">
+        <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Tên nhà cung cấp không được để trống!">
           <input nz-input formControlName="name" id="name" placeholder="Nhập vào tên" />
         </nz-form-control>
       </nz-form-item>

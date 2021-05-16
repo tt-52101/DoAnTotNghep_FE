@@ -68,6 +68,10 @@ export const notifyRouter = {
   getAll: `api/v1/computer-management/notification`,
   update: `api/v1/computer-management/notification/update`,
 };
+export const dashboardRouter = {
+  getAll: `api/v1/dashboard`,
+  update: `api/v1/dashboard/update-visit`,
+};
 export const productRouter = {
   create: `api/v1/computer-management/product`,
   createMany: `api/v1/computer-management/product/create-many`,
@@ -86,6 +90,7 @@ export const orderRouter = {
   create: `api/v1/computer-management/order`,
   createMany: `api/v1/computer-management/order/create-many`,
   update: `api/v1/computer-management/order`,
+  updateStatusOrder: `api/v1/computer-management/order/update-status`,
   delete: `api/v1/computer-management/order`,
   getById: `api/v1/computer-management/order?id=`,
   getFilter: `api/v1/computer-management/order/filter`,

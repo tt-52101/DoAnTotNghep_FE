@@ -129,6 +129,14 @@
                   />
                   Đơn Mua
                 </ng-template>
+
+                <nz-card [nzTitle]="billTitle">
+                  <ng-template #billTitle>
+                    <h3><b>Đơn hàng của tôi</b></h3>
+                    <p>Quản lý đơn hàng của bạn</p>
+                  </ng-template>
+                  <div nz-row nzGutter="8"></div>
+                </nz-card>
               </nz-tab>
               <nz-tab [nzTitle]="changePwTemplate">
                 <ng-template #changePwTemplate>
@@ -136,8 +144,8 @@
                   Đổi Mật Khẩu
                 </ng-template>
 
-                <nz-card [nzTitle]="titleTemplate">
-                  <ng-template #titleTemplate>
+                <nz-card [nzTitle]="changePassTemplate">
+                  <ng-template #changePassTemplate>
                     <h3><b>Đổi mật khẩu</b></h3>
                     <p>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</p>
                   </ng-template>

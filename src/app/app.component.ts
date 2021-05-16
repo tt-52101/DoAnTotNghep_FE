@@ -8,6 +8,9 @@ import { filter } from 'rxjs/operators';
 import { HubConnection } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 import 'ag-grid-enterprise';
+import { HttpClient } from '@angular/common/http';
+import { dashboardRouter } from '@util';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +29,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
+    private http: HttpClient,
     private nzConfigService: NzConfigService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-alain-version', VERSION_ALAIN.full);
@@ -35,6 +39,9 @@ export class AppComponent implements OnInit {
   }
   msgs: any[] = [];
   ngOnInit(): void {
+    var ob = this.http.get(environment.BASE_API_URL + dashboardRouter.update + environment.ALLOW_ANONYMOUS).subscribe((res) => {
+      localStorage.setItem('visit-count', JSON.stringify(res));
+    });
     this.router.events.pipe(filter((evt) => evt instanceof NavigationEnd)).subscribe(() => {
       this.titleSrv.setTitle();
       this.modalSrv.closeAll();

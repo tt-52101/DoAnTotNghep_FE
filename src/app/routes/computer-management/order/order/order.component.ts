@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ACLService } from '@delon/acl';
 import { ButtonModel, GridModel, QueryFilerModel } from '@model';
-import { BtnCellRenderComponent, DeleteModalComponent, StatusNameCellRenderComponent } from '@shared';
+import { BtnCellRenderComponent, DeleteModalComponent, PaymentTypeCellRenderComponent, StatusNameCellRenderComponent } from '@shared';
 import {
   EXCEL_STYLES_DEFAULT,
   LIST_STATUS,
+  LIST_STATUS_ORDER,
   OVERLAY_LOADING_TEMPLATE,
   OVERLAY_NOROW_TEMPLATE,
   PAGE_SIZE_OPTION_DEFAULT,
@@ -42,12 +43,17 @@ export class OrderComponent implements OnInit {
       },
       { field: 'code', headerName: 'Mã', minWidth: 100 },
       { field: 'name', headerName: 'Tên', sortable: true, filter: true, minWidth: 100, flex: 1 },
+      { field: 'email', headerName: 'Email', sortable: true, filter: true, minWidth: 100, flex: 1 },
+      { field: 'grandTotalFix', headerName: 'Tổng tiền', sortable: true, filter: true, minWidth: 100, flex: 1 },
+      { field: 'orderDate', headerName: 'Ngày đặt', sortable: true, filter: true, minWidth: 100, flex: 1 },
       {
-        field: 'parentName',
-        headerName: 'Loại SP cha',
+        field: 'phuongThucThanhToan',
+        headerName: 'Phương thức thanh toán',
         sortable: true,
-        minWidth: 180,
+        filter: true,
+        minWidth: 100,
         flex: 1,
+        cellRenderer: 'paymentCellRender',
       },
       { field: 'statusName', headerName: 'Trạng thái', minWidth: 150, cellRenderer: 'statusNameCellRender' },
       {
@@ -67,6 +73,7 @@ export class OrderComponent implements OnInit {
       resizable: true,
     };
     this.frameworkComponents = {
+      paymentCellRender: PaymentTypeCellRenderComponent,
       btnCellRenderer: BtnCellRenderComponent,
       statusNameCellRender: StatusNameCellRenderComponent,
     };
@@ -146,7 +153,7 @@ export class OrderComponent implements OnInit {
 
   isRenderComplete = false;
   listCategory = [];
-  listStatus = LIST_STATUS;
+  listStatus = LIST_STATUS_ORDER;
   filter: QueryFilerModel = { ...QUERY_FILTER_DEFAULT };
   pageSizeOptions: any[] = [];
   paginationMessage = '';
@@ -437,7 +444,11 @@ export class OrderComponent implements OnInit {
         for (const item of dataResult.data) {
           item.index = ++i;
           item.statusName = this.listStatus.find((x: any) => x.id === item.status)?.name;
+          item.grandTotalFix = item.grandTotal.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,') + 'đ';
           item.editGrantAccess = true;
+          const date = new Date(item.createdDate);
+          item.orderDate =
+            date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
           item.deleteGrantAccess = true;
           item.infoGrantAccess = true;
         }

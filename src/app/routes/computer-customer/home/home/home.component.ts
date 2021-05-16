@@ -4,7 +4,7 @@ import { StartupService } from '@core';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { SettingsService } from '@delon/theme';
 import { environment } from '@env/environment';
-import { LAPTOP_ID } from '@util';
+import { GM_GEAR, LAPTOP_ID, PC_GM } from '@util';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
@@ -33,6 +33,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   listMsiActive: any[] = [];
   listMsiResult: any[] = [];
+
+  listPcActive: any[] = [];
+  listPcResult: any[] = [];
+
+  listGmActive: any[] = [];
+  listGmResult: any[] = [];
 
   prodCountActive: any[] = [];
   prodCountResult: any[] = [];
@@ -114,6 +120,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.cartCusService.addToCart(item);
   }
   listLaptopRs: any[] = [];
+  listPcRs: any[] = [];
+  listGmRs: any[] = [];
   listCateMeta: any[] = [];
   fetchListCategoryMetaByProd() {
     this.categoryMetaService.getAll().subscribe((res) => {
@@ -130,11 +138,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
           if (item == LAPTOP_ID) {
             this.listLaptopRs.push(this.listProduct[index]);
           }
+
+          if (item == GM_GEAR) {
+            this.listGmRs.push(this.listProduct[index]);
+          }
+
+          if (item == PC_GM) {
+            this.listPcRs.push(this.listProduct[index]);
+          }
         });
       }
 
       this.prodCountActive = this.getListProdActive(this.listProduct.sort((a, b) => (b.visitCount > a.visitCount ? 1 : -1)));
       this.prodCountResult = this.getListProdRs(this.listProduct.sort((a, b) => (b.visitCount > a.visitCount ? 1 : -1)));
+
+      this.listAcerActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
+      this.listAcerResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
+
+      this.listPcActive = this.getListProdActive(this.listPcRs);
+      this.listPcResult = this.getListProdRs(this.listPcRs);
+
+      this.listGmActive = this.getListProdActive(this.listGmRs);
+      this.listGmResult = this.getListProdRs(this.listGmRs);
 
       this.listAcerActive = this.getListProdActive(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
       this.listAcerResult = this.getListProdRs(this.listLaptopRs.filter((x) => x.supplierName === 'ACER'));
@@ -178,28 +203,29 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // this.router.navigate(['/product-detail/' + code]);
   }
   ngAfterViewInit() {
-    // (function (d, s, id) {
-    //   let js,
-    //     fjs = d.getElementsByTagName(s)[2];
-    //   // for (let index = 0; index < fjs.length; index++) {
-    //   //   console.log(index + ' ' + fjs[index].outerHTML);
-    //   // }
-    //   if (d.getElementById(id)) {
-    //     return;
-    //   }
-    //   js = d.createElement(s);
-    //   js.id = id;
-    //   js.setAttribute('src', 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1');
-    //   // js.src = '//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1';
-    //   // Notice the "!" at the end of line
-    //   fjs.nodeName; // <- error!
-    //   if (fjs === null) {
-    //     alert('oops');
-    //   } else {
-    //     // since you've done the nullable check
-    //     // TS won't complain from this point on
-    //     fjs.parentNode?.insertBefore(js, fjs); // <- no error
-    //   }
-    // })(document, 'script', 'facebook-js-sdk');
+    (function (d, s, id, idBefore) {
+      let js,
+        fjs = d.getElementsByTagName(s)[3];
+      // for (let index = 0; index < fjs.length; index++) {
+      //   console.log(index + ' ' + fjs[index].outerHTML);
+      // }
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.setAttribute('src', 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1');
+      // js.src = '//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=253504385800401&autoLogAppEvents=1';
+      // Notice the "!" at the end of line
+      fjs.nodeName; // <- error!
+
+      if (fjs === null) {
+        alert('oops');
+      } else {
+        // since you've done the nullable check
+        // TS won't complain from this point on
+        fjs.parentNode?.insertBefore(js, fjs); // <- no error
+      }
+    })(document, 'script', 'facebook-js-sdk', 'facebook-jssdk');
   }
 }

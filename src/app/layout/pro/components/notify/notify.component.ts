@@ -44,19 +44,7 @@ export class LayoutProWidgetNotifyComponent {
     private router: Router,
     private cdr: ChangeDetectorRef,
   ) {
-    this.userService.getNotify().subscribe((res) => {
-      if (res.data) {
-        res.data.map((item: any) => {
-          item.avatar = 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png';
-          item.datetime = item.createdDate.slice(0, 10);
-          item.read = item.isRead;
-          item.type = item.read === false ? 'Chưa đọc' : 'Đã đọc';
-        });
-        this.listMsg = res.data;
-        console.log(this.listMsg);
-        this.count = this.listMsg.filter((x) => x.read === false).length;
-      }
-    });
+    this.fetchListNotification();
     let connection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:8310/signalr')
       .configureLogging(signalR.LogLevel.Information)
@@ -69,19 +57,35 @@ export class LayoutProWidgetNotifyComponent {
 
     connection.on('BroadcastMessage', (data: any) => {
       this.notifiService.info('Thông báo', 'Bạn có 1 thông báo mới');
-      if (data.listNotifications) {
-        data.listNotifications.map((item: any) => {
-          item.type = 'Thông báo';
+      this.fetchListNotification();
+      // if (data.listNotifications) {
+      //   data.listNotifications.map((item: any) => {
+      //     item.type = 'Thông báo';
+      //     item.avatar = 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png';
+      //     item.datetime = item.createdDate.slice(0, 10);
+
+      //     item.read = item.isRead;
+      //   });
+      //   this.listMsg = data.listNotifications;
+      //   this.updateNoticeData(this.listMsg);
+      //   this.count = this.listMsg.length;
+      // }
+    });
+  }
+  fetchListNotification() {
+    this.userService.getNotify().subscribe((res) => {
+      if (res.data) {
+        res.data.map((item: any) => {
           item.avatar = 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png';
-          item.datetime = item.createdDate.slice(0, 10);
+          item.datetime = new Date(item.createdDate);
           item.read = item.isRead;
+          item.type = item.read === false ? 'Chưa đọc' : 'Đã đọc';
         });
-        this.listMsg = data.listNotifications;
-        this.count = this.listMsg.length;
+        this.listMsg = res.data;
+        this.count = this.listMsg.filter((x) => x.read === false).length;
       }
     });
   }
-
   updateNoticeData(notices: NoticeIconList[]): NoticeItem[] {
     const data = this.data.slice();
     data.forEach((i) => (i.list = []));

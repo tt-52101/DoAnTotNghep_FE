@@ -80,17 +80,6 @@
       </nz-col>
 
       <nz-col nzSm="8" nzXS="12" nzMd="8" class="padding-bottom-10">
-        <nz-form-item class="margin-0">
-          <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="status">Loại sản phẩm cha</nz-form-label>
-          <nz-form-control [nzSm]="15" [nzXs]="24">
-            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn SP cha" [(ngModel)]="filter.parentId">
-              <nz-option *ngFor="let option of listCategory" [nzLabel]="option['name']" [nzValue]="option['id']"> </nz-option>
-            </nz-select>
-          </nz-form-control>
-        </nz-form-item>
-      </nz-col>
-
-      <nz-col nzSm="8" nzXS="12" nzMd="8" class="padding-bottom-10">
         <button
           nz-button
           nzType="primary"
@@ -144,7 +133,7 @@
   </nz-card>
 </page-header-wrapper>
 
-<app-category-item
+<app-order-item
   #itemModal
   [isVisible]="modal.isShow"
   [item]="modal.item"
@@ -152,6 +141,6 @@
   [option]="modal.option"
   (eventEmmit)="onModalEventEmmit($event)"
 >
-</app-category-item>
+</app-order-item>
 
 <delete-modal #deleteModal [isVisible]="isShowDelete" (eventEmmit)="onDeleteEventEmmit($event)"></delete-modal>

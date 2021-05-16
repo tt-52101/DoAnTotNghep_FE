@@ -67,7 +67,7 @@ a:focus {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
+  /* font-family: "Raleway", sans-serif; */
 }
 
 h2 {
@@ -1429,7 +1429,7 @@ img {
 
 #aa-testimonial {
   background-attachment: fixed;
-  background-image: url("../img/testimonial-bg-1.jpg");
+  background-image: url("../../assets/img/about-page-testimonial-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   display: inline;
@@ -1439,7 +1439,6 @@ img {
 }
 #aa-testimonial:after {
   content: '';
-  background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   left: 0;
   right: 0;
@@ -1470,7 +1469,7 @@ img {
   left: 0;
   top: 0;
   width: 100px;
-  position: absolute;
+position: absolute;
   z-index: 1;
   background: #fff;
   border-radius: 0px 0px 100% 0px;

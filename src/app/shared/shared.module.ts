@@ -52,7 +52,14 @@ const COMPONENTS_ENTRY = [
   PaginationComponent,
   ...QUICK_CHAT_COMPONENTS,
 ];
-const COMPONENTS = [EditorComponent, DeleteModalComponent, LockModalComponent, ...COMPONENTS_ENTRY, ...PRO_SHARED_COMPONENTS];
+const COMPONENTS = [
+  EditorComponent,
+  DeleteModalComponent,
+  LockModalComponent,
+  PaymentTypeCellRenderComponent,
+  ...COMPONENTS_ENTRY,
+  ...PRO_SHARED_COMPONENTS,
+];
 const DIRECTIVES = [ImgDirective, DelayDirective, MasonryDirective, ScrollbarDirective, MouseFocusDirective];
 const PIPES = [FormatDatePipe, GenderPipe];
 // #endregion
@@ -62,6 +69,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import {
   BtnCellRenderComponent,
   StatusCellRenderComponent,
+  PaymentTypeCellRenderComponent,
   StatusDeleteCellRenderComponent,
   StatusImportCellRenderComponent,
   StatusNameCellRenderComponent,
@@ -80,6 +88,7 @@ import { LockModalComponent } from './components/modal/lock-modal/lock-modal.com
     AgGridModule.withComponents([
       StatusCellRenderComponent,
       StatusNameCellRenderComponent,
+      PaymentTypeCellRenderComponent,
       StatusDeleteCellRenderComponent,
       StatusImportCellRenderComponent,
       BtnCellRenderComponent,

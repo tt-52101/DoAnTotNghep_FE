@@ -24,7 +24,9 @@ export class OrderService {
   update(model: any): Observable<any> {
     return this.http.put(environment.BASE_API_URL + orderRouter.update, model);
   }
-
+  updateStatusOrder(model: any): Observable<any> {
+    return this.http.put(environment.BASE_API_URL + orderRouter.updateStatusOrder, model);
+  }
   getById(id: string): Observable<any> {
     return this.http.get(environment.BASE_API_URL + orderRouter.getById + id);
   }

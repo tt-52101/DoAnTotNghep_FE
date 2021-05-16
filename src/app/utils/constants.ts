@@ -3,16 +3,19 @@ import { QueryFilerModel } from '@model';
 
 export const ROLE_SYS_ADMIN = 'SYS_ADMIN';
 export const LAPTOP_ID = '14843a87-3a07-4dd1-9171-0dc0f56ff0fc';
+export const PC_GM = '4f5e44ec-53a3-4536-b8e3-f673191a3638';
+export const GM_GEAR = 'ee4a2a91-6416-46ae-928c-ec31ba9bbbd2';
 export const LIST_STATUS = [
   { id: true, code: true, name: 'Hoạt động' },
   { id: false, code: false, name: 'Không hoạt động' },
 ];
+
 export const LIST_STATUS_ORDER = [
+  { id: -1, name: 'Đã hủy' },
   { id: 0, name: 'Chờ xác nhận' },
-  { id: 1, name: 'Chờ xác nhận' },
-  { id: 2, name: 'Đang lấy hàng' },
-  { id: 3, name: 'Đang giao hàng' },
-  { id: 4, name: 'Đánh giá' },
+  { id: 1, name: 'Đang lấy hàng' },
+  { id: 2, name: 'Đang giao hàng' },
+  { id: 3, name: 'Đã giao hàng' },
 ];
 export const QUERY_FILTER_DEFAULT: QueryFilerModel = {
   pageNumber: 1,
