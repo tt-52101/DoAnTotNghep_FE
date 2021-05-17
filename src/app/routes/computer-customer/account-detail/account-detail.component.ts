@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { cleanForm } from '@util';
@@ -19,6 +19,7 @@ import { UserService } from 'src/app/services/computer-management/user/user.serv
 })
 export class AccountDetailComponent implements OnInit {
   constructor(
+    private routeActive: ActivatedRoute,
     private fb: FormBuilder,
     private nzMessage: NzMessageService,
     private cusService: UserService,
@@ -26,6 +27,9 @@ export class AccountDetailComponent implements OnInit {
     private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
   ) {
+    routeActive.queryParams.subscribe((res) => {
+      console.log(res);
+    });
     this.formRegister = fb.group({
       username: [{ value: null, disabled: true }, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
@@ -47,6 +51,7 @@ export class AccountDetailComponent implements OnInit {
   avatar = '';
   pageIndex = 1;
   pageSize = 5;
+  index = 0;
   avatarUrl: any = '';
   userId: any;
   passwordVisible = false;
@@ -80,12 +85,8 @@ export class AccountDetailComponent implements OnInit {
             const data = res.data;
             data.map((item) => {
               item.listProducts = JSON.parse(item.listProducts);
-              item.listProducts.map((item) => {
-                // for (let index = 0; index < item.categoryName.length; index++) {
-                //   if (index <= item.categoryName.length - 2) {
-                //     item.categoryName[index] = item.categoryName[index] + ', ';
-                //   }
-                // }
+              item.listProducts.map((prod) => {
+                prod.categoryString = prod.categoryName.toString();
               });
             });
             this.listOrderAll = data;
@@ -102,6 +103,9 @@ export class AccountDetailComponent implements OnInit {
         },
       );
     }
+  }
+  tabSelectChange(event: any) {
+    this.index = event.index;
   }
   fetchUser() {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');

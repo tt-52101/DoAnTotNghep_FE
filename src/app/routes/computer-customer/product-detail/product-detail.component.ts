@@ -4,12 +4,58 @@ import { environment } from '@env/environment';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CategoryMetaService } from 'src/app/services/computer-management/category-meta/category-meta.service';
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
+import { formatDistance } from 'date-fns';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.less'],
 })
 export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy {
+  data = {
+    author: 'Han Solo',
+    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+    content:
+      'We supply a series of design principles, practical patterns and high quality design resources' +
+      '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+    children: [
+      {
+        author: 'Han Solo',
+        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        content:
+          'We supply a series of design principles, practical patterns and high quality design resources' +
+          '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+        children: [
+          {
+            author: 'Han Solo',
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            content:
+              'We supply a series of design principles, practical patterns and high quality design resources' +
+              '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+          },
+          {
+            author: 'Han Solo',
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            content:
+              'We supply a series of design principles, practical patterns and high quality design resources' +
+              '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+          },
+        ],
+      },
+    ],
+  };
+  likes = 0;
+  dislikes = 0;
+  time = formatDistance(new Date(), new Date());
+
+  like(): void {
+    this.likes = 1;
+    this.dislikes = 0;
+  }
+
+  dislike(): void {
+    this.likes = 0;
+    this.dislikes = 1;
+  }
   urlComment = '';
   myThumbnail: any;
   itemQuickView: any = {};

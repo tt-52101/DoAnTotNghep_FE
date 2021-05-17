@@ -103,6 +103,9 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
   showModal(): void {
     this.isVisible = true;
   }
+  navigate(url: string) {
+    window.location.href = url;
+  }
   getListCart() {
     this.total = 0;
     this.cartService.getById().subscribe((res) => {

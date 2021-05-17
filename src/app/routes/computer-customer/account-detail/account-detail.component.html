@@ -15,7 +15,7 @@
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-12">
-            <nz-tabset [nzTabPosition]="position">
+            <nz-tabset [nzSelectedIndex]="index" (nzSelectChange)="tabSelectChange($event)" [nzTabPosition]="position">
               <nz-tab [nzTitle]="userTemplate">
                 <ng-template #userTemplate>
                   <img height="16" width="16" src="../../../../assets/img/Graphicloads-Flat-Finance-Person.ico" alt="" />
@@ -178,7 +178,7 @@
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
                                                 Loại sản phẩm:
-                                                <span *ngFor="let cate of prod.categoryName">{{ cate }}</span>
+                                                <span>{{ prod.categoryName.toString() }}</span>
                                               </p>
                                             </div>
                                             <div class="col-md-12">
@@ -199,12 +199,19 @@
                                       </div>
                                       <div class="row">
                                         <div class="col-md-12 pull-right">
-                                          <button nz-button [nzDanger]="item.status === 3" *ngIf="item.status === 3" nzType="default">
+                                          <button
+                                            nz-button
+                                            [nzDanger]="item.status === 3"
+                                            [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
+                                            *ngIf="item.status === 3"
+                                            nzType="default"
+                                          >
                                             Đánh giá
                                           </button>
                                           <button nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
                                             [nzDanger]="item.status === -1"
+                                            [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
                                             *ngIf="item.status === 3 || item.status === -1"
                                             nz-button
                                             nzType="default"
@@ -279,7 +286,7 @@
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
                                                 Loại sản phẩm:
-                                                <span *ngFor="let cate of prod.categoryName">{{ cate }}</span>
+                                                <span>{{ prod.categoryString }}</span>
                                               </p>
                                             </div>
                                             <div class="col-md-12">
@@ -296,6 +303,36 @@
                                           <img class="img-price" src="../../../../assets/img/price.png" alt="" />
                                           Tổng số tiền:
                                           <span style="font-size: 25px" class="text-red">{{ item.grandTotal | currency: 'VND' }}</span>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-12 pull-right">
+                                          <button
+                                            nz-button
+                                            [nzDanger]="item.status === 3"
+                                            [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
+                                            *ngIf="item.status === 3"
+                                            nzType="default"
+                                          >
+                                            Đánh giá
+                                          </button>
+                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button
+                                            [nzDanger]="item.status === -1"
+                                            [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
+                                            *ngIf="item.status === 3 || item.status === -1"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Mua lần nữa
+                                          </button>
+                                          <button
+                                            *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Hủy đơn hàng
+                                          </button>
                                         </div>
                                       </div>
                                     </div>
@@ -357,7 +394,7 @@
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
                                                 Loại sản phẩm:
-                                                <span *ngFor="let cate of prod.categoryName">{{ cate }}</span>
+                                                <span>{{ prod.categoryString }}</span>
                                               </p>
                                             </div>
                                             <div class="col-md-12">
@@ -374,6 +411,36 @@
                                           <img class="img-price" src="../../../../assets/img/price.png" alt="" />
                                           Tổng số tiền:
                                           <span style="font-size: 25px" class="text-red">{{ item.grandTotal | currency: 'VND' }}</span>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-12 pull-right">
+                                          <button
+                                            nz-button
+                                            [nzDanger]="item.status === 3"
+                                            [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
+                                            *ngIf="item.status === 3"
+                                            nzType="default"
+                                          >
+                                            Đánh giá
+                                          </button>
+                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button
+                                            [nzDanger]="item.status === -1"
+                                            [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
+                                            *ngIf="item.status === 3 || item.status === -1"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Mua lần nữa
+                                          </button>
+                                          <button
+                                            *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Hủy đơn hàng
+                                          </button>
                                         </div>
                                       </div>
                                     </div>
@@ -435,7 +502,7 @@
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
                                                 Loại sản phẩm:
-                                                <span *ngFor="let cate of prod.categoryName">{{ cate }}</span>
+                                                <span>{{ prod.categoryString }}</span>
                                               </p>
                                             </div>
                                             <div class="col-md-12">
@@ -452,6 +519,36 @@
                                           <img class="img-price" src="../../../../assets/img/price.png" alt="" />
                                           Tổng số tiền:
                                           <span style="font-size: 25px" class="text-red">{{ item.grandTotal | currency: 'VND' }}</span>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-12 pull-right">
+                                          <button
+                                            nz-button
+                                            [nzDanger]="item.status === 3"
+                                            [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
+                                            *ngIf="item.status === 3"
+                                            nzType="default"
+                                          >
+                                            Đánh giá
+                                          </button>
+                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button
+                                            [nzDanger]="item.status === -1"
+                                            [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
+                                            *ngIf="item.status === 3 || item.status === -1"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Mua lần nữa
+                                          </button>
+                                          <button
+                                            *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Hủy đơn hàng
+                                          </button>
                                         </div>
                                       </div>
                                     </div>
@@ -513,7 +610,7 @@
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
                                                 Loại sản phẩm:
-                                                <span *ngFor="let cate of prod.categoryName">{{ cate }}</span>
+                                                <span>{{ prod.categoryString }}</span>
                                               </p>
                                             </div>
                                             <div class="col-md-12">
@@ -530,6 +627,36 @@
                                           <img class="img-price" src="../../../../assets/img/price.png" alt="" />
                                           Tổng số tiền:
                                           <span style="font-size: 25px" class="text-red">{{ item.grandTotal | currency: 'VND' }}</span>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-12 pull-right">
+                                          <button
+                                            nz-button
+                                            [nzDanger]="item.status === 3"
+                                            [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
+                                            *ngIf="item.status === 3"
+                                            nzType="default"
+                                          >
+                                            Đánh giá
+                                          </button>
+                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button
+                                            [nzDanger]="item.status === -1"
+                                            [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
+                                            *ngIf="item.status === 3 || item.status === -1"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Mua lần nữa
+                                          </button>
+                                          <button
+                                            *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Hủy đơn hàng
+                                          </button>
                                         </div>
                                       </div>
                                     </div>
@@ -591,7 +718,7 @@
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
                                                 Loại sản phẩm:
-                                                <span *ngFor="let cate of prod.categoryName">{{ cate }}</span>
+                                                <span>{{ prod.categoryString }}</span>
                                               </p>
                                             </div>
                                             <div class="col-md-12">
@@ -608,6 +735,36 @@
                                           <img class="img-price" src="../../../../assets/img/price.png" alt="" />
                                           Tổng số tiền:
                                           <span style="font-size: 25px" class="text-red">{{ item.grandTotal | currency: 'VND' }}</span>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-12 pull-right">
+                                          <button
+                                            nz-button
+                                            [nzDanger]="item.status === 3"
+                                            [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
+                                            *ngIf="item.status === 3"
+                                            nzType="default"
+                                          >
+                                            Đánh giá
+                                          </button>
+                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button
+                                            [nzDanger]="item.status === -1"
+                                            [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
+                                            *ngIf="item.status === 3 || item.status === -1"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Mua lần nữa
+                                          </button>
+                                          <button
+                                            *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
+                                            nz-button
+                                            nzType="default"
+                                          >
+                                            Hủy đơn hàng
+                                          </button>
                                         </div>
                                       </div>
                                     </div>

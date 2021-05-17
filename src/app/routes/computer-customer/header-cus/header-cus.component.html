@@ -135,7 +135,15 @@
                 <i nz-icon nzType="info" nzTheme="outline"></i>Xin chào
                 <b>{{ userName }}</b>
               </li>
-              <li nz-menu-item routerLink="/account-detail"><i nz-icon nzType="user" nzTheme="outline"></i> Thông tin tài khoản</li>
+              <li nz-menu-item (click)="navigate('http://localhost:4200/account-detail?type=0')">
+                <i nz-icon nzType="user" nzTheme="outline"></i> Thông tin tài khoản
+              </li>
+              <li nz-menu-item (click)="navigate('http://localhost:4200/account-detail?type=1')">
+                <i nz-icon nzType="bars" nzTheme="outline"></i> Đơn mua
+              </li>
+              <li nz-menu-item (click)="navigate('http://localhost:4200/account-detail?type=2')">
+                <i nz-icon nzType="setting" nzTheme="outline"></i> Đổi mật khẩu
+              </li>
               <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i> Đăng xuất</li>
             </ul>
           </nz-dropdown-menu>

@@ -164,48 +164,45 @@
                 <div class="fb-comments" [attr.href]="urlComment" data-width="100%" data-numposts="5"></div>
                 <div class="aa-product-review-area">
                   <h4>2 Reviews for T-Shirt</h4>
-                  <ul class="aa-review-nav">
-                    <li>
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="#">
-                            <img class="media-object" src="img/testimonial-img-3.jpg" alt="girl image" />
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                          <div class="aa-product-rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star-o"></span>
-                          </div>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="#">
-                            <img class="media-object" src="img/testimonial-img-3.jpg" alt="girl image" />
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                          <div class="aa-product-rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star-o"></span>
-                          </div>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                  <ng-template #commentTemplateRef let-comment="comment">
+                    <nz-comment [nzAuthor]="comment.author" [nzDatetime]="time">
+                      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="comment.avatar"></nz-avatar>
+                      <nz-comment-content>
+                        <p>{{ comment.content }}</p>
+                      </nz-comment-content>
+                      <nz-comment-action>
+                        <i
+                          nz-tooltip
+                          nzTitle="Like"
+                          nz-icon
+                          nzType="like"
+                          [nzTheme]="likes > 0 ? 'twotone' : 'outline'"
+                          (click)="like()"
+                        ></i>
+                        <span class="count like">{{ likes }}</span>
+                      </nz-comment-action>
+                      <nz-comment-action>
+                        <i
+                          nz-tooltip
+                          nzTitle="Dislike"
+                          nz-icon
+                          nzType="dislike"
+                          [nzTheme]="dislikes > 0 ? 'twotone' : 'outline'"
+                          (click)="dislike()"
+                        ></i>
+                        <span class="count dislike">{{ dislikes }}</span>
+                      </nz-comment-action>
+                      <nz-comment-action>Reply to</nz-comment-action>
+                      <ng-container *ngIf="comment.children && comment.children.length">
+                        <ng-template ngFor let-child [ngForOf]="comment.children">
+                          <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: child }">
+                          </ng-template>
+                        </ng-template>
+                      </ng-container>
+                    </nz-comment>
+                  </ng-template>
+
+                  <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: data }"> </ng-template>
                   <h4>Add a review</h4>
                   <div class="aa-your-rating">
                     <p>Bạn đánh giá</p>

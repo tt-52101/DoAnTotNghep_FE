@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { SliderComponent } from './slider/slider.component';
 import { SupportComponent } from './support/support.component';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -45,6 +46,14 @@ import { ConfirmComponent } from './confirm/confirm.component';
     CheckOutComponent,
     ConfirmComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, NgxImageZoomModule, NgxCaptchaModule, SharedModule, ComputerCustomerRoutingModule],
+  imports: [
+    CommonModule,
+    NzCommentModule,
+    ReactiveFormsModule,
+    NgxImageZoomModule,
+    NgxCaptchaModule,
+    SharedModule,
+    ComputerCustomerRoutingModule,
+  ],
 })
 export class ComputerCustomerModule {}

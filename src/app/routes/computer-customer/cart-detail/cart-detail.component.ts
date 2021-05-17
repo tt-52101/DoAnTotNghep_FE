@@ -49,13 +49,9 @@ export class CartDetailComponent implements OnInit {
           const listCart = listProducts;
           if (listCart !== '' && listCart.length !== 0 && listCart !== undefined && listCart !== null) {
             if (listCart) {
-              listCart.map((item: any) => {
-                for (let index = 0; index < item.categoryName.length; index++) {
-                  if (index <= item.categoryName.length - 2) {
-                    item.categoryName[index] = item.categoryName[index] + ', ';
-                  }
-                }
-              });
+              // listCart.map((item: any) => {
+              //   item.categoryString = item.categoryName.toString();
+              // });
             }
             this.listCart = listCart;
             localStorage.setItem('list-cart', JSON.stringify(listCart));
