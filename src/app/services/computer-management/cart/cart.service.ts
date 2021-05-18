@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CartService {
   constructor(private http: _HttpClient) {}
-  private listCartSource = new BehaviorSubject(JSON.parse(localStorage.getItem('list-cart') || '[]'));
+  private listCartSource = new BehaviorSubject([]);
   currentCart = this.listCartSource.asObservable();
   changeCart(listCart: any) {
     this.listCartSource.next(listCart);

@@ -163,36 +163,36 @@
               <div class="tab-pane fade" id="review">
                 <div class="fb-comments" [attr.href]="urlComment" data-width="100%" data-numposts="5"></div>
                 <div class="aa-product-review-area">
-                  <h4>2 Reviews for T-Shirt</h4>
+                  <h4>{{ listRs.length }} đánh giá về {{ itemQuickView.code }}</h4>
                   <ng-template #commentTemplateRef let-comment="comment">
-                    <nz-comment [nzAuthor]="comment.author" [nzDatetime]="time">
-                      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="comment.avatar"></nz-avatar>
+                    <nz-comment [nzAuthor]="comment.userName" [nzDatetime]="comment.createdDate + ' ago'">
+                      <nz-avatar nz-comment-avatar [nzSrc]="baseFile + comment.avatarUrl"></nz-avatar>
                       <nz-comment-content>
-                        <p>{{ comment.content }}</p>
+                        <nz-rate *ngIf="comment.isRoot === true" [ngModel]="comment.rating" nzDisabled></nz-rate>
                       </nz-comment-content>
-                      <nz-comment-action>
-                        <i
-                          nz-tooltip
-                          nzTitle="Like"
-                          nz-icon
-                          nzType="like"
-                          [nzTheme]="likes > 0 ? 'twotone' : 'outline'"
-                          (click)="like()"
-                        ></i>
-                        <span class="count like">{{ likes }}</span>
-                      </nz-comment-action>
-                      <nz-comment-action>
-                        <i
-                          nz-tooltip
-                          nzTitle="Dislike"
-                          nz-icon
-                          nzType="dislike"
-                          [nzTheme]="dislikes > 0 ? 'twotone' : 'outline'"
-                          (click)="dislike()"
-                        ></i>
-                        <span class="count dislike">{{ dislikes }}</span>
-                      </nz-comment-action>
-                      <nz-comment-action>Reply to</nz-comment-action>
+                      <nz-comment-content>
+                        <div [innerHTML]="comment.content"></div>
+                      </nz-comment-content>
+                      <nz-comment-action
+                        ><span [hidden]="comment.checked === true" (click)="openReply(comment.id)">Trả lời</span></nz-comment-action
+                      >
+                      <nz-comment-content [hidden]="comment.checked === false" *ngIf="comment.checked === true">
+                        <nz-form-item>
+                          <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <button
+                            nz-button
+                            nzType="primary"
+                            [nzLoading]="submitting"
+                            [disabled]="!inputValue"
+                            (click)="submitComment(comment.id, 2)"
+                          >
+                            Trả lời
+                          </button>
+                          <button style="margin-left: 15px" nz-button nzType="primary" (click)="handleClose(comment.id)">Đóng</button>
+                        </nz-form-item>
+                      </nz-comment-content>
                       <ng-container *ngIf="comment.children && comment.children.length">
                         <ng-template ngFor let-child [ngForOf]="comment.children">
                           <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: child }">
@@ -202,8 +202,11 @@
                     </nz-comment>
                   </ng-template>
 
-                  <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: data }"> </ng-template>
-                  <h4>Add a review</h4>
+                  <div *ngFor="let item of listRs">
+                    <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: item }"> </ng-template>
+                    <hr />
+                  </div>
+                  <h4>Thêm đánh giá</h4>
                   <div class="aa-your-rating">
                     <p>Bạn đánh giá</p>
                     <nz-rate [(ngModel)]="value" [nzTooltips]="tooltips"></nz-rate>
@@ -212,19 +215,37 @@
                   <!-- review form -->
                   <form action="" class="aa-review-form">
                     <div class="form-group">
-                      <label for="message">Your Review</label>
-                      <textarea class="form-control" rows="3" id="message"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" id="name" placeholder="Name" />
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email</label>
-                      <input type="email" class="form-control" id="email" placeholder="example@gmail.com" />
+                      <nz-comment>
+                        <nz-avatar
+                          nz-comment-avatar
+                          [routerLink]="'/account-detail'"
+                          nzIcon="user"
+                          [nzSrc]="token ? baseFile + userInfo.avatar : ''"
+                        >
+                        </nz-avatar>
+                        <nz-comment-content>
+                          <nz-form-item>
+                            <!-- <textarea [ngModelOptions]="{standalone: true}" [(ngModel)]="inputReview" nz-input
+                              rows="4"></textarea> -->
+                            <ckeditor
+                              [ngModelOptions]="{ standalone: true }"
+                              nz-col
+                              nzSpan="24"
+                              [(ngModel)]="inputReview"
+                              style="width: 500px !important"
+                              [editor]="Editor"
+                            ></ckeditor>
+                          </nz-form-item>
+                          <!-- <nz-form-item>
+                            <button nz-button nzType="primary"  [disabled]="inputValue ===''">
+                              Bình luận
+                            </button>
+                          </nz-form-item> -->
+                        </nz-comment-content>
+                      </nz-comment>
                     </div>
 
-                    <button type="submit" class="btn btn-default aa-review-submit">Submit</button>
+                    <button type="button" (click)="submitComment(null, 1)" class="btn btn-default aa-review-submit">Đánh giá</button>
                   </form>
                 </div>
               </div>

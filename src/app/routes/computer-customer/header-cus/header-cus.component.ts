@@ -40,6 +40,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private cusService: UserService,
   ) {
+    this.listCart = [];
     const token = this.tokenService.get()?.token;
     if (token) {
       this.isLogin = true;
@@ -110,12 +111,11 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     this.total = 0;
     this.cartService.getById().subscribe((res) => {
       if (res.code === 200) {
-        const listProducts = JSON.parse(res.data.listProducts);
+        const listProducts = JSON.parse(res.data.listProducts ? res.data.listProducts : null);
         if (listProducts) {
           const listCart = listProducts;
           if (listCart !== '' && listCart.length !== 0 && listCart !== undefined && listCart !== null) {
             this.listCart = listCart;
-            localStorage.setItem('list-cart', JSON.stringify(listCart));
             this.listCart.map((item) => {
               item.subTotal = item.count * (item.price - item.discount);
               this.total = this.total + item.subTotal;
@@ -142,6 +142,9 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
       this.userService.getById(userModel.id).subscribe(
         (res) => {
           if (res.code === 200) {
+            res.data.password = '';
+            res.data.passwordSalt = '';
+            localStorage.setItem('user-info', JSON.stringify(res.data));
             const data = res.data;
             this.user = res.data;
             this.userName = res.data.name;

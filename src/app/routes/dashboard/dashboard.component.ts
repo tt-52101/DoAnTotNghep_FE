@@ -29,14 +29,8 @@ export class DashboardComponent {
   constructor(private dashboardService: DashboardService, private prodService: ProductService, private cdf: ChangeDetectorRef) {
     const list = JSON.parse(localStorage.getItem('visit-count') || '[]');
     if (list) {
-      this.visitWebsite = list.length;
-      list.map((item: any) => {
-        const d1 = new Date();
-        const d2 = new Date(item.createdDate);
-        if (d1.getDay() === d2.getDay() && d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear()) {
-          this.visitWebsiteToday++;
-        }
-      });
+      this.visitWebsite = list.visitWebsite;
+      this.visitWebsiteToday = list.visitWebsiteToday;
     }
     this.prodService.getAll().subscribe((res) => {
       if (res.code === 200) {

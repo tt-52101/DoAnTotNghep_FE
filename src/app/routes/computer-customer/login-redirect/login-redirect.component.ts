@@ -71,11 +71,11 @@ export class LoginRedirectComponent implements OnInit {
         this.nzMessage.success('Đăng nhập thành công');
         this.customerService.changeLogin(true);
         this.isLogin = true;
-        this.tokenService.set({
+        const model = {
           id: res.data.userId,
           token: res.data.tokenString,
           email: res.data.userModel.email,
-          avatarUrl: res.data.userModel.avatarUrl,
+          avatarUrl: res.data.userModel.avatar,
           timeExpride: res.data.timeExpride,
           time: res.data.timeExpride,
           name: res.data.userModel.name,
@@ -83,7 +83,9 @@ export class LoginRedirectComponent implements OnInit {
           rights: res.data.listRight,
           roles: res.data.listRole,
           // isSysAdmin,
-        });
+        };
+        console.log(model);
+        this.tokenService.set(model);
         if (res.data.userModel.isAdmin === true) {
           this.router.navigateByUrl('/admin');
         } else {

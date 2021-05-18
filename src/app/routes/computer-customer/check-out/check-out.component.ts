@@ -118,7 +118,7 @@ export class CheckOutComponent implements OnInit {
               // });
             }
             this.listCart = listCart;
-            localStorage.setItem('list-cart', JSON.stringify(listCart));
+            // localStorage.setItem('list-cart', JSON.stringify(listCart));
             this.listCart.map((item) => {
               item.subTotal = item.count * (item.price - item.discount);
               this.total = this.total + item.subTotal;

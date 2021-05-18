@@ -17,6 +17,7 @@ import { HeaderCusComponent } from './header-cus/header-cus.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
 import { QuickViewComponent } from './quick-view/quick-view.component';
@@ -48,6 +49,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
   ],
   imports: [
     CommonModule,
+    CKEditorModule,
     NzCommentModule,
     ReactiveFormsModule,
     NgxImageZoomModule,
