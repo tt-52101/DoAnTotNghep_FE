@@ -17,6 +17,14 @@ export const LIST_STATUS_ORDER = [
   { id: 2, name: 'Đang giao hàng' },
   { id: 3, name: 'Đã giao hàng' },
 ];
+export const LIST_SORT_TYPE = [
+  { id: 0, name: 'Mới nhất' },
+  { id: 1, name: 'Giá tăng dần' },
+  { id: 2, name: 'Giá giảm dần' },
+  { id: 3, name: 'Lượt xem' },
+  { id: 4, name: 'Đánh giá' },
+  { id: 5, name: 'Tên A -> Z' },
+];
 export const QUERY_FILTER_DEFAULT: QueryFilerModel = {
   pageNumber: 1,
   pageSize: 20,

@@ -11,6 +11,7 @@ import { CustomerService } from 'src/app/services/computer-customer/customer/cus
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
+import ts from 'typescript';
 
 @Component({
   selector: 'app-header-cus',
@@ -27,6 +28,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
   sub3: Subscription;
   listCart: any[] = [];
   total: any = 0;
+  textSearch = '';
   constructor(
     private cartService: CartService,
     private fb: FormBuilder,
@@ -41,6 +43,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     private cusService: UserService,
   ) {
     this.listCart = [];
+
     const token = this.tokenService.get()?.token;
     if (token) {
       this.isLogin = true;
@@ -83,6 +86,9 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
       }
     });
   }
+  enterSearch() {
+    this.router.navigateByUrl('search-detail?textSearch=' + this.textSearch);
+  }
   viewDetail(code: any) {
     const url = '/product-detail/' + code;
     window.location.href = url;
@@ -92,6 +98,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     this.sub1.unsubscribe();
     this.sub2.unsubscribe();
     this.sub3.unsubscribe();
+    this.textSearch = '';
   }
   formLogin: FormGroup;
   isLogin: any = false;

@@ -28,6 +28,12 @@ jQuery(function ($) {
   $(window).on('scroll', function () {
     if ($(this).scrollTop() >= 200) {
       $('.navbar').addClass('fixed-top');
+      document.getElementById('navbar-cus').style.backgroundColor = 'black';
+      var all = document.getElementsByClassName('text-menu');
+for (var i = 0; i < all.length; i++) {
+  all[i].style.color = 'white';
+}
+      
     } else if ($(this).scrollTop() == 0) {
       $('.navbar').removeClass('fixed-top');
     }

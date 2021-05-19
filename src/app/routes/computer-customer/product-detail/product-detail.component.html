@@ -89,7 +89,7 @@
                     <p style="float: right" class="aa-product-avilability">Trạng thái: <nz-tag [nzColor]="'green'">Còn hàng </nz-tag></p>
                   </div>
                 </div>
-                <nz-rate [ngModel]="'2.5'" nzDisabled></nz-rate>
+                <nz-rate [ngModel]="itemQuickView.rating" nzDisabled></nz-rate>
                 <br />
                 <span class="text-label">Giá bán: </span
                 ><span class="text-price">{{ itemQuickView.price | currency: 'VND' | lowercase }}</span>
@@ -152,7 +152,7 @@
 
         <div class="container">
           <div class="aa-product-details-bottom">
-            <ul class="nav nav-tabs" id="myTab2">
+            <ul class="nav nav-tabs item-center" id="myTab2">
               <li><a href="#description" data-toggle="tab">Chi tiết sản phẩm</a></li>
               <li><a href="#review" data-toggle="tab">Bình luận</a></li>
             </ul>

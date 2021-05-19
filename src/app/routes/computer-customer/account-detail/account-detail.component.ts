@@ -28,7 +28,7 @@ export class AccountDetailComponent implements OnInit {
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
   ) {
     routeActive.queryParams.subscribe((res) => {
-      console.log(res);
+      this.index = res.type;
     });
     this.formRegister = fb.group({
       username: [{ value: null, disabled: true }, [Validators.required]],
