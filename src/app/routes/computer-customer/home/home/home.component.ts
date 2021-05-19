@@ -148,7 +148,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         });
       }
-
+      console.log(this.listLaptopRs);
       this.prodCountActive = this.getListProdActive(this.listProduct.sort((a, b) => (b.visitCount > a.visitCount ? 1 : -1)));
       this.prodCountResult = this.getListProdRs(this.listProduct.sort((a, b) => (b.visitCount > a.visitCount ? 1 : -1)));
 

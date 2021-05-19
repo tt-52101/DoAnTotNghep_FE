@@ -186,8 +186,8 @@ export class OrderComponent implements OnInit {
   isShowDelete = false;
   isShowImport = false;
 
-  tittle = 'Danh sách loại sản phẩm';
-  moduleName = 'Loại sản phẩm';
+  tittle = 'Danh sách đơn đặt';
+  moduleName = 'Đơn đặt';
 
   modal: any = {
     type: '',

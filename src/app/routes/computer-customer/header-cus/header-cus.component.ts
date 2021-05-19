@@ -11,6 +11,7 @@ import { CustomerService } from 'src/app/services/computer-customer/customer/cus
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
+import ts from 'typescript';
 
 @Component({
   selector: 'app-header-cus',
@@ -27,6 +28,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
   sub3: Subscription;
   listCart: any[] = [];
   total: any = 0;
+  textSearch = '';
   constructor(
     private cartService: CartService,
     private fb: FormBuilder,
@@ -40,6 +42,8 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private cusService: UserService,
   ) {
+    this.listCart = [];
+
     const token = this.tokenService.get()?.token;
     if (token) {
       this.isLogin = true;
@@ -82,6 +86,9 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
       }
     });
   }
+  enterSearch() {
+    this.router.navigateByUrl('search-detail?textSearch=' + this.textSearch);
+  }
   viewDetail(code: any) {
     const url = '/product-detail/' + code;
     window.location.href = url;
@@ -91,6 +98,7 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
     this.sub1.unsubscribe();
     this.sub2.unsubscribe();
     this.sub3.unsubscribe();
+    this.textSearch = '';
   }
   formLogin: FormGroup;
   isLogin: any = false;
@@ -103,16 +111,18 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
   showModal(): void {
     this.isVisible = true;
   }
+  navigate(url: string) {
+    window.location.href = url;
+  }
   getListCart() {
     this.total = 0;
     this.cartService.getById().subscribe((res) => {
       if (res.code === 200) {
-        const listProducts = JSON.parse(res.data.listProducts);
+        const listProducts = JSON.parse(res.data.listProducts ? res.data.listProducts : null);
         if (listProducts) {
           const listCart = listProducts;
           if (listCart !== '' && listCart.length !== 0 && listCart !== undefined && listCart !== null) {
             this.listCart = listCart;
-            localStorage.setItem('list-cart', JSON.stringify(listCart));
             this.listCart.map((item) => {
               item.subTotal = item.count * (item.price - item.discount);
               this.total = this.total + item.subTotal;
@@ -139,6 +149,9 @@ export class HeaderCusComponent implements OnInit, OnDestroy {
       this.userService.getById(userModel.id).subscribe(
         (res) => {
           if (res.code === 200) {
+            res.data.password = '';
+            res.data.passwordSalt = '';
+            localStorage.setItem('user-info', JSON.stringify(res.data));
             const data = res.data;
             this.user = res.data;
             this.userName = res.data.name;

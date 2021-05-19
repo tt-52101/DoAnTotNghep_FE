@@ -19,7 +19,7 @@ export class CartCustomerService {
   removeItem(item: any, listCart: any[]) {
     const index = listCart.indexOf(item);
     listCart.splice(index, 1);
-    localStorage.setItem('list-cart', JSON.stringify(listCart));
+    // localStorage.setItem('list-cart', JSON.stringify(listCart));
     this.cartService.changeCart(listCart);
     const cartModel = {
       listProducts: JSON.stringify(listCart),
@@ -45,7 +45,7 @@ export class CartCustomerService {
       item.subTotal = item.count * (item.price - item.discount);
       total = total + item.subTotal;
     });
-    localStorage.setItem('list-cart', JSON.stringify(listCart));
+    // localStorage.setItem('list-cart', JSON.stringify(listCart));
     this.cartcusService.changeCart(listCart);
     const cartModel = {
       listProducts: JSON.stringify(listCart),
@@ -64,37 +64,43 @@ export class CartCustomerService {
     return modelReturn;
   }
   addToCart(item: any) {
-    const token = this.tokenService.get()?.token;
-    if (token) {
-      let listCart = JSON.parse(localStorage.getItem('list-cart') || '{}');
-      if (listCart.length > 0) {
-        let flag = 0;
-        listCart.forEach((c: any) => {
-          if (c.id === item.id) {
-            c.count++;
-            flag = 1;
-          }
-        });
-        if (flag === 0) {
-          item.count = 1;
-          listCart.push(item);
-        }
-      } else {
-        item.count = 1;
-        listCart.push(item);
-      }
-      localStorage.setItem('list-cart', JSON.stringify(listCart));
-      const cartModel = {
-        listProducts: JSON.stringify(listCart),
-      };
-      this.cartService.update(cartModel).subscribe((res) => {
+    const userModel = JSON.parse(localStorage.getItem('_token') || '{}');
+    if (userModel) {
+      this.cartService.getById().subscribe((res) => {
         if (res.code === 200) {
-          this.nzMessage.success('Đã thêm vào giỏ hàng');
-        } else {
-          this.nzMessage.success('Có lỗi xảy ra');
+          const listProducts = JSON.parse(res.data.listProducts ? res.data.listProducts : null);
+          if (listProducts) {
+            const listCart = listProducts;
+            if (listCart.length > 0) {
+              let flag = 0;
+              listCart.forEach((c: any) => {
+                if (c.id === item.id) {
+                  c.count++;
+                  flag = 1;
+                }
+              });
+              if (flag === 0) {
+                item.count = 1;
+                listCart.push(item);
+              }
+            } else {
+              item.count = 1;
+              listCart.push(item);
+            }
+            const cartModel = {
+              listProducts: JSON.stringify(listCart),
+            };
+            this.cartService.update(cartModel).subscribe((res) => {
+              if (res.code === 200) {
+                this.nzMessage.success('Đã thêm vào giỏ hàng');
+              } else {
+                this.nzMessage.success('Có lỗi xảy ra');
+              }
+            });
+            this.cartService.changeCart(listCart);
+          }
         }
       });
-      this.cartService.changeCart(listCart);
     } else {
       this.nzMessage.error('Bạn phải đăng nhập để mua hàng');
       this.router.navigateByUrl('/login');

@@ -56,7 +56,14 @@
   </div>
 </nz-dropdown-menu>
 
-<nz-modal nzWidth="600px" [nzFooter]="modalFooter" [(nzVisible)]="isVisible" nzTitle="Thay đổi mật khẩu" (nzOnCancel)="handleCancel()">
+<nz-modal
+  [nzAutofocus]="null"
+  nzWidth="600px"
+  [nzFooter]="modalFooter"
+  [(nzVisible)]="isVisible"
+  nzTitle="Thay đổi mật khẩu"
+  (nzOnCancel)="handleCancel()"
+>
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="form" (ngSubmit)="save()">
       <nz-form-item>

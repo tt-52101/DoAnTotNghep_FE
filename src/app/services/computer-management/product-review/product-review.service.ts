@@ -26,7 +26,7 @@ export class ProductReviewService {
   }
 
   getById(id: string): Observable<any> {
-    return this.http.get(environment.BASE_API_URL + productReviewRouter.getById + id);
+    return this.http.get(environment.BASE_API_URL + productReviewRouter.getById + id + '&_allow_anonymous=true');
   }
 
   delete(list: [string]): Observable<any> {

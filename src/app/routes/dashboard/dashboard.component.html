@@ -29,6 +29,21 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-yellow order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Đơn hàng chưa xử lý</h6>
+          <h2 class="text-right">
+            <i class="fas fa-spinner f-left"></i> <span>{{ visitProd }}</span>
+          </h2>
+          <p class="m-b-0">
+            Đơn hàng chưa xử lý ngày hôm nay<span class="f-right">{{ visitProdToday }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="col-md-4 col-xl-3">
       <div class="card bg-c-green order-card">
         <div class="card-block">
@@ -42,24 +57,10 @@
         </div>
       </div>
     </div>
-
-    <div class="col-md-4 col-xl-3">
-      <div class="card bg-c-yellow order-card">
-        <div class="card-block">
-          <h6 class="m-b-20">Lượt ghé thăm sản phẩm</h6>
-          <h2 class="text-right">
-            <i class="fa fa-rocket f-left"></i><span>{{ visitProd }}</span>
-          </h2>
-          <p class="m-b-0">
-            Lượt ghé thăm ngày hôm nay<span class="f-right">{{ visitProdToday }}</span>
-          </p>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-6 col-sm-6">
       <div class="card-box bg-green">
         <div class="inner">
           <h3>{{ grandTotalRecived | currency: 'VND' }}</h3>
@@ -73,7 +74,7 @@
         ></a>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-6 col-sm-6">
       <div class="card-box bg-orange">
         <div class="inner">
           <h3>{{ grandTotal | currency: 'VND' }}</h3>
@@ -87,7 +88,7 @@
         ></a>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-6">
+    <!-- <div class="col-lg-4 col-sm-6">
       <div class="card-box bg-red">
         <div class="inner">
           <h3>723</h3>
@@ -100,9 +101,9 @@
           Xem thêm <i class="fa fa-arrow-circle-right"></i
         ></a>
       </div>
-    </div>
+    </div> -->
 
-    <div class="col-lg-12 col-sm-12">
+    <div class="col-lg-6 col-sm-12">
       <div class="card-box bg-blue">
         <div class="inner">
           <h3>Top 5 sản phẩm xem nhiều nhất</h3>

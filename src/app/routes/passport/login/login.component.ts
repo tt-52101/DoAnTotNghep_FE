@@ -140,10 +140,11 @@ export class UserLoginComponent implements OnDestroy {
 
           const isSysAdmin =
             res.data.listRole === null || res.data.listRole === undefined ? false : res.data.listRole.includes(ROLE_SYS_ADMIN);
-
+          console.log(res.data.userModel?.avatar);
           // Set user token information
           this.tokenService.set({
             id: res.data.userId,
+            avatar: res.data.userModel?.avatar,
             token: res.data.tokenString,
             email: res.data.userModel.email,
             avatarUrl: res.data.userModel.avatarUrl,
@@ -167,7 +168,7 @@ export class UserLoginComponent implements OnDestroy {
           //#endregion
           const userModel = {
             name: res.data.userModel?.name,
-            avatar: './assets/tmp/img/avatarr.jpg',
+            avatar: res.data.userModel?.avatar,
             email: res.data.userModel?.email,
           };
           this.settingsService.setUser(userModel);

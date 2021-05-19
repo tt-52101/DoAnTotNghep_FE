@@ -3,7 +3,7 @@
   <div class="container">
     <div class="menu-area">
       <!-- Navbar -->
-      <div class="navbar navbar-default" role="navigation">
+      <div class="navbar navbar-default" id="navbar-cus" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -15,7 +15,12 @@
         <div class="navbar-collapse collapse">
           <!-- Left nav -->
           <ul class="nav navbar-nav">
-            <li><a [routerLink]="['/home']">Home</a></li>
+            <li><a class="text-menu" [routerLink]="['/home']">Trang chủ</a></li>
+            <li><a class="text-menu" [routerLink]="['/home']">Laptop Gaming</a></li>
+            <li><a class="text-menu" [routerLink]="['/home']">PC Worksation</a></li>
+            <li><a class="text-menu" [routerLink]="['/home']">Gaming Gear</a></li>
+            <li><a class="text-menu" [routerLink]="['/home']">Về chúng tôi</a></li>
+            <li><a class="text-menu" [routerLink]="['/home']">Liên hệ</a></li>
           </ul>
         </div>
         <!--/.nav-collapse -->

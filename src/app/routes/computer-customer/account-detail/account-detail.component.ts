@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { cleanForm } from '@util';
@@ -9,6 +9,7 @@ import { NzTabPosition } from 'ng-zorro-antd/tabs';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
+import { OrderService } from 'src/app/services/computer-management/order/order.service';
 import { UserService } from 'src/app/services/computer-management/user/user.service';
 
 @Component({
@@ -18,12 +19,17 @@ import { UserService } from 'src/app/services/computer-management/user/user.serv
 })
 export class AccountDetailComponent implements OnInit {
   constructor(
+    private routeActive: ActivatedRoute,
     private fb: FormBuilder,
     private nzMessage: NzMessageService,
     private cusService: UserService,
+    private orderService: OrderService,
     private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
   ) {
+    routeActive.queryParams.subscribe((res) => {
+      this.index = res.type;
+    });
     this.formRegister = fb.group({
       username: [{ value: null, disabled: true }, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
@@ -41,13 +47,24 @@ export class AccountDetailComponent implements OnInit {
       confirmPassword: [null, [Validators.required]],
     });
   }
+  tabs = ['Tất cả', 'Chờ xác nhận', 'Chờ lấy hàng', 'Đang giao hàng', 'Đã giao hàng', 'Đã hủy'];
   avatar = '';
+  pageIndex = 1;
+  pageSize = 5;
+  index = 0;
   avatarUrl: any = '';
   userId: any;
   passwordVisible = false;
   password?: string;
+  baseFile = environment.BASE_FILE_URL;
   newPasswordVisible = false;
   newPassword?: string;
+  listOrderAll: any[] = [];
+  listOrder0: any[] = [];
+  listOrder1: any[] = [];
+  listOrder2: any[] = [];
+  listOrder3: any[] = [];
+  listOrder_1: any[] = [];
   confirmPasswordVisible = false;
   confirmPassword?: string;
   baseFileUrl = environment.BASE_FILE_URL;
@@ -57,6 +74,38 @@ export class AccountDetailComponent implements OnInit {
   formChangePassword: FormGroup;
   ngOnInit(): void {
     this.fetchUser();
+    this.fetchOrderByUser();
+  }
+  fetchOrderByUser() {
+    const userModel = JSON.parse(localStorage.getItem('_token') || '{}');
+    if (userModel) {
+      this.orderService.getById(userModel.id).subscribe(
+        (res) => {
+          if (res.code === 200) {
+            const data = res.data;
+            data.map((item) => {
+              item.listProducts = JSON.parse(item.listProducts);
+              item.listProducts.map((prod) => {
+                prod.categoryString = prod.categoryName.toString();
+              });
+            });
+            this.listOrderAll = data;
+            this.listOrder0 = data.filter((x) => x.status === 0);
+            this.listOrder1 = data.filter((x) => x.status === 1);
+            this.listOrder2 = data.filter((x) => x.status === 2);
+            this.listOrder3 = data.filter((x) => x.status === 3);
+            this.listOrder_1 = data.filter((x) => x.status === -1);
+            console.log(this.listOrder1);
+          }
+        },
+        (err) => {
+          this.nzMessage.error(err.error.message);
+        },
+      );
+    }
+  }
+  tabSelectChange(event: any) {
+    this.index = event.index;
   }
   fetchUser() {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');

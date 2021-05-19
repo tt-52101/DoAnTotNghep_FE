@@ -407,8 +407,8 @@ img {
 
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-search-box {
   float: right;
-  margin-right: 5%;
-  margin-top: 13px;
+  /* margin-right: 5%;
+  margin-top: 13px; */
   position: relative;
   width: 500px;
 }
@@ -420,6 +420,9 @@ img {
   height: 40px;
   padding: 10px 55px 10px 10px;
   width: 100%;
+}
+.fixed-top-custom{
+  color: red;
 }
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-search-box button {
   border: medium none;
@@ -442,7 +445,7 @@ img {
   float: right;
   text-align: center;
   position: relative;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cart-link {
   font-size: 22px;

@@ -17,10 +17,26 @@
             <!-- / header top left -->
             <div class="aa-header-top-right">
               <ul class="aa-head-top-nav-right">
-                <li><a *ngIf="isLogin === true" [routerLink]="['/account-detail']">Thông tin tài khoản</a></li>
-                <li><a href="javascript:void(0)" (click)="showModal()" *ngIf="isLogin === false">Đăng nhập</a></li>
-                <li><a href="javascript:void(0)" *ngIf="isLogin === true" (click)="logout()">Đăng xuất</a></li>
-                <li><a href="javascript:void(0)" *ngIf="isLogin === false" [routerLink]="['/register']">Đăng ký</a></li>
+                <li>
+                  <a class="text-action" *ngIf="isLogin === true" [routerLink]="['/account-detail']"
+                    ><i class="fas fa-user-circle" aria-hidden="true"></i> Thông tin tài khoản</a
+                  >
+                </li>
+                <li>
+                  <a class="text-action" href="javascript:void(0)" (click)="showModal()" *ngIf="isLogin === false"
+                    ><i class="fas fa-user-circle" aria-hidden="true"></i> Đăng nhập</a
+                  >
+                </li>
+                <li>
+                  <a class="text-action" href="javascript:void(0)" *ngIf="isLogin === true" (click)="logout()"
+                    ><i class="fas fa-sign-out-alt 5x"></i> Đăng xuất</a
+                  >
+                </li>
+                <li>
+                  <a class="text-action" href="javascript:void(0)" *ngIf="isLogin === false" [routerLink]="['/register']"
+                    ><i class="fas fa-user-circle" aria-hidden="true"></i> Đăng ký</a
+                  >
+                </li>
               </ul>
             </div>
           </div>
@@ -32,24 +48,41 @@
 
   <!-- start header bottom  -->
   <div class="aa-header-bottom">
-    <div class="container">
+    <div class="">
       <div class="row">
-        <div [class]="isLogin ? 'col-md-11' : 'col-md-12'">
-          <div class="aa-header-bottom-area">
+        <div class="item-center col-md-10 offset-md-1">
+          <div class="aa-header-bottom-area item-center">
             <!-- logo  -->
             <!-- <img src="../../../../assets/img/Logo.png" alt=""> -->
-            <div class="aa-logo">
+            <div class="aa-logo col-md-1">
               <!-- Text based logo -->
               <a href="javascript:void(0)" [routerLink]="['/home']">
-                <span class="fas fa-laptop"></span>
-                <p>Vân Anh<strong>Computer</strong> <span>Thế giới máy tính</span></p>
+                <!-- <span class="fas fa-laptop"></span> -->
+                <img height="106" src="../../../../assets/img/Logo.png" alt="Logo" />
+                <!-- <p>Vân Anh<strong>Computer</strong> <span>Thế giới máy tính</span></p> -->
               </a>
               <!-- img based logo -->
               <!-- <a href="index.html"><img src="../../../../../assets/tmp/img/logo.jpg" alt="logo img"></a> -->
             </div>
             <!-- / logo  -->
+
+            <!-- search box -->
+            <div class="aa-search-box col-md-6">
+              <form action="">
+                <input
+                  type="text"
+                  name=""
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="textSearch"
+                  id="text-search-box"
+                  (keyup.enter)="enterSearch()"
+                  placeholder="Nhập từ khóa tìm kiếm... "
+                /><i class="fas fa-search" aria-hidden="true"></i>
+              </form>
+            </div>
+            <!-- / search box -->
             <!-- cart box -->
-            <div class="aa-cartbox">
+            <div class="aa-cartbox col-md-1">
               <div class="dropdown">
                 <a class="aa-cart-link dropbtn" [routerLink]="'/cart-detail'" href="javascript:void(0)">
                   <span class="fas fa-shopping-basket"></span>
@@ -115,30 +148,30 @@
               </div>
             </div>
             <!-- / cart box -->
-            <!-- search box -->
-            <div class="aa-search-box">
-              <form action="">
-                <input type="text" name="" id="" placeholder="Nhập từ khóa tìm kiếm... " />
-                <button type="submit"><span class="fa fa-search"></span></button>
-              </form>
+            <div *ngIf="isLogin" class="col-md-1">
+              <a nz-dropdown [nzDropdownMenu]="menu">
+                <nz-avatar nzSize="large" [nzSrc]="avatar" nzIcon="user"></nz-avatar>
+              </a>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item>
+                    <i nz-icon nzType="info" nzTheme="outline"></i>Xin chào
+                    <b>{{ userName }}</b>
+                  </li>
+                  <li nz-menu-item (click)="navigate('http://localhost:4200/account-detail?type=0')">
+                    <i nz-icon nzType="user" nzTheme="outline"></i> Thông tin tài khoản
+                  </li>
+                  <li nz-menu-item (click)="navigate('http://localhost:4200/account-detail?type=1')">
+                    <i nz-icon nzType="bars" nzTheme="outline"></i> Đơn mua
+                  </li>
+                  <li nz-menu-item (click)="navigate('http://localhost:4200/account-detail?type=2')">
+                    <i nz-icon nzType="setting" nzTheme="outline"></i> Đổi mật khẩu
+                  </li>
+                  <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i> Đăng xuất</li>
+                </ul>
+              </nz-dropdown-menu>
             </div>
-            <!-- / search box -->
           </div>
-        </div>
-        <div *ngIf="isLogin" [ngClass]="{ 'col-md-1': isLogin }">
-          <a nz-dropdown [nzDropdownMenu]="menu">
-            <nz-avatar nzSize="large" [nzSrc]="avatar" nzIcon="user"></nz-avatar>
-          </a>
-          <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
-              <li nz-menu-item>
-                <i nz-icon nzType="info" nzTheme="outline"></i>Xin chào
-                <b>{{ userName }}</b>
-              </li>
-              <li nz-menu-item routerLink="/account-detail"><i nz-icon nzType="user" nzTheme="outline"></i> Thông tin tài khoản</li>
-              <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i> Đăng xuất</li>
-            </ul>
-          </nz-dropdown-menu>
         </div>
       </div>
     </div>
@@ -146,7 +179,14 @@
   <!-- / header bottom  -->
 </header>
 <!-- / header section -->
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Đăng nhập" nzWidth="700px" (nzOnCancel)="handleCancel()">
+<nz-modal
+  [nzAutofocus]="null"
+  [(nzVisible)]="isVisible"
+  [nzAutofocus]="null"
+  nzTitle="Đăng nhập"
+  nzWidth="700px"
+  (nzOnCancel)="handleCancel()"
+>
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="formLogin" class="login-form" (ngSubmit)="submitForm()">
       <nz-form-item>

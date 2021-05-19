@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
 
 import { AgGridModule } from 'ag-grid-angular';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ComputerManagementRoutingModule } from './computer-management-routing.module';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryItemComponent } from './category/category-item/category-item.component';
@@ -45,6 +45,6 @@ import { UserItemComponent } from './user/user-item/user-item.component';
     UserComponent,
     UserItemComponent,
   ],
-  imports: [CommonModule, ComputerManagementRoutingModule, SharedModule, AgGridModule.withComponents([])],
+  imports: [CommonModule, CKEditorModule, ComputerManagementRoutingModule, SharedModule, AgGridModule.withComponents([])],
 })
 export class ComputerManagementModule {}
