@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { SharedModule } from '@shared';
 import { ComputerCustomerRoutingModule } from './computer-customer-routing.module';
-import { HomeComponent } from './home/home/home.component';
+import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { SliderComponent } from './slider/slider.component';
 import { SupportComponent } from './support/support.component';
@@ -28,6 +28,7 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { VoucherComponent } from './voucher/voucher.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     CheckOutComponent,
     ConfirmComponent,
     SearchDetailComponent,
+    VoucherComponent,
   ],
   imports: [
     CommonModule,

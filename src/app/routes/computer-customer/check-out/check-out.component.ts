@@ -9,7 +9,6 @@ import { BaseAddressService } from 'src/app/services/computer-management/base-ad
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
 import { OrderService } from 'src/app/services/computer-management/order/order.service';
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
-
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
@@ -69,6 +68,9 @@ export class CheckOutComponent implements OnInit {
       default:
         break;
     }
+  }
+  onFocus() {
+    console.log('forcus');
   }
   save() {
     this.isLoading = true;

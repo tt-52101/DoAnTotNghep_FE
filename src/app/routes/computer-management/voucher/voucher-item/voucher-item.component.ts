@@ -3,17 +3,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ACLService } from '@delon/acl';
 import { environment } from '@env/environment';
 import { ButtonModel } from '@model';
-import { SupplierService } from '@service';
-import { supplierRouter } from '@util';
+import { VoucherService } from '@service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+
 @Component({
-  selector: 'app-supplier-item',
-  templateUrl: './supplier-item.component.html',
-  styleUrls: ['./supplier-item.component.less'],
+  selector: 'app-voucher-item',
+  templateUrl: './voucher-item.component.html',
+  styleUrls: ['./voucher-item.component.less'],
 })
-export class SupplierItemComponent implements OnInit {
+export class VoucherItemComponent implements OnInit {
   @Input() type = 'add';
   @Input() item: any;
   @Input() isVisible = false;
@@ -21,8 +21,8 @@ export class SupplierItemComponent implements OnInit {
   @Output() eventEmmit = new EventEmitter<any>();
 
   form: FormGroup;
-  moduleName = 'nhà cung cấp';
-  listTag: any[] = [];
+  moduleName = 'mã giảm giá';
+  listvoucher: any[] = [];
   isInfo = false;
   isEdit = false;
   isAdd = false;
@@ -41,7 +41,7 @@ export class SupplierItemComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private messageService: NzMessageService,
-    private supplierService: SupplierService,
+    private voucherService: VoucherService,
     private aclService: ACLService,
   ) {
     this.btnSave = {
@@ -86,7 +86,11 @@ export class SupplierItemComponent implements OnInit {
     };
     this.form = this.fb.group({
       code: [{ value: null, disabled: true }, [Validators.required]],
-      name: [null, [Validators.required]],
+      discount: [{ value: null, disabled: false }, [Validators.required]],
+      expiredDate: [{ value: null, disabled: false }, [Validators.required]],
+      startDate: [{ value: null, disabled: false }, [Validators.required]],
+      type: [{ value: null, disabled: false }, [Validators.required]],
+      quantity: [{ value: null, disabled: false }, [Validators.required]],
       status: [true],
     });
   }
@@ -124,8 +128,8 @@ export class SupplierItemComponent implements OnInit {
         break;
     }
   }
-  fecthlistTag(): void {
-    this.supplierService.getListCombobox().subscribe(
+  fecthlistvoucher(): void {
+    this.voucherService.getListCombobox().subscribe(
       (res: any) => {
         this.isLoading = false;
         if (res.code !== 200) {
@@ -137,7 +141,7 @@ export class SupplierItemComponent implements OnInit {
           return;
         }
         const dataResult = res.data;
-        this.listTag = dataResult;
+        this.listvoucher = dataResult;
         this.messageService.success(`${res.message}`);
         this.isReloadGrid = true;
       },
@@ -159,7 +163,6 @@ export class SupplierItemComponent implements OnInit {
 
   updateFormToEdit(): void {
     this.updateFormType('edit');
-    this.form.get('name')?.enable();
     this.form.get('status')?.enable();
   }
 
@@ -194,8 +197,8 @@ export class SupplierItemComponent implements OnInit {
 
   public initData(data: any, type: any = null, option: any = {}): void {
     this.avatarUrl = '';
-    if (this.listTag.length === 0) {
-      this.fecthlistTag();
+    if (this.listvoucher.length === 0) {
+      this.fecthlistvoucher();
     }
     this.isLoading = false;
     this.isReloadGrid = false;
@@ -210,14 +213,22 @@ export class SupplierItemComponent implements OnInit {
     if (this.item.id === null || this.item.id === undefined) {
       this.form = this.fb.group({
         code: [{ value: null, disabled: this.isInfo }, [Validators.required]],
-        name: [{ value: null, disabled: this.isInfo }, [Validators.required]],
+        discount: [{ value: null, disabled: this.isInfo }, [Validators.required]],
+        expiredDate: [{ value: null, disabled: this.isInfo }, [Validators.required]],
+        startDate: [{ value: null, disabled: this.isInfo }, [Validators.required]],
+        type: [{ value: null, disabled: this.isInfo }, [Validators.required]],
+        quantity: [{ value: null, disabled: this.isInfo }, [Validators.required]],
         status: [{ value: true, disabled: this.isInfo }],
       });
     } else {
       this.parentId = this.item.parentId;
       this.form = this.fb.group({
         code: [{ value: this.item.code, disabled: true }, [Validators.required]],
-        name: [{ value: this.item.name, disabled: this.isInfo }, [Validators.required]],
+        discount: [{ value: this.item.discount, disabled: this.isInfo }, [Validators.required]],
+        expiredDate: [{ value: this.item.expiredTime, disabled: this.isInfo }, [Validators.required]],
+        startDate: [{ value: this.item.startTime, disabled: this.isInfo }, [Validators.required]],
+        type: [{ value: this.item.type, disabled: this.isInfo }, [Validators.required]],
+        quantity: [{ value: this.item.quantity, disabled: this.isInfo }, [Validators.required]],
         status: [{ value: this.item.status, disabled: this.isInfo }],
       });
     }
@@ -253,22 +264,20 @@ export class SupplierItemComponent implements OnInit {
     let flag = false;
     let data = {
       id: this.item.id,
-      name: this.form.controls.name.value,
+      startTime: this.form.controls.startDate.value,
+      expiredTime: this.form.controls.expiredDate.value,
+      type: this.form.controls.type.value,
       code: this.form.controls.code.value,
-      avatarUrl: this.url,
+      discount: this.form.controls.discount.value,
+      quantity: this.form.controls.quantity.value,
       status: this.form.controls.status.value,
     };
-    if (data.name === null || data.name === undefined || data.name === '') {
-      this.isLoading = false;
-      this.messageService.error(`Tên nhà cung cấp không được để trống!`);
-      return;
-    }
 
     if (this.isAdd) {
-      this.listTag.map((item) => {
+      this.listvoucher.map((item) => {
         if (item.note === data.code) {
           this.isLoading = false;
-          this.messageService.error(`Mã nhà cung cấp đã tồn tại!`);
+          this.messageService.error(`Mã voucher đã tồn tại!`);
           flag = true;
           return;
         }
@@ -277,7 +286,7 @@ export class SupplierItemComponent implements OnInit {
         this.isLoading = false;
         return;
       }
-      const promise = this.supplierService.create(data).subscribe(
+      const promise = this.voucherService.create(data).subscribe(
         (res: any) => {
           this.isLoading = false;
           if (res.code !== 200) {
@@ -308,7 +317,7 @@ export class SupplierItemComponent implements OnInit {
       );
       return promise;
     } else if (this.isEdit) {
-      const promise = this.supplierService.update(data).subscribe(
+      const promise = this.voucherService.update(data).subscribe(
         (res: any) => {
           this.isLoading = false;
           if (res.code !== 200) {

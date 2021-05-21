@@ -59,6 +59,16 @@ export const supplierRouter = {
   getAll: `api/v1/computer-management/supplier/all`,
   getListCombobox: `api/v1/computer-management/supplier/for-combobox`,
 };
+export const voucherRouter = {
+  create: `api/v1/computer-management/voucher`,
+  createMany: `api/v1/computer-management/voucher/create-many`,
+  update: `api/v1/computer-management/voucher`,
+  delete: `api/v1/computer-management/voucher`,
+  getById: `api/v1/computer-management/voucher?id=`,
+  getFilter: `api/v1/computer-management/voucher/filter`,
+  getAll: `api/v1/computer-management/voucher/all`,
+  getListCombobox: `api/v1/computer-management/voucher/for-combobox`,
+};
 export const baseAddressRouter = {
   city: `api/v1/address/city`,
   district: `api/v1/address/district?matp=`,
@@ -111,6 +121,7 @@ export const customerRouter = {
   create: `api/v1/computer-management/customer`,
   createMany: `api/v1/computer-management/customer/create-many`,
   update: `api/v1/computer-management/customer`,
+  updateVoucher: `api/v1/computer-management/customer/update-voucher`,
   delete: `api/v1/computer-management/customer`,
   getById: `api/v1/computer-management/customer?id=`,
   getFilter: `api/v1/computer-management/customer/filter`,

@@ -23,6 +23,8 @@ import { ProductReviewComponent } from './product-review/product-review/product-
 import { ProductReviewItemComponent } from './product-review/product-review-item/product-review-item.component';
 import { UserComponent } from './user/user/user.component';
 import { UserItemComponent } from './user/user-item/user-item.component';
+import { VoucherComponent } from './voucher/voucher/voucher.component';
+import { VoucherItemComponent } from './voucher/voucher-item/voucher-item.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { UserItemComponent } from './user/user-item/user-item.component';
     ProductReviewItemComponent,
     UserComponent,
     UserItemComponent,
+    VoucherComponent,
+    VoucherItemComponent,
   ],
   imports: [CommonModule, CKEditorModule, ComputerManagementRoutingModule, SharedModule, AgGridModule.withComponents([])],
 })

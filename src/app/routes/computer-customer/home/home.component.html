@@ -48,26 +48,31 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="aa-promo-left">
-                      <div class="aa-promo-banner aa-promo-banner-hoz">
-                        <img src="../../../../../assets/img/Banner/Laptop-Gaming-Button.jpg" alt="img" />
-                        <div class="aa-prom-content"></div>
-                      </div>
+                      <a href="javascript:void(0)" (click)="search('LAPTOP')">
+                        <div class="aa-promo-banner aa-promo-banner-hoz">
+                          <img src="../../../../../assets/img/Banner/Laptop-Gaming-Button.jpg" alt="img" />
+                        </div>
+                      </a>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="aa-promo-left">
-                      <div class="aa-promo-banner aa-promo-banner-hoz">
-                        <img src="../../../../../assets/img/freebuild-slider_compressed.jpg" alt="img" />
-                        <div class="aa-prom-content"></div>
-                      </div>
+                      <a href="javascript:void(0)" (click)="getVoucher()">
+                        <div class="aa-promo-banner aa-promo-banner-hoz">
+                          <img src="../../../../../assets/img/voucher.PNG" alt="img" />
+                          <div class="aa-prom-content"><span class="now">Lấy mã ngay >></span></div>
+                        </div>
+                      </a>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="aa-promo-left">
-                      <div class="aa-promo-banner aa-promo-banner-hoz">
-                        <img src="../../../../../assets/img/monitor_slider_compressed.jpg" alt="img" />
-                        <div class="aa-prom-content"></div>
-                      </div>
+                      <a href="javascript:void(0)" (click)="search('MÀN HÌNH')">
+                        <div class="aa-promo-banner aa-promo-banner-hoz">
+                          <img src="../../../../../assets/img/monitor_slider_compressed.jpg" alt="img" />
+                          <div class="aa-prom-content"></div>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -81,28 +86,38 @@
             <div class="row">
               <div class="aa-promo-right no-padding">
                 <div class="aa-single-promo-right col-md-3">
-                  <div class="aa-promo-banner">
-                    <img src="../../../../../assets/img/Banner/ACER-store.jpg" alt="img" />
-                    <div class="aa-prom-content"></div>
-                  </div>
+                  <a href="javascript:void(0)" (click)="search('ACER')">
+                    <div class="aa-promo-banner">
+                      <img src="../../../../../assets/img/Banner/ACER-store.jpg" alt="img" />
+                      <div class="aa-prom-content"></div>
+                    </div>
+                  </a>
                 </div>
                 <div class="aa-single-promo-right col-md-3">
-                  <div class="aa-promo-banner">
-                    <img src="../../../../../assets/img/Banner/Asus-store.jpg" alt="img" />
-                    <div class="aa-prom-content"></div>
-                  </div>
+                  <a href="javascript:void(0)" (click)="search('ASUS')">
+                    <div class="aa-promo-banner">
+                      <img [routerLink]="'search-detail?textSearch=ASUS'" src="../../../../../assets/img/Banner/Asus-store.jpg" alt="img" />
+                      <div class="aa-prom-content"></div>
+                    </div>
+                  </a>
                 </div>
+
                 <div class="aa-single-promo-right col-md-3">
-                  <div class="aa-promo-banner">
-                    <img src="../../../../../assets/img/Banner/MSI-store.jpg" alt="img" />
-                    <div class="aa-prom-content"></div>
-                  </div>
+                  <a href="javascript:void(0)" (click)="search('MSI')">
+                    <div class="aa-promo-banner">
+                      <img [routerLink]="'search-detail?textSearch=MSI'" src="../../../../../assets/img/Banner/MSI-store.jpg" alt="img" />
+                      <div class="aa-prom-content"></div>
+                    </div>
+                  </a>
                 </div>
+
                 <div class="aa-single-promo-right col-md-3">
-                  <div class="aa-promo-banner">
-                    <img src="../../../../../assets/img/Banner/PC-store.jpg" alt="img" />
-                    <div class="aa-prom-content"></div>
-                  </div>
+                  <a href="javascript:void(0)" (click)="search('PC')">
+                    <div class="aa-promo-banner">
+                      <img [routerLink]="'search-detail?textSearch=PC'" src="../../../../../assets/img/Banner/PC-store.jpg" alt="img" />
+                      <div class="aa-prom-content"></div>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>

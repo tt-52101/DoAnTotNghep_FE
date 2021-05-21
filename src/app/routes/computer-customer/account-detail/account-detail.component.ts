@@ -49,11 +49,15 @@ export class AccountDetailComponent implements OnInit {
   }
   tabs = ['Tất cả', 'Chờ xác nhận', 'Chờ lấy hàng', 'Đang giao hàng', 'Đã giao hàng', 'Đã hủy'];
   avatar = '';
+  totalCount = 0;
   pageIndex = 1;
+  pageIndexVoucher = 1;
   pageSize = 5;
+  pageSizeVoucher = 12;
   index = 0;
   avatarUrl: any = '';
   userId: any;
+  listVoucherByUser: any[] = [];
   passwordVisible = false;
   password?: string;
   baseFile = environment.BASE_FILE_URL;
@@ -75,6 +79,9 @@ export class AccountDetailComponent implements OnInit {
   ngOnInit(): void {
     this.fetchUser();
     this.fetchOrderByUser();
+  }
+  changeTab() {
+    this.pageIndex = 1;
   }
   fetchOrderByUser() {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');
@@ -107,6 +114,11 @@ export class AccountDetailComponent implements OnInit {
   tabSelectChange(event: any) {
     this.index = event.index;
   }
+  getVoucher(item: any) {
+    if (item.isSelected !== 2) {
+      this.router.navigateByUrl('/search-detail?textSearch=');
+    }
+  }
   fetchUser() {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');
     if (userModel) {
@@ -114,6 +126,30 @@ export class AccountDetailComponent implements OnInit {
         (res) => {
           if (res.code === 200) {
             const data = res.data;
+            this.listVoucherByUser = data.vouchers;
+            if (this.listVoucherByUser) {
+              this.totalCount = this.listVoucherByUser.length;
+              this.listVoucherByUser.map((item) => {
+                item.percent = (item.used / item.quantity) * 100;
+                if (item.startTime && item.expiredTime) {
+                  item.timeValid =
+                    new Date(item.startTime).getDate() +
+                    '.' +
+                    new Date(item.startTime).getMonth() +
+                    ' - ' +
+                    new Date(item.expiredTime).getDate() +
+                    '.' +
+                    new Date(item.expiredTime).getMonth();
+                }
+                if (item.type === 1) {
+                  item.discountView = item.discount;
+                  item.typeName = '%';
+                } else {
+                  item.discountView = item.discount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+                  item.typeName = 'VNĐ';
+                }
+              });
+            }
             this.userId = data.id;
             if (data.avatar) {
               this.avatar = data.avatar;

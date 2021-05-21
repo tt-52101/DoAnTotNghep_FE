@@ -4,12 +4,13 @@ import { AccountDetailComponent } from './account-detail/account-detail.componen
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { ConfirmComponent } from './confirm/confirm.component';
-import { HomeComponent } from './home/home/home.component';
+import { HomeComponent } from './home/home.component';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RegisterComponent } from './register/register.component';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
+import { VoucherComponent } from './voucher/voucher.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'search-detail', component: SearchDetailComponent, data: { title: 'Tìm kiếm sản phẩm' } },
       { path: 'product-detail/:id', component: ProductDetailComponent, data: { title: 'Chi tiết sản phẩm' } },
       { path: 'confirm/:id', component: ConfirmComponent, data: { title: 'Đặt hàng thành công' } },
+      { path: 'voucher', component: VoucherComponent, data: { title: 'Danh sách Voucher' } },
     ],
   },
 ];

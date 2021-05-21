@@ -188,7 +188,14 @@
               <p class="font-italic mb-4">Nếu bạn có mã giảm giá, hãy nhập nó vào ô bên dưới</p>
               <div class="input-group mb-4 border rounded-pill p-2">
                 <div class="col-md-10">
-                  <input type="text" placeholder="Nhập mã giảm giá" aria-describedby="button-addon3" class="form-control border-0" />
+                  <input
+                    type="text"
+                    (focus)="onFocus()"
+                    id="forcus-text"
+                    placeholder="Nhập mã giảm giá"
+                    aria-describedby="button-addon3"
+                    class="form-control cuupon-text border-0"
+                  />
                 </div>
                 <div class="col-md-2">
                   <button id="button-addon3" type="button" class="btn btn-success px-4 rounded-pill">

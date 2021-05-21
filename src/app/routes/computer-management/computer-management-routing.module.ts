@@ -9,6 +9,7 @@ import { ProductComponent } from './product/product/product.component';
 import { SupplierComponent } from './supplier/supplier/supplier.component';
 import { TagComponent } from './tag/tag/tag.component';
 import { UserComponent } from './user/user/user.component';
+import { VoucherComponent } from './voucher/voucher/voucher.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'order', component: OrderComponent },
       { path: 'user', component: UserComponent },
       { path: 'product-review', component: ProductReviewComponent },
+      { path: 'voucher', component: VoucherComponent },
     ],
   },
 ];

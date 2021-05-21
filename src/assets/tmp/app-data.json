@@ -43,6 +43,14 @@
                 "icon": "anticon anticon-dashboard",
                 "link": "/admin/computer-management/supplier"
               }
+              ,
+              {
+                "text": "Voucher",
+                "i18n": "Voucher",
+                "hideInBreadcrumb": true,
+                "icon": "anticon anticon-dashboard",
+                "link": "/admin/computer-management/voucher"
+              }
             ]
            },
           {

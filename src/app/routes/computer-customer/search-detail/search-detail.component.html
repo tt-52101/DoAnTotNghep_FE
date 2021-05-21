@@ -1,5 +1,12 @@
 <div nz-row nzGutter="8">
-  <div style="margin-top: 20px" nz-col nzSpan="4" nzOffset="1">
+  <div style="margin-top: 20px" nz-col nzOffset="1" nzSpan="22">
+    <ul class="breadcrumb">
+      <li><a href="javascript:void(0)" [routerLink]="'/home'">Trang chủ</a></li>
+      <li>Tìm kiếm sản phẩm</li>
+      <li>{{ textSearch }}</li>
+    </ul>
+  </div>
+  <div nz-col nzSpan="4" nzOffset="1">
     <nz-card>
       <div style="font-weight: bold; text-align: center">LỌC SẢN PHẨM</div>
     </nz-card>
