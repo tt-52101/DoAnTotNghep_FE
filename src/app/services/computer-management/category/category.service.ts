@@ -44,7 +44,7 @@ export class CategoryService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.BASE_API_URL + categoryRouter.getAll);
+    return this.http.get(environment.BASE_API_URL + categoryRouter.getAll + environment.ALLOW_ANONYMOUS);
   }
 
   getListCombobox(): Observable<any> {

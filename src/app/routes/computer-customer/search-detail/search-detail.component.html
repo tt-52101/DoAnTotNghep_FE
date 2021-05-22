@@ -64,21 +64,21 @@
       </ng-template>
     </nz-card>
   </div>
-  <div style="margin-top: 20px" nz-col nzSpan="18">
+  <div nz-col nzSpan="18">
     <nz-card [nzBordered]="true">
       <div nz-row>
-        <div nz-col nzSpan="10">
+        <div nz-col nzSpan="12">
           <form [formGroup]="form" action="">
             <nz-form-item nzFlex>
-              <nz-form-label nzFor="" nzSpan="4">Sắp xếp theo</nz-form-label>
-              <nz-form-control nzSpan="7">
+              <nz-form-label nzFor="" nzSpan="5">Sắp xếp theo</nz-form-label>
+              <nz-form-control nzSpan="6">
                 <nz-select (ngModelChange)="filterHandler(1, $event)" formControlName="sortType">
                   <nz-option *ngFor="let item of listSortType" [nzValue]="item.id" [nzLabel]="item.name"> </nz-option>
                 </nz-select>
               </nz-form-control>
 
-              <nz-form-label nzFor="" nzOffset="1" nzSpan="6">Số sản phẩm/ Trang</nz-form-label>
-              <nz-form-control nzSpan="6">
+              <nz-form-label nzFor="" nzOffset="1" nzSpan="7">Số sản phẩm/ Trang</nz-form-label>
+              <nz-form-control nzSpan="5">
                 <nz-select formControlName="pageSize" (ngModelChange)="changePageSize($event)">
                   <nz-option *ngFor="let item of listPageSizeDf" [nzValue]="item" [nzLabel]="item"> </nz-option>
                 </nz-select>
@@ -86,8 +86,7 @@
             </nz-form-item>
           </form>
         </div>
-        <div nz-col nzSpan="6"></div>
-        <div nz-col nzSpan="8">
+        <div nz-col nzSpan="12">
           <nz-pagination
             style="float: right"
             [nzItemRender]="renderItemTemplate"
