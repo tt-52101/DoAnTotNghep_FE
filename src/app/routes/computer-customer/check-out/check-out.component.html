@@ -185,21 +185,22 @@
           <div class="col-lg-6">
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Mã giảm giá</div>
             <div class="p-4">
-              <p class="font-italic mb-4">Nếu bạn có mã giảm giá, hãy nhập nó vào ô bên dưới</p>
+              <p class="font-italic mb-4">Nếu bạn có mã giảm giá, hãy chọn nó vào ô bên dưới</p>
               <div class="input-group mb-4 border rounded-pill p-2">
                 <div class="col-md-10">
                   <input
+                    readonly
                     type="text"
-                    (focus)="onFocus()"
+                    [(ngModel)]="voucherCode"
                     id="forcus-text"
-                    placeholder="Nhập mã giảm giá"
+                    placeholder=" Mã giảm giá"
                     aria-describedby="button-addon3"
                     class="form-control cuupon-text border-0"
                   />
                 </div>
                 <div class="col-md-2">
-                  <button id="button-addon3" type="button" class="btn btn-success px-4 rounded-pill">
-                    <i class="fa fa-gift mr-2"></i>Áp dụng
+                  <button id="button-addon3" type="button" (click)="onFocus()" class="btn btn-success px-4 rounded-pill">
+                    <i class="fa fa-gift mr-2"></i>Lấy mã
                   </button>
                 </div>
               </div>
@@ -243,14 +244,14 @@
                   <strong class="text-muted">Giá tạm tính </strong><strong>{{ total | currency: 'VND' | lowercase }}</strong>
                 </li>
                 <li class="d-flex justify-content-between py-3 border-bottom">
-                  <strong class="text-muted">Phí vận chuyển</strong><strong>{{ shipping | currency: 'VND' | lowercase }}</strong>
+                  <strong class="text-muted">Phí vận chuyển</strong><strong>{{ '+' + shipping | currency: 'VND' | lowercase }}</strong>
                 </li>
                 <li class="d-flex justify-content-between py-3 border-bottom">
-                  <strong class="text-muted">Mã giảm giá</strong><strong>{{ shipping | currency: 'VND' | lowercase }}</strong>
+                  <strong class="text-muted">Mã giảm giá</strong><strong>{{ '-' + voucher | currency: 'VND' | lowercase }}</strong>
                 </li>
                 <li class="d-flex justify-content-between py-3 border-bottom">
                   <strong class="text-muted">Tổng cộng</strong>
-                  <strong>{{ shipping + total | currency: 'VND' | lowercase }}</strong>
+                  <strong>{{ shipping + total - voucher | currency: 'VND' | lowercase }}</strong>
                 </li>
               </ul>
               <a href="javascript:void(0)" (click)="save()" class="btn btn-danger rounded-pill py-2 btn-block">Đặt hàng</a>
@@ -261,3 +262,58 @@
     </div>
   </div>
 </div>
+<nz-modal
+  nzWidth="700px"
+  [(nzVisible)]="isVisible"
+  nzTitle="Voucher của bạn"
+  [nzAutofocus]="false"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="nzFooter"
+>
+  <ng-container *nzModalContent>
+    <div class="overflow-auto" nz-row>
+      <div *ngFor="let item of listVoucherByUser" class="col-md-12">
+        <article class="card fl-left">
+          <section class="date">
+            <time datetime="23th feb">
+              <span>{{ item.discountView }}</span
+              ><span>{{ item.typeName }}</span>
+            </time>
+          </section>
+          <section class="card-cont">
+            <h3>Mã giảm giá {{ item.discountView + item.typeName }}</h3>
+            <div class="even-date">
+              <i class="fa fa-calendar"></i>
+              <time>
+                Có hiệu lực từ:
+                <span> {{ item.timeValid }}</span>
+                <!-- <span>08:55pm to 12:00 am</span> -->
+              </time>
+            </div>
+            <!-- <nz-progress [nzStatus]="success" [nzStrokeColor]="'red'" [nzPercent]="item.percent">
+        </nz-progress> -->
+            <button [disabled]="item.isSelected === 2" nz-button class="selected" (click)="applyVoucher(item)" nzType="primary">
+              {{ item.isSelected === 2 ? 'Đã hết hạn' : 'Áp dụng' }}
+            </button>
+          </section>
+        </article>
+      </div>
+      <div class="null-item">
+        <div class="row">
+          <div *ngIf="listVoucherByUser.length === 0" style="height: 400px" class="col-md-12 item-center">
+            <img style="width: 6.25rem; height: 6.25rem" src="../../../../assets/img/null.png" alt="Null Order" />
+            <br />
+            <p>
+              Chưa có mã giảm giá
+              <a href="javascript:void(0)" [routerLink]="'/voucher'">Lấy ngay</a>
+            </p>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #nzFooter>
+    <button nz-button nzType="primary" (click)="handleCancel()" nzDanger>Đóng</button>
+  </ng-template>
+</nz-modal>

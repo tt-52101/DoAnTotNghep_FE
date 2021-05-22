@@ -139,7 +139,22 @@
                     <h3><b>Đơn hàng của tôi</b></h3>
                     <p>Quản lý đơn hàng của bạn</p>
                   </ng-template>
-                  <div nz-row nzGutter="8">
+                  <div *ngIf="viewDetail === false" nz-row nzGutter="8">
+                    <div class="col-md-12">
+                      <nz-input-group nz-col nzSpan="24" [nzSuffix]="suffixIconSearch">
+                        <input
+                          type="text"
+                          style="text-align: center"
+                          [(ngModel)]="ts"
+                          (ngModelChange)="changeText($event)"
+                          nz-input
+                          placeholder="Nhập mã đơn hàng"
+                        />
+                      </nz-input-group>
+                      <ng-template #suffixIconSearch>
+                        <i nz-icon nzType="search"></i>
+                      </ng-template>
+                    </div>
                     <div class="warpper col-md-12">
                       <input class="radio" id="one" name="group" type="radio" checked />
                       <input class="radio" id="two" name="group" type="radio" />
@@ -208,9 +223,10 @@
                                           >
                                             Đánh giá
                                           </button>
-                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
                                             [nzDanger]="item.status === -1"
+                                            (click)="buildAgain()"
                                             [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
                                             *ngIf="item.status === 3 || item.status === -1"
                                             nz-button
@@ -222,6 +238,7 @@
                                             *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
                                             nz-button
                                             nzType="default"
+                                            (click)="cancelOrder(item)"
                                           >
                                             Hủy đơn hàng
                                           </button>
@@ -316,9 +333,10 @@
                                           >
                                             Đánh giá
                                           </button>
-                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
                                             [nzDanger]="item.status === -1"
+                                            (click)="buildAgain()"
                                             [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
                                             *ngIf="item.status === 3 || item.status === -1"
                                             nz-button
@@ -330,6 +348,7 @@
                                             *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
                                             nz-button
                                             nzType="default"
+                                            (click)="cancelOrder(item)"
                                           >
                                             Hủy đơn hàng
                                           </button>
@@ -424,9 +443,10 @@
                                           >
                                             Đánh giá
                                           </button>
-                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
                                             [nzDanger]="item.status === -1"
+                                            (click)="buildAgain()"
                                             [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
                                             *ngIf="item.status === 3 || item.status === -1"
                                             nz-button
@@ -438,6 +458,7 @@
                                             *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
                                             nz-button
                                             nzType="default"
+                                            (click)="cancelOrder(item)"
                                           >
                                             Hủy đơn hàng
                                           </button>
@@ -532,9 +553,10 @@
                                           >
                                             Đánh giá
                                           </button>
-                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
                                             [nzDanger]="item.status === -1"
+                                            (click)="buildAgain()"
                                             [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
                                             *ngIf="item.status === 3 || item.status === -1"
                                             nz-button
@@ -546,6 +568,7 @@
                                             *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
                                             nz-button
                                             nzType="default"
+                                            (click)="cancelOrder(item)"
                                           >
                                             Hủy đơn hàng
                                           </button>
@@ -640,9 +663,10 @@
                                           >
                                             Đánh giá
                                           </button>
-                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
                                             [nzDanger]="item.status === -1"
+                                            (click)="buildAgain()"
                                             [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
                                             *ngIf="item.status === 3 || item.status === -1"
                                             nz-button
@@ -654,6 +678,7 @@
                                             *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
                                             nz-button
                                             nzType="default"
+                                            (click)="cancelOrder(item)"
                                           >
                                             Hủy đơn hàng
                                           </button>
@@ -748,9 +773,10 @@
                                           >
                                             Đánh giá
                                           </button>
-                                          <button nz-button nzType="default">Chi tiết đơn hàng</button>
+                                          <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
                                             [nzDanger]="item.status === -1"
+                                            (click)="buildAgain()"
                                             [ngClass]="{ 'text-highlight': item.status === -1 ? true : false }"
                                             *ngIf="item.status === 3 || item.status === -1"
                                             nz-button
@@ -762,6 +788,7 @@
                                             *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
                                             nz-button
                                             nzType="default"
+                                            (click)="cancelOrder(item)"
                                           >
                                             Hủy đơn hàng
                                           </button>
@@ -806,6 +833,10 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  <div *ngIf="viewDetail === true" nz-row nzGutter="8">
+                    <nz-page-header class="site-page-header" (nzBack)="onBack()" nzBackIcon nzTitle="Quay lại"> </nz-page-header>
                   </div>
                 </nz-card>
               </nz-tab>

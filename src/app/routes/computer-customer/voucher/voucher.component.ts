@@ -52,7 +52,7 @@ export class VoucherComponent implements OnInit {
         this.listVoucher = dataRs;
         this.listVoucher.map((item) => {
           item.isSelected = 0;
-          if (item.used === item.quantity) {
+          if (item.used >= item.quantity) {
             item.isSelected = 2;
           }
           this.listVoucherByUser.map((r) => {

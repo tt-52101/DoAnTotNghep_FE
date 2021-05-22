@@ -5,6 +5,7 @@ import { ComputerCustomerRoutingModule } from './computer-customer-routing.modul
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { SliderComponent } from './slider/slider.component';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { SupportComponent } from './support/support.component';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { SubscribeComponent } from './subscribe/subscribe.component';
@@ -57,6 +58,7 @@ import { VoucherComponent } from './voucher/voucher.component';
     CommonModule,
     CKEditorModule,
     NzEmptyModule,
+    NzPageHeaderModule,
     NzSliderModule,
     NzCommentModule,
     ReactiveFormsModule,

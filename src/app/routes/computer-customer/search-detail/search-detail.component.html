@@ -133,7 +133,7 @@
                 <div class="product-image4">
                   <a href="javascript:void(0)" (click)="viewDetail(item.code)">
                     <img class="pic-1" [src]="baseFile + item.pictures[0]" />
-                    <img class="pic-2" [src]="baseFile + item.pictures[0]" />
+                    <img class="pic-2" [src]="baseFile + (item.pictures.length > 1 ? item.pictures[1] : item.pictures[0])" />
                   </a>
                   <ul class="social">
                     <li (click)="updateVisitCount(item.code, item)">

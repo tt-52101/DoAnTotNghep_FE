@@ -5,6 +5,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { cleanForm } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTabPosition } from 'ng-zorro-antd/tabs';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
@@ -23,6 +24,7 @@ export class AccountDetailComponent implements OnInit {
     private fb: FormBuilder,
     private nzMessage: NzMessageService,
     private cusService: UserService,
+    private modal: NzModalService,
     private orderService: OrderService,
     private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
@@ -55,8 +57,10 @@ export class AccountDetailComponent implements OnInit {
   pageSize = 5;
   pageSizeVoucher = 12;
   index = 0;
+  viewDetail = false;
   avatarUrl: any = '';
   userId: any;
+  ts = '';
   listVoucherByUser: any[] = [];
   passwordVisible = false;
   password?: string;
@@ -83,10 +87,55 @@ export class AccountDetailComponent implements OnInit {
   changeTab() {
     this.pageIndex = 1;
   }
-  fetchOrderByUser() {
+  buildAgain() {
+    this.router.navigateByUrl('/search-detail?textSearch=');
+  }
+  viewDetailOrder(item: any) {
+    this.viewDetail = true;
+  }
+  onBack() {
+    this.viewDetail = false;
+  }
+  cancelOrder(item: any) {
+    this.modal.confirm({
+      nzTitle: '<i>Bạn có chắc chắn muốn hủy đơn hàng không?</i>',
+      nzOnOk: () => {
+        let data = {
+          id: item.id,
+          status: -1,
+        };
+        this.orderService.updateStatusOrder(data).subscribe(
+          (res: any) => {
+            if (res.code !== 200) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            if (res.data === null || res.data === undefined) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            const dataResult = res.data;
+            this.nzMessage.success(`Cập nhật đơn hàng thành công`);
+            this.fetchOrderByUser();
+          },
+          (err: any) => {
+            if (err.error) {
+              this.nzMessage.error(`${err.error.message}`);
+            } else {
+              this.nzMessage.error(`${err.status}`);
+            }
+          },
+        );
+      },
+    });
+  }
+  changeText(event: any) {
+    this.fetchOrderByUser(event);
+  }
+  fetchOrderByUser(event: string = '') {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');
     if (userModel) {
-      this.orderService.getById(userModel.id).subscribe(
+      this.orderService.getById(userModel.id, event).subscribe(
         (res) => {
           if (res.code === 200) {
             const data = res.data;
@@ -102,7 +151,6 @@ export class AccountDetailComponent implements OnInit {
             this.listOrder2 = data.filter((x) => x.status === 2);
             this.listOrder3 = data.filter((x) => x.status === 3);
             this.listOrder_1 = data.filter((x) => x.status === -1);
-            console.log(this.listOrder1);
           }
         },
         (err) => {

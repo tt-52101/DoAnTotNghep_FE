@@ -4,7 +4,7 @@ import { QueryFilerModel } from '@model';
 export const ROLE_SYS_ADMIN = 'SYS_ADMIN';
 export const LAPTOP_ID = '14843a87-3a07-4dd1-9171-0dc0f56ff0fc';
 export const PC_GM = '4f5e44ec-53a3-4536-b8e3-f673191a3638';
-export const GM_GEAR = 'ee4a2a91-6416-46ae-928c-ec31ba9bbbd2';
+export const GM_GEAR = '86ED6A82-6C93-4F5C-867A-44BBF38C6A51'.toLocaleLowerCase();
 export const LIST_STATUS = [
   { id: true, code: true, name: 'Hoạt động' },
   { id: false, code: false, name: 'Không hoạt động' },
