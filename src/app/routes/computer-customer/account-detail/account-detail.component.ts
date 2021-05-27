@@ -5,6 +5,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '@env/environment';
 import { cleanForm } from '@util';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzTabPosition } from 'ng-zorro-antd/tabs';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
@@ -23,6 +24,7 @@ export class AccountDetailComponent implements OnInit {
     private fb: FormBuilder,
     private nzMessage: NzMessageService,
     private cusService: UserService,
+    private modal: NzModalService,
     private orderService: OrderService,
     private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
@@ -49,11 +51,17 @@ export class AccountDetailComponent implements OnInit {
   }
   tabs = ['Tất cả', 'Chờ xác nhận', 'Chờ lấy hàng', 'Đang giao hàng', 'Đã giao hàng', 'Đã hủy'];
   avatar = '';
+  totalCount = 0;
   pageIndex = 1;
+  pageIndexVoucher = 1;
   pageSize = 5;
+  pageSizeVoucher = 12;
   index = 0;
+  viewDetail = false;
   avatarUrl: any = '';
   userId: any;
+  ts = '';
+  listVoucherByUser: any[] = [];
   passwordVisible = false;
   password?: string;
   baseFile = environment.BASE_FILE_URL;
@@ -66,6 +74,7 @@ export class AccountDetailComponent implements OnInit {
   listOrder3: any[] = [];
   listOrder_1: any[] = [];
   confirmPasswordVisible = false;
+  itemDetail = '';
   confirmPassword?: string;
   baseFileUrl = environment.BASE_FILE_URL;
   uploadUrl = environment.BASE_UPLOAD_URL;
@@ -76,10 +85,98 @@ export class AccountDetailComponent implements OnInit {
     this.fetchUser();
     this.fetchOrderByUser();
   }
-  fetchOrderByUser() {
+  changeTab() {
+    this.pageIndex = 1;
+  }
+  buildAgain() {
+    this.router.navigateByUrl('/search-detail?textSearch=');
+  }
+  viewDetailOrder(item: any) {
+    this.viewDetail = true;
+    this.itemDetail = item;
+    console.log(this.itemDetail);
+  }
+  onBack() {
+    this.viewDetail = false;
+  }
+  changeStatus(item: any) {
+    this.modal.confirm({
+      nzTitle: '<i>Bạn đã nhận được hàng?</i>',
+      nzOnOk: () => {
+        let data = {
+          id: item.id,
+          status: 3,
+        };
+        this.orderService.updateStatusOrder(data).subscribe(
+          (res: any) => {
+            if (res.code !== 200) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            if (res.data === null || res.data === undefined) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            const dataResult = res.data;
+            this.nzMessage.success(`Cảm ơn bạn đã mua hàng. Hãy đánh giá sản phẩm thật tốt nhé ^^`);
+            this.fetchOrderByUser();
+          },
+          (err: any) => {
+            if (err.error) {
+              this.nzMessage.error(`${err.error.message}`);
+            } else {
+              this.nzMessage.error(`${err.status}`);
+            }
+          },
+        );
+      },
+    });
+  }
+  cancelOrder(item: any) {
+    this.modal.confirm({
+      nzTitle: '<i>Bạn có chắc chắn muốn hủy đơn hàng không?</i>',
+      nzOnOk: () => {
+        let data = {
+          id: item.id,
+          status: -1,
+        };
+        this.orderService.updateStatusOrder(data).subscribe(
+          (res: any) => {
+            if (res.code !== 200) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            if (res.data === null || res.data === undefined) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            const dataResult = res.data;
+            this.nzMessage.success(`Cập nhật đơn hàng thành công`);
+            this.fetchOrderByUser();
+          },
+          (err: any) => {
+            if (err.error) {
+              this.nzMessage.error(`${err.error.message}`);
+            } else {
+              this.nzMessage.error(`${err.status}`);
+            }
+          },
+        );
+      },
+    });
+  }
+  changeText(event: any) {
+    this.fetchOrderByUser(event);
+  }
+  viewProdDetail(code: any) {
+    const url = '/product-detail/' + code;
+    window.location.href = url;
+    // this.router.navigate(['/product-detail/' + code]);
+  }
+  fetchOrderByUser(event: string = '') {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');
     if (userModel) {
-      this.orderService.getById(userModel.id).subscribe(
+      this.orderService.getById(userModel.id, event).subscribe(
         (res) => {
           if (res.code === 200) {
             const data = res.data;
@@ -95,7 +192,6 @@ export class AccountDetailComponent implements OnInit {
             this.listOrder2 = data.filter((x) => x.status === 2);
             this.listOrder3 = data.filter((x) => x.status === 3);
             this.listOrder_1 = data.filter((x) => x.status === -1);
-            console.log(this.listOrder1);
           }
         },
         (err) => {
@@ -107,6 +203,11 @@ export class AccountDetailComponent implements OnInit {
   tabSelectChange(event: any) {
     this.index = event.index;
   }
+  getVoucher(item: any) {
+    if (item.isSelected !== 2) {
+      this.router.navigateByUrl('/search-detail?textSearch=');
+    }
+  }
   fetchUser() {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');
     if (userModel) {
@@ -114,6 +215,30 @@ export class AccountDetailComponent implements OnInit {
         (res) => {
           if (res.code === 200) {
             const data = res.data;
+            this.listVoucherByUser = data.vouchers;
+            if (this.listVoucherByUser) {
+              this.totalCount = this.listVoucherByUser.length;
+              this.listVoucherByUser.map((item) => {
+                item.percent = (item.used / item.quantity) * 100;
+                if (item.startTime && item.expiredTime) {
+                  item.timeValid =
+                    new Date(item.startTime).getDate() +
+                    '.' +
+                    new Date(item.startTime).getMonth() +
+                    ' - ' +
+                    new Date(item.expiredTime).getDate() +
+                    '.' +
+                    new Date(item.expiredTime).getMonth();
+                }
+                if (item.type === 1) {
+                  item.discountView = item.discount;
+                  item.typeName = '%';
+                } else {
+                  item.discountView = item.discount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+                  item.typeName = 'VNĐ';
+                }
+              });
+            }
             this.userId = data.id;
             if (data.avatar) {
               this.avatar = data.avatar;

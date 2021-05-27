@@ -35,59 +35,25 @@ export class DashboardComponent {
     this.prodService.getAll().subscribe((res) => {
       if (res.code === 200) {
         this.listProd = res.data.data;
-        // this.listProd.map((item: any) => {
-        //   if (item.status === 0) {
-        //     this.visitProd++;
-        //   }
-        //   const d1 = new Date();
-        //   const d2 = new Date(item.createdDate);
-        //   if (
-        //     d1.getDay() === d2.getDay() &&
-        //     d1.getMonth() === d2.getMonth() &&
-        //     d1.getFullYear() === d2.getFullYear() &&
-        //     item.status === 0
-        //   ) {
-        //     this.visitProdToday++;
-        //   }
-        // });
         if (res.data.data) {
           this.listProd.sort((a: any, b: any) => (b.visitCount > a.visitCount ? 1 : -1));
           this.prodTopFive = [...this.listProd.slice(0, 5)];
+          this.cdf.detectChanges();
         }
       }
     });
     this.dashboardService.getAll().subscribe((res) => {
       if (res) {
-        res.orders.map((item: any) => {
-          if (item.status === 0) {
-            this.visitProd++;
-          }
-          this.orderCount++;
-          this.grandTotal += item.grandTotal;
-          const d1 = new Date();
-          const d2 = new Date(item.createdDate);
-          if (d1.getDay() === d2.getDay() && d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear()) {
-            this.orderCountToday++;
-          }
-          if (
-            d1.getDay() === d2.getDay() &&
-            item.status === 0 &&
-            d1.getMonth() === d2.getMonth() &&
-            d1.getFullYear() === d2.getFullYear()
-          ) {
-            this.visitProdToday++;
-          }
-          if (d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear()) {
-            this.orderCountMonth++;
-          }
-          if (item.status === 3) {
-            this.grandTotalRecived += item.grandTotal;
-            this.orderCountRecived++;
-          }
-          if (item.status === -1) {
-            this.orderRevoked++;
-          }
-        });
+        const rs = res.orderReport;
+        this.orderCount = rs.orderReceived;
+        this.orderCountRecived = rs.orderDelivered;
+        this.orderRevoked = rs.orderCancelled;
+        this.orderCountMonth = rs.orderReceivedMonth;
+        this.orderCountToday = rs.orderReceivedToday;
+        this.visitProd = rs.orderNotProcess;
+        this.visitProdToday = rs.orderNotProcessToday;
+        this.grandTotal = rs.grandTotal;
+        this.grandTotalRecived = rs.grandTotalDelivered;
         this.cdf.detectChanges();
       }
     });

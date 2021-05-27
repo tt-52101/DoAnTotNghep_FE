@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArrayService } from '@delon/util';
 import { environment } from '@env/environment';
 import { QueryFilerModel } from '@model';
@@ -52,6 +52,7 @@ export class SearchDetailComponent implements OnInit {
     private arrayService: ArrayService,
     private messageService: NzMessageService,
     private cdRef: ChangeDetectorRef,
+    private router: Router,
     private cartCusService: CartCustomerService,
     private categoryMetaService: CategoryMetaService,
     private prodService: ProductService,
@@ -105,6 +106,7 @@ export class SearchDetailComponent implements OnInit {
       if (res.code === 200) {
         this.listProd = res.data.data;
         this.maxDefault = res.data.maxDefault;
+        console.log(this.maxDefault);
         this.totalCount = res.data.totalCount;
       }
     });
@@ -144,7 +146,10 @@ export class SearchDetailComponent implements OnInit {
     }
     this.fetchListProduct();
   }
-  treeViewClick(event: any) {}
+  treeViewClick(event: any) {
+    const ts = event.node._title;
+    this.router.navigateByUrl('/search-detail?textSearch=' + ts);
+  }
   addToCart(item: any) {
     this.cartCusService.addToCart(item);
   }

@@ -5,6 +5,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { SettingsService } from '@delon/theme';
 import { environment } from '@env/environment';
 import { GM_GEAR, LAPTOP_ID, PC_GM } from '@util';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CustomerService } from 'src/app/services/computer-customer/customer/customer.service';
 import { CartService } from 'src/app/services/computer-management/cart/cart.service';
@@ -68,6 +69,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private productService: ProductService,
     private settingService: SettingsService,
     private router: Router,
+    private msgService: NzMessageService,
     private customerService: CustomerService,
     private startupService: StartupService,
     private categoryMetaService: CategoryMetaService,
@@ -128,6 +130,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
       console.log(res);
       this.listCateMeta = res.data.data;
     });
+  }
+  getVoucher() {
+    const token = this.tokenService.get()?.token;
+    if (token) {
+      this.router.navigateByUrl('/voucher');
+    } else {
+      this.msgService.error('Bạn cần đăng nhập để xem mã giảm giá');
+    }
+  }
+  search(ts: any) {
+    this.router.navigateByUrl('/search-detail?textSearch=' + ts);
   }
   fetchListProduct() {
     this.listLaptopRs = [];

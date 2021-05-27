@@ -18,7 +18,16 @@ export class CustomerService {
   login(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + customerRouter.getToken, model);
   }
+  updateVoucher(model: any): Observable<any> {
+    return this.http.put(environment.BASE_API_URL + customerRouter.updateVoucher, model);
+  }
+  getById(id: any): Observable<any> {
+    return this.http.get(environment.BASE_API_URL + customerRouter.getById + id);
+  }
   register(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + customerRouter.register + environment.ALLOW_ANONYMOUS, model);
+  }
+  forgotPassword(model: any): Observable<any> {
+    return this.http.get(environment.BASE_API_URL + customerRouter.forgotPassword + environment.ALLOW_ANONYMOUS + '&email=' + model);
   }
 }

@@ -4,6 +4,33 @@
 .ant-spin-nested-loading {
   display: none !important;
 }
+
+.now {
+  color: red;
+  font-weight: bold;
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0% {
+    color: red;
+    font-weight: bold;
+    font-family: inherit;
+  }
+  50% {
+    color: white;
+    font-weight: bold;
+    font-family: inherit;
+  }
+  100% {
+    color: red;
+    font-weight: bold;
+    font-family: inherit;
+  }
+}
+
 body {
   margin-top: 0;
   margin-left: 0;
@@ -16,6 +43,22 @@ body {
 }
 .aa-promo-banner-hoz {
   height: 155px !important;
+}
+#aa-promo .aa-promo-area .aa-promo-banner .aa-prom-content {
+  position: absolute;
+
+  /* left: 0; */
+  top: 86% !important;
+  right: 0 !important;
+  bottom: -23px !important;
+  left: unset !important;
+
+  /* width: 100%; */
+
+  /* text-align: center; */
+  z-index: 99;
+  width: unset !important;
+  text-align: unset;
 }
 .item-center {
   display: flex;

@@ -18,6 +18,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/services/computer-management/order/order.service';
 import { OrderItemComponent } from '../order-item/order-item.component';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-order',
@@ -25,6 +26,10 @@ import { OrderItemComponent } from '../order-item/order-item.component';
   styleUrls: ['./order.component.less'],
 })
 export class OrderComponent implements OnInit {
+  itemPrint;
+  isPrint = false;
+  baseFile = environment.BASE_FILE_URL;
+  currentDate = new Date();
   constructor(
     private orderService: OrderService,
     private aclService: ACLService,
@@ -64,6 +69,7 @@ export class OrderComponent implements OnInit {
           infoClicked: (item: any) => this.onViewItem(item),
           editClicked: (item: any) => this.onEditItem(item),
           deleteClicked: (item: any) => this.onDeleteItem(item),
+          printClicked: (item: any) => this.printOrder(item),
         },
       },
     ];
@@ -327,7 +333,42 @@ export class OrderComponent implements OnInit {
     };
     this.itemModal.initData(item, 'edit');
   }
+  printOrder(item: any) {
+    this.itemPrint = item;
+    this.itemPrint.listProducts = JSON.parse(item.listProducts);
+    setTimeout(function () {
+      let mywindow = window.open('', 'PRINT', 'height=' + screen.height + ',width=' + screen.width + ' fullscreen=yes');
+      mywindow?.document.write('<html>');
+      mywindow?.document.write('<head>');
+      mywindow?.document.write(
+        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">',
+      );
+      mywindow?.document.write(
+        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">',
+      );
 
+      mywindow?.document.write('<title>Hóa đơn: ' + item.code + ' </title>');
+      mywindow?.document.write(
+        '<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">',
+      );
+      mywindow?.document.write('<link rel="stylesheet" href="../../../../../assets/css/styleprint.css">');
+      mywindow?.document.write('<script src="../../../../../assets/js/print.js"></script>');
+      mywindow?.document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>');
+      mywindow?.document.write(
+        '<script media="all" src="<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>',
+      );
+      mywindow?.document.write('</head>');
+      mywindow?.document.write('<body >');
+      let x = document.getElementById('pdf')?.innerHTML;
+      if (x) {
+        mywindow?.document.write(x);
+      }
+      mywindow?.document.write('</body></html>');
+      mywindow?.document.close(); // necessary for IE >= 10
+      mywindow?.focus(); // necessary for IE >= 10*/
+      // mywindow?.print();
+    }, 1000);
+  }
   onViewItem(item: any = null): void {
     if (item === null) {
       const selectedRows = this.gridApi.getSelectedRows();
@@ -341,7 +382,6 @@ export class OrderComponent implements OnInit {
     };
     this.itemModal.initData(item, 'info');
   }
-
   onDeleteItem(item: any = null): void {
     let selectedRows = this.gridApi.getSelectedRows();
     if (item !== null) {
@@ -451,6 +491,7 @@ export class OrderComponent implements OnInit {
             date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
           item.deleteGrantAccess = true;
           item.infoGrantAccess = true;
+          item.printGrantAccess = true;
         }
         this.grid.totalData = dataResult.totalCount;
         this.grid.dataCount = dataResult.dataCount;

@@ -260,7 +260,7 @@ export class SupplierItemComponent implements OnInit {
     };
     if (data.name === null || data.name === undefined || data.name === '') {
       this.isLoading = false;
-      this.messageService.error(`Tên tag không được để trống!`);
+      this.messageService.error(`Tên nhà cung cấp không được để trống!`);
       return;
     }
 
@@ -268,7 +268,7 @@ export class SupplierItemComponent implements OnInit {
       this.listTag.map((item) => {
         if (item.note === data.code) {
           this.isLoading = false;
-          this.messageService.error(`Mã tag đã tồn tại!`);
+          this.messageService.error(`Mã nhà cung cấp đã tồn tại!`);
           flag = true;
           return;
         }

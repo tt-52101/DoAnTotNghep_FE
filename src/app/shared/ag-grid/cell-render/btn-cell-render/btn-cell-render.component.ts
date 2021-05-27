@@ -29,7 +29,10 @@ export class BtnCellRenderComponent implements ICellRendererAngularComp, OnInit,
     // console.log(this.params.data);
     this.params.infoClicked(this.params.data);
   }
-
+  btnPrintClickedHandler($event: any) {
+    // console.log(this.params.data);
+    this.params.printClicked(this.params.data);
+  }
   btnEditClickedHandler($event: any) {
     // console.log(this.params.data);
     this.params.editClicked(this.params.data);

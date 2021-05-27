@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { environment } from '@env/environment';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { CartCustomerService } from 'src/app/services/computer-customer/cart-customer/cart-customer.service';
 import { CategoryMetaService } from 'src/app/services/computer-management/category-meta/category-meta.service';
 import { ProductService } from 'src/app/services/computer-management/product/product.service';
@@ -10,6 +11,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ProductReviewService } from 'src/app/services/computer-management/product-review/product-review.service';
 import { ArrayService } from '@delon/util';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
+import { NzI18nService } from 'ng-zorro-antd/i18n';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -43,6 +45,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private arrayService: ArrayService,
     private route: ActivatedRoute,
+    private nzI18n: NzI18nService,
     private prodReviewService: ProductReviewService,
     private nzMessage: NzMessageService,
     private cartCusService: CartCustomerService,
@@ -155,7 +158,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
             avatarUrl: item.avatarUrl,
             checked: false,
             content: item.content,
-            createdDate: formatDistance(new Date(item.createdDate), new Date()).toString(),
+            createdDate: formatDistanceToNow(new Date(item.createdDate) as Date, { locale: this.nzI18n.getDateLocale() }),
             rating: item.rating,
             status: item.status,
             userId: item.userId,
@@ -177,7 +180,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
             }
           },
         });
-        console.log(this.listRs);
       }
     });
   }
@@ -255,7 +257,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
         avatarUrl: item.avatarUrl,
         checked: false,
         content: item.content,
-        createdDate: formatDistance(new Date(item.createdDate), new Date()).toString(),
+        createdDate: formatDistanceToNow(new Date(item.createdDate) as Date, { locale: this.nzI18n.getDateLocale() }),
         rating: item.rating,
         status: item.status,
         userId: item.userId,
@@ -282,7 +284,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.listRs = [];
     const arrayTreeResult = this.listProdReview.map((item: any, i: number, arr: any[]) => {
       const checkIsLeft = arr.some((c) => c.parentId === item.id);
-
       return {
         id: item.id,
         parent_id: item.parentId,
@@ -291,7 +292,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
         avatarUrl: item.avatarUrl,
         checked: false,
         content: item.content,
-        createdDate: formatDistance(new Date(item.createdDate), new Date()).toString(),
+        createdDate: formatDistanceToNow(new Date(item.createdDate) as Date, { locale: this.nzI18n.getDateLocale() }),
         rating: item.rating,
         status: item.status,
         userId: item.userId,
