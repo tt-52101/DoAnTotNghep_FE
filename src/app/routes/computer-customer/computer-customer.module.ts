@@ -30,7 +30,8 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { VoucherComponent } from './voucher/voucher.component';
-
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -53,12 +54,14 @@ import { VoucherComponent } from './voucher/voucher.component';
     ConfirmComponent,
     SearchDetailComponent,
     VoucherComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     CommonModule,
     CKEditorModule,
     NzEmptyModule,
     NzPageHeaderModule,
+    NzResultModule,
     NzSliderModule,
     NzCommentModule,
     ReactiveFormsModule,

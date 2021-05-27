@@ -106,6 +106,7 @@ export class SearchDetailComponent implements OnInit {
       if (res.code === 200) {
         this.listProd = res.data.data;
         this.maxDefault = res.data.maxDefault;
+        console.log(this.maxDefault);
         this.totalCount = res.data.totalCount;
       }
     });

@@ -129,6 +129,7 @@ export const customerRouter = {
   getListCombobox: `api/v1/computer-management/customer/for-combobox`,
   getToken: `api/v1/authentication/jwt/user/login`,
   register: `api/v1/account/create`,
+  forgotPassword: `api/v1/computer-management/customer/forgot-password`,
   changePassword: `api/v1/computer-management/customer/update-password`,
 };
 export const productReviewRouter = {

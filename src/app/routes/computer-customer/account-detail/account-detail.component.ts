@@ -74,6 +74,7 @@ export class AccountDetailComponent implements OnInit {
   listOrder3: any[] = [];
   listOrder_1: any[] = [];
   confirmPasswordVisible = false;
+  itemDetail = '';
   confirmPassword?: string;
   baseFileUrl = environment.BASE_FILE_URL;
   uploadUrl = environment.BASE_UPLOAD_URL;
@@ -92,9 +93,44 @@ export class AccountDetailComponent implements OnInit {
   }
   viewDetailOrder(item: any) {
     this.viewDetail = true;
+    this.itemDetail = item;
+    console.log(this.itemDetail);
   }
   onBack() {
     this.viewDetail = false;
+  }
+  changeStatus(item: any) {
+    this.modal.confirm({
+      nzTitle: '<i>Bạn đã nhận được hàng?</i>',
+      nzOnOk: () => {
+        let data = {
+          id: item.id,
+          status: 3,
+        };
+        this.orderService.updateStatusOrder(data).subscribe(
+          (res: any) => {
+            if (res.code !== 200) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            if (res.data === null || res.data === undefined) {
+              this.nzMessage.error(`${res.message}`);
+              return;
+            }
+            const dataResult = res.data;
+            this.nzMessage.success(`Cảm ơn bạn đã mua hàng. Hãy đánh giá sản phẩm thật tốt nhé ^^`);
+            this.fetchOrderByUser();
+          },
+          (err: any) => {
+            if (err.error) {
+              this.nzMessage.error(`${err.error.message}`);
+            } else {
+              this.nzMessage.error(`${err.status}`);
+            }
+          },
+        );
+      },
+    });
   }
   cancelOrder(item: any) {
     this.modal.confirm({
@@ -131,6 +167,11 @@ export class AccountDetailComponent implements OnInit {
   }
   changeText(event: any) {
     this.fetchOrderByUser(event);
+  }
+  viewProdDetail(code: any) {
+    const url = '/product-detail/' + code;
+    window.location.href = url;
+    // this.router.navigate(['/product-detail/' + code]);
   }
   fetchOrderByUser(event: string = '') {
     const userModel = JSON.parse(localStorage.getItem('_token') || '{}');

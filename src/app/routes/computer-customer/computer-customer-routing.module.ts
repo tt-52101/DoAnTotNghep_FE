@@ -4,6 +4,7 @@ import { AccountDetailComponent } from './account-detail/account-detail.componen
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
 import { LoginRedirectComponent } from './login-redirect/login-redirect.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'product-detail/:id', component: ProductDetailComponent, data: { title: 'Chi tiết sản phẩm' } },
       { path: 'confirm/:id', component: ConfirmComponent, data: { title: 'Đặt hàng thành công' } },
       { path: 'voucher', component: VoucherComponent, data: { title: 'Danh sách Voucher' } },
+      { path: 'forgot-password', component: ForgotPasswordComponent, data: { title: 'Lấy lại mật khẩu' } },
     ],
   },
 ];

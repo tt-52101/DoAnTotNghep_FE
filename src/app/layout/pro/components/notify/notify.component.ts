@@ -70,6 +70,7 @@ export class LayoutProWidgetNotifyComponent {
       //   this.updateNoticeData(this.listMsg);
       //   this.count = this.listMsg.length;
       // }
+      this.cdr.detectChanges();
     });
   }
   fetchListNotification() {
@@ -83,6 +84,7 @@ export class LayoutProWidgetNotifyComponent {
         });
         this.listMsg = res.data;
         this.count = this.listMsg.filter((x) => x.read === false).length;
+        this.cdr.detectChanges();
       }
     });
   }

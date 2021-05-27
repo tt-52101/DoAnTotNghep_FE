@@ -65,11 +65,11 @@ export class VoucherComponent implements OnInit {
             item.timeValid =
               new Date(item.startTime).getDate() +
               '.' +
-              new Date(item.startTime).getMonth() +
+              (new Date(item.startTime).getMonth() + 1) +
               ' - ' +
               new Date(item.expiredTime).getDate() +
               '.' +
-              new Date(item.expiredTime).getMonth();
+              (new Date(item.expiredTime).getMonth() + 1);
           }
           if (item.type === 1) {
             item.discountView = item.discount;

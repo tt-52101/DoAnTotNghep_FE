@@ -27,4 +27,7 @@ export class CustomerService {
   register(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + customerRouter.register + environment.ALLOW_ANONYMOUS, model);
   }
+  forgotPassword(model: any): Observable<any> {
+    return this.http.get(environment.BASE_API_URL + customerRouter.forgotPassword + environment.ALLOW_ANONYMOUS + '&email=' + model);
+  }
 }

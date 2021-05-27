@@ -60,6 +60,18 @@
   nz-button
   nzType="primary"
   nzShape="circle"
+  *ngIf="params.data.printGrantAccess"
+  class="btn-info"
+  (click)="btnPrintClickedHandler($event)"
+  title="In hóa đơn"
+>
+  <i nz-icon nzType="printer" nzTheme="outline"></i>
+</button>
+
+<button
+  nz-button
+  nzType="primary"
+  nzShape="circle"
   *ngIf="params.data.unlockGrantAccess"
   class="btn-success"
   (click)="btnUnLockClickedHandler($event)"

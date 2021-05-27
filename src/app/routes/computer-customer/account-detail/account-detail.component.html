@@ -188,7 +188,9 @@
                                         <div class="col-md-8">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p style="font-weight: bold">{{ prod.name }}</p>
+                                              <p (click)="viewProdDetail(prod.code)" style="font-weight: bold; cursor: pointer">
+                                                {{ prod.name }}
+                                              </p>
                                             </div>
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
@@ -201,8 +203,9 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="col-md-2 item-center">
-                                          <p>{{ prod.price + prod.discount | currency: 'VND' }}</p>
+                                        <div class="col-md-2 item-center flex-block">
+                                          <h5 class="price-out">{{ prod.price | currency: 'VND' }}</h5>
+                                          <h5>{{ prod.price - prod.discount | currency: 'VND' }}</h5>
                                         </div>
                                       </div>
                                       <div class="row">
@@ -298,7 +301,9 @@
                                         <div class="col-md-8">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p style="font-weight: bold">{{ prod.name }}</p>
+                                              <p (click)="viewProdDetail(prod.code)" style="font-weight: bold; cursor: pointer">
+                                                {{ prod.name }}
+                                              </p>
                                             </div>
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
@@ -311,8 +316,9 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="col-md-2 item-center">
-                                          <p>{{ prod.price + prod.discount | currency: 'VND' }}</p>
+                                        <div class="col-md-2 item-center flex-block">
+                                          <h5 class="price-out">{{ prod.price | currency: 'VND' }}</h5>
+                                          <h5>{{ prod.price - prod.discount | currency: 'VND' }}</h5>
                                         </div>
                                       </div>
                                       <div class="row">
@@ -408,7 +414,9 @@
                                         <div class="col-md-8">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p style="font-weight: bold">{{ prod.name }}</p>
+                                              <p (click)="viewProdDetail(prod.code)" style="font-weight: bold; cursor: pointer">
+                                                {{ prod.name }}
+                                              </p>
                                             </div>
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
@@ -421,8 +429,9 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="col-md-2 item-center">
-                                          <p>{{ prod.price + prod.discount | currency: 'VND' }}</p>
+                                        <div class="col-md-2 item-center flex-block">
+                                          <h5 class="price-out">{{ prod.price | currency: 'VND' }}</h5>
+                                          <h5>{{ prod.price - prod.discount | currency: 'VND' }}</h5>
                                         </div>
                                       </div>
                                       <div class="row">
@@ -518,7 +527,9 @@
                                         <div class="col-md-8">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p style="font-weight: bold">{{ prod.name }}</p>
+                                              <p (click)="viewProdDetail(prod.code)" style="font-weight: bold; cursor: pointer">
+                                                {{ prod.name }}
+                                              </p>
                                             </div>
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
@@ -531,8 +542,9 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="col-md-2 item-center">
-                                          <p>{{ prod.price + prod.discount | currency: 'VND' }}</p>
+                                        <div class="col-md-2 item-center flex-block">
+                                          <h5 class="price-out">{{ prod.price | currency: 'VND' }}</h5>
+                                          <h5>{{ prod.price - prod.discount | currency: 'VND' }}</h5>
                                         </div>
                                       </div>
                                       <div class="row">
@@ -552,6 +564,9 @@
                                             nzType="default"
                                           >
                                             Đánh giá
+                                          </button>
+                                          <button (click)="changeStatus(item)" class="text-highlight" nz-button nzType="default">
+                                            Đã nhận được hàng
                                           </button>
                                           <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
                                           <button
@@ -628,7 +643,9 @@
                                         <div class="col-md-8">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p style="font-weight: bold">{{ prod.name }}</p>
+                                              <p (click)="viewProdDetail(prod.code)" style="font-weight: bold; cursor: pointer">
+                                                {{ prod.name }}
+                                              </p>
                                             </div>
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
@@ -641,8 +658,9 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="col-md-2 item-center">
-                                          <p>{{ prod.price + prod.discount | currency: 'VND' }}</p>
+                                        <div class="col-md-2 item-center flex-block">
+                                          <h5 class="price-out">{{ prod.price | currency: 'VND' }}</h5>
+                                          <h5>{{ prod.price - prod.discount | currency: 'VND' }}</h5>
                                         </div>
                                       </div>
                                       <div class="row">
@@ -738,7 +756,9 @@
                                         <div class="col-md-8">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p style="font-weight: bold">{{ prod.name }}</p>
+                                              <p (click)="viewProdDetail(prod.code)" style="font-weight: bold; cursor: pointer">
+                                                {{ prod.name }}
+                                              </p>
                                             </div>
                                             <div class="col-md-12">
                                               <p class="text-muted font-weight-normal font-italic d-block">
@@ -751,8 +771,9 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="col-md-2 item-center">
-                                          <p>{{ prod.price + prod.discount | currency: 'VND' }}</p>
+                                        <div class="col-md-2 item-center flex-block">
+                                          <h5 class="price-out">{{ prod.price | currency: 'VND' }}</h5>
+                                          <h5>{{ prod.price - prod.discount | currency: 'VND' }}</h5>
                                         </div>
                                       </div>
                                       <div class="row">
@@ -774,6 +795,7 @@
                                             Đánh giá
                                           </button>
                                           <button (click)="viewDetailOrder(item)" nz-button nzType="default">Chi tiết đơn hàng</button>
+
                                           <button
                                             [nzDanger]="item.status === -1"
                                             (click)="buildAgain()"
@@ -836,7 +858,201 @@
                   </div>
 
                   <div *ngIf="viewDetail === true" nz-row nzGutter="8">
-                    <nz-page-header class="site-page-header" (nzBack)="onBack()" nzBackIcon nzTitle="Quay lại"> </nz-page-header>
+                    <nz-card class="col-md-12" [nzTitle]="detailTitle">
+                      <ng-template #detailTitle>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <nz-page-header class="site-page-header" (nzBack)="onBack()" nzBackIcon nzTitle="Quay lại"> </nz-page-header>
+                          </div>
+                          <div class="col-md-5 offset-md-5 pull-right">
+                            <div *ngIf="itemDetail.status === 0" class="text-status">
+                              <span style="color: black">Đơn hàng {{ itemDetail.code }}</span> | Chờ xác nhận
+                            </div>
+                            <div *ngIf="itemDetail.status === 1" class="text-status">
+                              <span style="color: black">Đơn hàng {{ itemDetail.code }}</span> | Chờ lấy hàng
+                            </div>
+                            <div *ngIf="itemDetail.status === 2" class="text-status">
+                              <span style="color: black">Đơn hàng {{ itemDetail.code }}</span> | Đang giao hàng
+                            </div>
+                            <div *ngIf="itemDetail.status === 3" class="text-status">
+                              <span style="color: black"
+                                ><i class="fas fa-truck"></i><span style="color: black">Đơn hàng {{ itemDetail.code }}</span> | Giao hàng
+                                thành công |</span
+                              >
+                              Đã giao hàng
+                            </div>
+                            <div *ngIf="itemDetail.status === -1" class="text-status">
+                              <span style="color: black">Đơn hàng {{ itemDetail.code }}</span> | Đã hủy
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                      <nz-steps *ngIf="itemDetail.status !== -1" nzLabelPlacement="vertical" [nzCurrent]="1">
+                        <nz-step
+                          nzTitle="Đơn hàng đã đặt"
+                          [nzIcon]="iconCreate"
+                          nzStatus="finish"
+                          [nzDescription]="itemDetail.createdDate | date: 'dd/MM/yyyy HH:mm:ss'"
+                        ></nz-step>
+                        <ng-template #iconCreate>
+                          <img src="../../../../assets/img/invoice.svg" width="32" height="32" alt="" />
+                        </ng-template>
+
+                        <nz-step
+                          *ngIf="itemDetail.type === 2"
+                          nzTitle="Đơn hàng đã thanh toán"
+                          [nzIcon]="iconPayment"
+                          nzStatus="finish"
+                          [nzDescription]="itemDetail.createdDate | date: 'dd/MM/yyyy HH:mm:ss'"
+                        >
+                        </nz-step>
+                        <ng-template #iconPayment>
+                          <img src="../../../../assets/img/mobile-payment.svg" width="32" height="32" alt="" />
+                        </ng-template>
+
+                        <nz-step
+                          [nzTitle]="itemDetail.status > 0 ? 'Đã xác nhận' : 'Chờ xác nhận'"
+                          [nzIcon]="icon0"
+                          [nzStatus]="itemDetail.status > 0 ? 'finish' : 'wait'"
+                          [nzDescription]="itemDetail.status > 0 ? (itemDetail.confirmedDate | date: 'dd/MM/yyyy HH:mm:ss') : '12312'"
+                        >
+                        </nz-step>
+                        <ng-template #icon0>
+                          <img src="../../../../assets/img/time-left.svg" width="32" height="32" alt="" />
+                        </ng-template>
+
+                        <nz-step
+                          [nzTitle]="itemDetail.status >= 2 ? 'Đã lấy hàng' : 'Chờ lấy hàng'"
+                          [nzIcon]="icon1"
+                          [nzStatus]="itemDetail.status >= 2 ? 'finish' : 'wait'"
+                          [nzDescription]="itemDetail.status >= 2 ? (itemDetail.deliverDate | date: 'dd/MM/yyyy HH:mm:ss') : ''"
+                        >
+                        </nz-step>
+                        <ng-template #icon1>
+                          <img src="../../../../assets/img/package.svg" width="32" height="32" alt="" />
+                        </ng-template>
+
+                        <nz-step
+                          nzTitle="Đang giao hàng"
+                          [nzIcon]="icon2"
+                          [nzStatus]="itemDetail.status === 3 ? 'finish' : 'wait'"
+                        ></nz-step>
+                        <ng-template #icon2>
+                          <img src="../../../../assets/img/delivery-truck.svg" width="32" height="32" alt="" />
+                        </ng-template>
+
+                        <nz-step
+                          nzTitle="Đã giao hàng"
+                          [nzIcon]="icon3"
+                          [nzStatus]="itemDetail.status === 3 ? 'finish' : 'wait'"
+                          [nzDescription]="itemDetail.status === 3 ? (itemDetail.recivedDate | date: 'dd/MM/yyyy HH:mm:ss') : ''"
+                        >
+                        </nz-step>
+                        <ng-template #icon3>
+                          <img src="../../../../assets/img/inbox.svg" width="32" height="32" alt="" />
+                        </ng-template>
+                      </nz-steps>
+
+                      <nz-steps *ngIf="itemDetail.status === -1" nzLabelPlacement="vertical" [nzCurrent]="1">
+                        <nz-step
+                          nzTitle="Đơn hàng đã đặt"
+                          [nzIcon]="icon1"
+                          nzStatus="finish"
+                          [nzDescription]="itemDetail.createdDate | date: 'dd/MM/yyyy HH:mm:ss'"
+                        ></nz-step>
+                        <ng-template #icon1>
+                          <img src="../../../../assets/img/invoice.svg" width="32" height="32" alt="" />
+                        </ng-template>
+                        <nz-step
+                          nzTitle="Đơn hàng đã hủy"
+                          [nzIcon]="icon2"
+                          nzStatus="finish"
+                          [nzDescription]="itemDetail.canceledDate | date: 'dd/MM/yyyy HH:mm:ss'"
+                        ></nz-step>
+                        <ng-template #icon2>
+                          <img src="../../../../assets/img/cancel.svg" width="32" height="32" alt="" />
+                        </ng-template>
+                      </nz-steps>
+                      <div class="border"></div>
+                      <div>
+                        <h2>Địa chỉ nhận hàng</h2>
+                        <h4>{{ itemDetail.name }}</h4>
+                        <h4>{{ itemDetail.phoneNumber }}</h4>
+                        <h4>{{ itemDetail.addressDetail }}</h4>
+                        <h4>{{ itemDetail.commune }}</h4>
+                        <h4>{{ itemDetail.district }}</h4>
+                        <h4>{{ itemDetail.city }}</h4>
+                      </div>
+                      <div class="border"></div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div *ngFor="let prod of itemDetail.listProducts" class="row" style="border-bottom: 1px solid #eaeaea">
+                            <div class="col-md-2">
+                              <img [src]="baseFile + prod.pictures[0]" width="100" height="100" alt="Product Image" />
+                            </div>
+                            <div class="col-md-8">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <p (click)="viewProdDetail(prod.code)" style="font-weight: bold; cursor: pointer">{{ prod.name }}</p>
+                                </div>
+                                <div class="col-md-12">
+                                  <p class="text-muted font-weight-normal font-italic d-block">
+                                    Loại sản phẩm:
+                                    <span>{{ prod.categoryString }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-md-12">
+                                  <p style="font-weight: bold">x{{ prod.count }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-2 item-center flex-block">
+                              <h5 class="price-out">{{ prod.price | currency: 'VND' }}</h5>
+                              <h5>{{ prod.price - prod.discount | currency: 'VND' }}</h5>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12 pull-right">
+                              <ul class="list-unstyled mb-4">
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                  <strong class="text-muted">Giá tạm tính </strong
+                                  ><strong>{{ itemDetail.total | currency: 'VND' | lowercase }}</strong>
+                                </li>
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                  <strong class="text-muted">Phí vận chuyển</strong
+                                  ><strong>{{ '+' + itemDetail.shipping | currency: 'VND' | lowercase }}</strong>
+                                </li>
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                  <strong class="text-muted">Mã giảm giá</strong
+                                  ><strong>{{ '-' + itemDetail.discount | currency: 'VND' | lowercase }}</strong>
+                                </li>
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                  <strong class="text-muted">Tổng cộng</strong>
+                                  <strong>{{
+                                    itemDetail.shipping + itemDetail.total - itemDetail.discount | currency: 'VND' | lowercase
+                                  }}</strong>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </nz-card>
+                    <nz-card style="width: 100%">
+                      <div class="row">
+                        <div class="col-md-12 pull-right">
+                          <img class="img-price" src="../../../../assets/img/price.png" alt="" />
+                          Phương thức thanh toán:
+                          <span style="font-size: 20px" class="text-red">{{
+                            itemDetail.phuongThucThanhToan === 1
+                              ? 'Thanh
+                            toán khi nhận
+                            hàng'
+                              : 'Thanh toán qua ví điện tử'
+                          }}</span>
+                        </div>
+                      </div>
+                    </nz-card>
                   </div>
                 </nz-card>
               </nz-tab>
